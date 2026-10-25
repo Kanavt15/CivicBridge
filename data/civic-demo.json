@@ -1,0 +1,178 @@
+{
+  "name": "CivicBridge English-Hindi demonstration corpus",
+  "provenance": "synthetic-demo",
+  "license": "CC0-1.0",
+  "description": "Hand-authored fictional civic reports for demonstrating a training pipeline. Not collected from citizens; not a production benchmark.",
+  "groups": [
+    {
+      "category": "Waste Management",
+      "train": [
+        "Garbage collection trucks skip narrow lanes and mixed waste piles up near homes.",
+        "The landfill is overflowing with plastic waste and needs recycling segregation.",
+        "Food scraps and household rubbish are dumped beside the market every evening.",
+        "Residents need separate bins for wet waste and dry recyclable materials.",
+        "Municipal sanitation workers cannot collect overflowing community dustbins.",
+        "Plastic packaging and discarded bottles block the neighborhood waste collection point.",
+        "कूड़े का ढेर सड़क पर पड़ा है और कचरा उठाने वाली गाड़ी नहीं आती।",
+        "बाजार में प्लास्टिक और गीले कचरे को अलग करने के लिए डिब्बे चाहिए।"
+      ],
+      "test": [
+        "Uncollected garbage fills the bins outside our homes; we need reliable waste pickup.",
+        "मोहल्ले में कचरा उठाने की व्यवस्था खराब है और प्लास्टिक के ढेर लगे हैं।"
+      ]
+    },
+    {
+      "category": "Water Conservation",
+      "train": [
+        "The village borewell runs dry each summer and families need drinking water storage.",
+        "Leaking water supply pipes waste thousands of litres before reaching households.",
+        "Rainwater harvesting and groundwater recharge could restore the drying village well.",
+        "Residents depend on unreliable water tankers during the severe summer shortage.",
+        "The drinking water reservoir has low levels and needs conservation monitoring.",
+        "Broken taps continuously leak potable water near the community standpipe.",
+        "गांव में पीने के पानी की कमी है और कुआं सूख गया है।",
+        "बारिश के पानी का संग्रह और भूजल संरक्षण गांव के लिए जरूरी है।"
+      ],
+      "test": [
+        "A dry borewell and delayed tankers leave village households without drinking water.",
+        "गांव में पानी के टैंकर समय पर नहीं आते और पीने का पानी नहीं मिलता।"
+      ]
+    },
+    {
+      "category": "Education",
+      "train": [
+        "The primary school lacks classrooms and students study outside during the rain.",
+        "Teachers need offline digital learning material for children without internet access.",
+        "Village students cannot access a library or affordable learning resources.",
+        "The school roof is damaged and the classrooms need repair before lessons resume.",
+        "Children leave school because there are no accessible toilets or learning support.",
+        "Local teachers request science laboratory equipment for secondary school classes.",
+        "स्कूल की कक्षाएं टूटी हुई हैं और बच्चों को पढ़ने की जगह नहीं मिलती।",
+        "छात्रों के लिए पुस्तकालय और डिजिटल शिक्षा की सुविधा चाहिए।"
+      ],
+      "test": [
+        "Students need safe classrooms and an offline library of school learning materials.",
+        "स्कूल में बच्चों के लिए प्रयोगशाला और पढ़ाई की सामग्री उपलब्ध नहीं है।"
+      ]
+    },
+    {
+      "category": "Healthcare",
+      "train": [
+        "The rural clinic lacks doctors and patients travel far for basic consultations.",
+        "Community health workers need tools to schedule medical referrals in remote villages.",
+        "The hospital has long waiting times and no reliable patient appointment system.",
+        "Pregnant women cannot access regular medical checkups at the primary health centre.",
+        "Residents need medicine availability information for nearby public clinics.",
+        "Vaccination outreach teams need an offline system to follow up with patients.",
+        "गांव के अस्पताल में डॉक्टर नहीं हैं और मरीजों को दूर जाना पड़ता है।",
+        "स्वास्थ्य केंद्र में दवा और चिकित्सा जांच की सुविधा नहीं मिलती।"
+      ],
+      "test": [
+        "Patients need a local clinic referral and appointment service when doctors are absent.",
+        "अस्पताल में मरीजों के लिए दवा और डॉक्टर की उपलब्धता की जानकारी चाहिए।"
+      ]
+    },
+    {
+      "category": "Infrastructure",
+      "train": [
+        "Deep potholes damage vehicles on the main road and repairs are overdue.",
+        "Broken streetlights leave residential streets dark after sunset.",
+        "The public bridge has cracks and needs a structural inspection and repair.",
+        "Stormwater drains overflow because the drainage infrastructure is damaged.",
+        "The village footpath and public buildings need wheelchair ramps.",
+        "Damaged road surfaces and missing pavements make the neighborhood hard to navigate.",
+        "सड़क पर गहरे गड्ढे हैं और पुल की मरम्मत जरूरी है।",
+        "गली की स्ट्रीट लाइट खराब है और नाली टूट गई है।"
+      ],
+      "test": [
+        "The streetlights and roadside drains are broken and need municipal repair.",
+        "गांव की सड़क और फुटपाथ टूटे हुए हैं और मरम्मत की जरूरत है।"
+      ]
+    },
+    {
+      "category": "Agriculture",
+      "train": [
+        "Small farmers need soil moisture sensors to irrigate crops without wasting electricity.",
+        "Crop diseases spread because growers cannot obtain timely agricultural advice.",
+        "Farmers need affordable irrigation scheduling based on soil and crop conditions.",
+        "Village growers cannot find reliable market prices for harvested produce.",
+        "Soil testing equipment would help farmers choose suitable crop nutrients.",
+        "An irrigation pump fails frequently and leaves the farms without sufficient crop watering.",
+        "किसानों को फसल की सिंचाई और मिट्टी की नमी की जानकारी चाहिए।",
+        "खेत की फसल में बीमारी है और किसान को कृषि सलाह नहीं मिलती।"
+      ],
+      "test": [
+        "Farmers want soil sensors and agricultural advice to improve crop irrigation.",
+        "किसान को मिट्टी की जांच और फसल की सिंचाई के लिए सस्ती तकनीक चाहिए।"
+      ]
+    },
+    {
+      "category": "Environment",
+      "train": [
+        "Industrial smoke pollutes the neighborhood air and residents need air quality monitoring.",
+        "The local forest is losing trees and community volunteers want a replanting plan.",
+        "A polluted lake needs ecological restoration and biodiversity monitoring.",
+        "Construction dust worsens air pollution near residential buildings.",
+        "Urban trees are being cut without a plan to restore green cover.",
+        "Residents want reliable measurements of industrial emissions and local air quality.",
+        "कारखाने के धुएं से वायु प्रदूषण बढ़ रहा है और पेड़ कम हो रहे हैं।",
+        "झील में प्रदूषण है और पर्यावरण संरक्षण के लिए निगरानी चाहिए।"
+      ],
+      "test": [
+        "Air pollution from factory smoke and construction dust needs independent monitoring.",
+        "शहर में पेड़ों की कटाई और वायु प्रदूषण से पर्यावरण को नुकसान हो रहा है।"
+      ]
+    },
+    {
+      "category": "Public Safety",
+      "train": [
+        "Women feel unsafe walking home because harassment is frequent near the station.",
+        "Residents need a reliable way to report crime and unsafe public spaces.",
+        "Poor emergency response coordination makes the neighborhood unsafe at night.",
+        "Children face safety risks from unsecured abandoned buildings near the playground.",
+        "The community wants safer public spaces and a confidential harassment reporting channel.",
+        "A missing emergency warning system leaves residents unaware of local safety threats.",
+        "महिलाओं की सुरक्षा के लिए छेड़छाड़ की शिकायत की व्यवस्था चाहिए।",
+        "मोहल्ले में अपराध बढ़ रहे हैं और लोगों को सुरक्षा की चिंता है।"
+      ],
+      "test": [
+        "Repeated harassment and crime make the public park unsafe for women after dark.",
+        "लोगों को अपराध की शिकायत और आपातकालीन सुरक्षा सहायता की सुविधा चाहिए।"
+      ]
+    },
+    {
+      "category": "Transportation",
+      "train": [
+        "City buses are inaccessible to wheelchair users and elderly commuters.",
+        "Passengers need reliable bus arrival times and accessible route planning.",
+        "Traffic congestion makes daily commuting unpredictable on the main bus corridor.",
+        "Public transport routes do not connect the village to nearby employment centres.",
+        "Bus stops lack route information and accessible boarding points for passengers.",
+        "Commuters need coordinated last-mile transport between the railway station and homes.",
+        "बस यात्रियों को समय और मार्ग की सही जानकारी नहीं मिलती।",
+        "सार्वजनिक परिवहन में दिव्यांग यात्रियों के लिए सुलभ बसों की जरूरत है।"
+      ],
+      "test": [
+        "Commuters need accessible buses and dependable public transport arrival information.",
+        "गांव से शहर तक बस सेवा और यात्रियों के लिए मार्ग की जानकारी चाहिए।"
+      ]
+    },
+    {
+      "category": "Other",
+      "train": [
+        "Residents need a community noticeboard for local volunteer activities.",
+        "The neighborhood needs an accessible way to coordinate community events.",
+        "People want help understanding how to apply for public services and certificates.",
+        "Local artisans need a shared space to promote traditional crafts and community culture.",
+        "Volunteers struggle to coordinate donations of unused household goods.",
+        "Senior residents want a community companionship and social activity network.",
+        "मोहल्ले में सामुदायिक कार्यक्रम और स्वयंसेवकों का समन्वय करना है।",
+        "स्थानीय कलाकारों को अपनी कला दिखाने के लिए सामुदायिक मंच चाहिए।"
+      ],
+      "test": [
+        "Neighbors want a volunteer network to organize community events and share donated goods.",
+        "स्थानीय स्वयंसेवकों को सामुदायिक कार्यक्रम की जानकारी साझा करने का मंच चाहिए।"
+      ]
+    }
+  ]
+}

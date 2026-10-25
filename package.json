@@ -1,0 +1,79 @@
+{
+  "name": "civicbridge",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "prisma generate && npm run etl:check && next build",
+    "build:deploy": "node scripts/build-deploy.mjs",
+    "start": "next start --hostname 127.0.0.1",
+    "start:hosted": "next start --hostname 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "db:generate": "prisma generate",
+    "db:check": "tsx scripts/check-db.ts",
+    "deploy:check": "tsx scripts/check-production.ts",
+    "release": "npm run deploy:check && npm run db:check && npm run db:push",
+    "ai:train": "tsx scripts/train-ai.ts",
+    "ai:fetch": "node scripts/fetch-civic-data.mjs",
+    "ai:prepare": "node scripts/prepare-civic-data.mjs",
+    "etl": "node scripts/run-etl.mjs",
+    "etl:check": "tsx scripts/check-pipeline.ts",
+    "ai:train:demo": "tsx scripts/train-ai.ts --dataset data/civic-demo.json --output src/lib/ai/generated/demo-model.json",
+    "db:push": "prisma db push --skip-generate",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:studio": "prisma studio",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "local:db:start": "node scripts/mongo-local-db.mjs start",
+    "local:db:stop": "node scripts/mongo-local-db.mjs stop",
+    "admin:create": "tsx scripts/create-admin.ts",
+    "maintenance": "tsx scripts/maintenance.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.3",
+    "@radix-ui/react-slot": "^1.2.4",
+    "bcryptjs": "^3.0.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.577.0",
+    "next": "^16.1.6",
+    "next-auth": "5.0.0-beta.32",
+    "next-themes": "^0.4.6",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-leaflet": "^5.0.0",
+    "recharts": "^3.7.0",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.5.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@tailwindcss/postcss": "^4.2.1",
+    "@types/leaflet": "^1.9.21",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "mongodb": "^6.21.0",
+    "prettier": "^3.9.10",
+    "prisma": "6.19.3",
+    "tailwindcss": "^4.2.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  },
+  "overrides": {
+    "@prisma/config": {
+      "deepmerge-ts": "8.0.0"
+    }
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
+}

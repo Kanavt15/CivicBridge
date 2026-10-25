@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: civicbridge
+    runtime: node
+    plan: free
+    buildCommand: npm run build:deploy
+    startCommand: npm run release && npm run start:hosted
+    healthCheckPath: /api/health/ready
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: AUTH_URL
+        sync: false
+      - key: AUTH_SECRET
+        generateValue: true
+      - key: AUTH_TRUST_HOST
+        value: "true"
+      - key: ALLOW_DEMO_ACCOUNTS
+        value: "false"

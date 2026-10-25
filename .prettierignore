@@ -1,0 +1,11 @@
+node_modules
+.next
+.data
+package-lock.json
+prisma/migrations
+AGENTS.md
+next-env.d.ts
+test-results
+src/lib/ai/generated/
+data/sources/
+data/nyc311-civic.json

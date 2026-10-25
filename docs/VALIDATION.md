@@ -1,0 +1,61 @@
+# Verification record
+
+Verified locally on 23 October 2026 with Node.js 24.14.1, Next.js 16.4.3, Prisma 6.19.2, and an isolated MongoDB 8.2 replica set (`civicbridge-rs`, port 27018).
+
+| Check                                                   | Result                                                                      |
+| ------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Prisma schema validation                                | Passed                                                                      |
+| One-time database migration                             | Executed; all 104 records across 18 collections verified field by field     |
+| MongoDB schema and urgency-rank backfill                | Executed; existing string IDs and references preserved                      |
+| MongoDB indexes (`npm run db:push`)                     | Applied; subsequent run reports already in sync                             |
+| Temporary migration scripts and obsolete SQL migrations | Removed after successful transfer and workflow verification                 |
+| Demo seed                                               | Five role accounts, eight reports, three innovations/workspaces             |
+| TypeScript strict type check                            | Passed                                                                      |
+| Vitest                                                  | 15 unit tests passed                                                        |
+| Playwright HTTP/database suite, development server      | 7 scenarios passed                                                          |
+| Playwright HTTP/database suite, production server       | 7 scenarios passed, including administrator milestone verification          |
+| Optimized Next.js production build                      | Passed                                                                      |
+| HTTP page smoke test                                    | 20 application routes returned 200                                          |
+| Test cleanup                                            | Only records belonging to each integration run's unique prefix were removed |
+
+The scenarios verify registration, login for all five demo roles, rejection of public admin registration, server role enforcement, private report/file visibility, file-signature checks, real MongoDB persistence, ordered moderation, live dashboard/discovery updates, mutation-origin rejection, voting, comments, proposal privacy/approval, unique rewards, private workspace access, partner acceptance, milestones/tasks, invitation acceptance, team verification, editable assistance, matching, audit timelines, notifications, and leaderboard records. MongoDB regressions cover attaching uploads with missing nullable reference fields, sorting urgency by severity rather than alphabetically, and popularity sorting by related votes.
+
+The available computer-use tool reported no browsers. Consequently, screenshots, browser interaction, responsive layout, keyboard operation, client-side Leaflet/Recharts rendering, and dark-mode appearance have **not** been visually verified. Successful HTTP rendering does not establish those checks. The optional remote LLM path was not exercised because no provider key was configured; the local rules path was tested.
+
+Commands and deployment limits are documented in the root README and DEPLOYMENT.md. The isolated project MongoDB replica set remains available for local use. Start the application with `npm.cmd run dev`. The original PostgreSQL data files are retained as a rollback copy; the application no longer uses PostgreSQL.
+
+## Atlas preparation — 24 October 2026
+
+An Atlas environment template, separate local fallback template, credential-safe `db:check` command, and Atlas connection/deployment guide were added. TypeScript passes and the expanded unit suite passes all 21 tests. The new connection checker successfully pinged the existing local MongoDB database and performed a read-only application-collection transaction. No application runtime or schema changes were required for Atlas support.
+
+At that preparation stage, `.env` still pointed to local MongoDB. The later Atlas verification and transfer are recorded below; checked-in environment examples continue to contain placeholders only.
+
+## PowerShell deployment build — 24 October 2026
+
+Confirmed that Windows PowerShell 5.1 rejects `npm ci && npm run build` with `InvalidEndOfLine`. Added the portable `build:deploy` npm script, which runs `npm ci --include=dev` and then the existing production build through Node subprocesses. It stops on a failed install or build and does not require shell pipeline operators. `.node-version` pins the tested Node 24.14.1 runtime, and the package manifest/lockfile specify Node 24.
+
+Verified `npm.cmd run build:deploy` from PowerShell in an isolated fresh source copy with `NODE_ENV=production` and `npm_config_omit=dev`: 195 packages installed, Prisma Client generated, and the optimized Next.js build completed successfully. The copy did not contain `.env` or application data. TypeScript and all 21 unit tests pass, formatting passes, and the manifest/lockfile remain synchronized. The first sandboxed attempt could not reach Prisma's official binary host; rerunning with network access completed successfully. The temporary verification folder was removed, without reinstalling dependencies in or stopping the original running application.
+
+## Deployment and standout workflows — 24 October 2026
+
+- Atlas: real connection, application collection access, and a read-only transaction passed. The new schema/indexes were applied to the empty target. Transferred 71 existing application records and compared every scalar field, string ID, timestamp, and binary value using canonical hashes per collection. Ephemeral rate-limit counters were excluded. Temporary audit/transfer scripts were removed; previous local database copies remain intact. No integration-test records were written to Atlas.
+- Model: retrieved the official NYC311 2025 aggregate descriptor source, with reuse terms and no personal/location fields. Deterministic preparation produced 391 train / 112 held-out examples across six categories. Measured top-ranked accuracy 59.8%, macro F1 0.503, majority baseline 40.2%, coverage 66.1%, and accuracy among accepted predictions 75.7%. The separate authored bilingual synthetic model remains explicitly labeled. Neither result establishes Indian field performance.
+- TypeScript passed; all 36 unit tests passed. The nine HTTP/database scenarios passed against both development and optimized production servers on isolated `civicbridge_upgrade_test`. The final production run includes server/database identity matching, evidence privacy and separate-admin verification, duplicate-review audit protection, operations authorization and CSV export, public-data provenance, demo inference, and liveness/readiness.
+- Optimized `npm run build` passed with all new routes. Nine production page smoke checks returned HTTP 200. Formatting passed. The earlier clean-install `build:deploy` verification remains applicable; no dependencies were added for these features.
+- Separate production-default checks passed: demo buttons hidden, fresh demo login rejected, an already-issued demo session denied protected APIs, and normal liveness responses omit test-database identity. Integration tests refuse Atlas/application databases and require the actual server to advertise the same isolated test database before writes.
+- Render and Railway manifests and GitHub Actions workflow were prepared, using release preflight and readiness probes. They have not run in an actual cloud hosting account. A real hosted HTTPS origin, host environment settings/Atlas network access, and real administrator provisioning remain deployment steps.
+
+Browser visual checks remain unavailable in this environment. Remote LLM calls were not exercised. An unrestricted public launch still needs the email verification/recovery, scanning, backups, monitoring, and moderation operations documented in the deployment guide.
+
+## Production operations and ETL phase — 25 October 2026
+
+- Added the administrator system overview/API with a read-only database transaction, pending-review counts, sanitized configuration checks, and the bundled pipeline report. Anonymous access returns 401 and citizen access returns 403; admin responses use `no-store` and exclude the configured authentication secret and database URI.
+- Added combined search, urgency, review stage, overdue, and hide-demo queue filters. The CSV endpoint shares the filtering policy. An unmatched search exports only the header, with existing formula escaping retained.
+- Added offline `etl`, explicit upstream refresh, and read-only `etl:check`. The pinned 1,121 source pairs reproduce 391 training / 112 held-out examples. The checker reconstructs the model/evaluation and rejects fingerprint drift, altered weights, inflated metrics, partition leakage, synthetic provenance, stale reports, and failed baseline quality gates. The application build runs this gate.
+- Updated Auth.js to 5.0.0-beta.32 and Prisma Client/CLI to 6.19.3. Scoped the Prisma configuration dependency's `deepmerge-ts` override to 8.0.0. The full `npm audit --audit-level=high` reports **zero known vulnerabilities** at verification time. This is a point-in-time registry result, not a guarantee about all future advisories or application logic.
+- Prisma schema validation, client generation, strict TypeScript, all **44 unit tests**, formatting, and the optimized production build passed. All **nine HTTP/database scenarios passed against development and again against production** after the dependency updates, using only disposable local `civicbridge_test`. The suite cleaned its own prefixed records; the Atlas application was not used for integration writes.
+- `build:deploy` passed in a fresh ignored source copy with no `.env`, application data, existing dependencies, or prior build. It installed 195 packages with `NODE_ENV=production` and `npm_config_omit=dev`, generated Prisma, checked ETL, and built all routes including `/system` and `/api/system`. Next.js emitted a workspace-root warning because the verification copy was nested under the original repository; no application environment file was loaded in that build. The temporary copy was removed afterward.
+- Prepared an unprivileged Docker runtime, secret-excluding build context, readiness health check, and GitHub Actions checks for audits, model reproducibility, development/production workflows, formatting, and container builds. Docker is not installed locally, so the Linux image build has **not** been executed here. GitHub Actions has **not** run for these changes because nothing was pushed.
+- Confirmed the supplied `Kanavt15/CivicBridge` repository and configured it as local `origin`. No commit, push, collaborator change, hosting deployment, or production secret change was performed.
+
+Computer Use stopped because it could not confidently determine Chrome's URL, so visual layout and browser interaction remain unverified. Optional remote LLM behavior and actual hosting/Atlas network configuration still require verification. The existing Prisma 6 package-based seed configuration emits a Prisma 7 deprecation warning; Prisma 6 remains intentionally pinned for this MongoDB application.

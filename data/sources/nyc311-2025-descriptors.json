@@ -1,0 +1,5621 @@
+{
+  "source": "NYC Open Data / NYC311",
+  "dataset": "erm2-nwe9",
+  "sourceUrl": "https://data.cityofnewyork.us/d/erm2-nwe9",
+  "queryUrl": "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28*%29+AS+records&%24where=created_date+%3E%3D+%272025-01-01T00%3A00%3A00%27+AND+created_date+%3C+%272026-01-01T00%3A00%3A00%27+AND+descriptor+IS+NOT+NULL&%24group=complaint_type%2Cdescriptor&%24order=complaint_type%2Cdescriptor&%24limit=10000",
+  "retrievedAt": "2026-10-23T20:27:38.009Z",
+  "termsUrl": "https://data.cityofnewyork.us/stories/s/Terms-of-Use/k9k7-3cje",
+  "reusePolicyUrl": "https://www.nyc.gov/opendata/get-started/FAQs",
+  "fields": [
+    "complaint_type",
+    "descriptor",
+    "records"
+  ],
+  "rows": [
+    {
+      "complaint_type": "Abandoned Bike",
+      "descriptor": "Chained to Public Property",
+      "records": "2108"
+    },
+    {
+      "complaint_type": "Abandoned Vehicle",
+      "descriptor": "With License Plate",
+      "records": "67903"
+    },
+    {
+      "complaint_type": "AHV Inspection Unit",
+      "descriptor": "After Hours Work - With An AHV Permit",
+      "records": "28"
+    },
+    {
+      "complaint_type": "Air Quality",
+      "descriptor": "Air: Dust, Construction/Demolition (AE4)",
+      "records": "1074"
+    },
+    {
+      "complaint_type": "Air Quality",
+      "descriptor": "Air: Dust, Other (Use Comments) (AE5)",
+      "records": "210"
+    },
+    {
+      "complaint_type": "Air Quality",
+      "descriptor": "Air: Odor/Fumes, Dry Cleaners (AD1)",
+      "records": "7"
+    },
+    {
+      "complaint_type": "Air Quality",
+      "descriptor": "Air: Odor/Fumes, Restaurant (AD2)",
+      "records": "773"
+    },
+    {
+      "complaint_type": "Air Quality",
+      "descriptor": "Air: Odor/Fumes, Vehicle Idling (AD3)",
+      "records": "5385"
+    },
+    {
+      "complaint_type": "Air Quality",
+      "descriptor": "Air: Odor, Nail Salon (AD8)",
+      "records": "60"
+    },
+    {
+      "complaint_type": "Air Quality",
+      "descriptor": "Air: Odor, Sweet From Unknown Source (AZ1)",
+      "records": "52"
+    },
+    {
+      "complaint_type": "Air Quality",
+      "descriptor": "Air: Other Air Problem (Use Comments) (AZZ)",
+      "records": "281"
+    },
+    {
+      "complaint_type": "Air Quality",
+      "descriptor": "Air: Smoke, Chimney or vent (AS1)",
+      "records": "597"
+    },
+    {
+      "complaint_type": "Air Quality",
+      "descriptor": "Air: Smoke, Vehicular (AA4)",
+      "records": "1361"
+    },
+    {
+      "complaint_type": "Animal-Abuse",
+      "descriptor": "Chained",
+      "records": "386"
+    },
+    {
+      "complaint_type": "Animal-Abuse",
+      "descriptor": "In Car",
+      "records": "154"
+    },
+    {
+      "complaint_type": "Animal-Abuse",
+      "descriptor": "Neglected",
+      "records": "5225"
+    },
+    {
+      "complaint_type": "Animal-Abuse",
+      "descriptor": "No Shelter",
+      "records": "727"
+    },
+    {
+      "complaint_type": "Animal-Abuse",
+      "descriptor": "Other (complaint details)",
+      "records": "2370"
+    },
+    {
+      "complaint_type": "Animal-Abuse",
+      "descriptor": "Tortured",
+      "records": "1667"
+    },
+    {
+      "complaint_type": "Animal Facility - No Permit",
+      "descriptor": "N/A",
+      "records": "108"
+    },
+    {
+      "complaint_type": "Animal in a Park",
+      "descriptor": "Animal Waste",
+      "records": "171"
+    },
+    {
+      "complaint_type": "Animal in a Park",
+      "descriptor": "Dead Animal",
+      "records": "548"
+    },
+    {
+      "complaint_type": "Animal in a Park",
+      "descriptor": "Dog Off Leash",
+      "records": "3006"
+    },
+    {
+      "complaint_type": "Animal in a Park",
+      "descriptor": "Domestic Strays",
+      "records": "250"
+    },
+    {
+      "complaint_type": "Animal in a Park",
+      "descriptor": "Injured Wildlife",
+      "records": "1006"
+    },
+    {
+      "complaint_type": "Animal in a Park",
+      "descriptor": "Removing Wildlife",
+      "records": "202"
+    },
+    {
+      "complaint_type": "Animal in a Park",
+      "descriptor": "Wildlife Sighting",
+      "records": "233"
+    },
+    {
+      "complaint_type": "APPLIANCE",
+      "descriptor": "ELECTRIC/GAS RANGE",
+      "records": "13680"
+    },
+    {
+      "complaint_type": "APPLIANCE",
+      "descriptor": "MICROWAVE",
+      "records": "24"
+    },
+    {
+      "complaint_type": "APPLIANCE",
+      "descriptor": "REFRIGERATOR",
+      "records": "8796"
+    },
+    {
+      "complaint_type": "Asbestos",
+      "descriptor": "Asbestos Complaint (B1)",
+      "records": "961"
+    },
+    {
+      "complaint_type": "Asbestos",
+      "descriptor": "N/A",
+      "records": "550"
+    },
+    {
+      "complaint_type": "ASBESTOS",
+      "descriptor": "N/A",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Beach/Pool/Sauna Complaint",
+      "descriptor": "Beach/Pool/Sauna Unpermitted",
+      "records": "14"
+    },
+    {
+      "complaint_type": "Beach/Pool/Sauna Complaint",
+      "descriptor": "Beach/Pool Water",
+      "records": "74"
+    },
+    {
+      "complaint_type": "Beach/Pool/Sauna Complaint",
+      "descriptor": "Facility Maintenance",
+      "records": "95"
+    },
+    {
+      "complaint_type": "Beach/Pool/Sauna Complaint",
+      "descriptor": "Safety Equipment/Signs",
+      "records": "49"
+    },
+    {
+      "complaint_type": "Bench",
+      "descriptor": "Damaged/Bent/Loose/Leaning",
+      "records": "84"
+    },
+    {
+      "complaint_type": "Bench",
+      "descriptor": "Graffiti",
+      "records": "10"
+    },
+    {
+      "complaint_type": "Bench",
+      "descriptor": "Missing",
+      "records": "28"
+    },
+    {
+      "complaint_type": "BEST/Site Safety",
+      "descriptor": "Demolition - Unsafe",
+      "records": "400"
+    },
+    {
+      "complaint_type": "BEST/Site Safety",
+      "descriptor": "Safety Netting/Guard Rails - Damaged/Inadequate/None (Over 6 Stories/75 Feet)",
+      "records": "90"
+    },
+    {
+      "complaint_type": "Bike Rack",
+      "descriptor": "Abandoned Bike",
+      "records": "365"
+    },
+    {
+      "complaint_type": "Bike Rack",
+      "descriptor": "Damaged/Bent/Loose/Leaning",
+      "records": "200"
+    },
+    {
+      "complaint_type": "Bike Rack",
+      "descriptor": "Graffiti",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Bike Rack",
+      "descriptor": "Missing",
+      "records": "55"
+    },
+    {
+      "complaint_type": "Bike/Roller/Skate",
+      "descriptor": "N/A",
+      "records": "132"
+    },
+    {
+      "complaint_type": "Bike/Roller/Skate Chronic",
+      "descriptor": "N/A",
+      "records": "1644"
+    },
+    {
+      "complaint_type": "Blocked Driveway",
+      "descriptor": "No Access",
+      "records": "126163"
+    },
+    {
+      "complaint_type": "Blocked Driveway",
+      "descriptor": "Partial Access",
+      "records": "46560"
+    },
+    {
+      "complaint_type": "Boilers",
+      "descriptor": "Boiler - Defective/Inoperative/No Permit",
+      "records": "3997"
+    },
+    {
+      "complaint_type": "Borough Office",
+      "descriptor": "Construction Enforcement Work Order (DOB)",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Borough Office",
+      "descriptor": "Restroom Non-Complaince With Local Law 79/16",
+      "records": "23"
+    },
+    {
+      "complaint_type": "Bridge Condition",
+      "descriptor": "American Flag",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Bridge Condition",
+      "descriptor": "Decorative Necklace Lighting",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Bridge Condition",
+      "descriptor": "Dirt, Debris, Litter Complaint",
+      "records": "47"
+    },
+    {
+      "complaint_type": "Bridge Condition",
+      "descriptor": "Fallen Debris from Bridge",
+      "records": "9"
+    },
+    {
+      "complaint_type": "Bridge Condition",
+      "descriptor": "Fence",
+      "records": "6"
+    },
+    {
+      "complaint_type": "Bridge Condition",
+      "descriptor": "Graffiti - Bridge",
+      "records": "25"
+    },
+    {
+      "complaint_type": "Bridge Condition",
+      "descriptor": "Guard Rail - Bridge",
+      "records": "7"
+    },
+    {
+      "complaint_type": "Bridge Condition",
+      "descriptor": "Pothole",
+      "records": "108"
+    },
+    {
+      "complaint_type": "Bridge Condition",
+      "descriptor": "Rough Pavement",
+      "records": "19"
+    },
+    {
+      "complaint_type": "Bridge Condition",
+      "descriptor": "Snow on Overpass",
+      "records": "12"
+    },
+    {
+      "complaint_type": "Broken Parking Meter",
+      "descriptor": "Bent/Loose",
+      "records": "33"
+    },
+    {
+      "complaint_type": "Broken Parking Meter",
+      "descriptor": "Coin or Card Did Not Register",
+      "records": "908"
+    },
+    {
+      "complaint_type": "Broken Parking Meter",
+      "descriptor": "Credit Card Stuck in Meter",
+      "records": "94"
+    },
+    {
+      "complaint_type": "Broken Parking Meter",
+      "descriptor": "Graffiti",
+      "records": "47"
+    },
+    {
+      "complaint_type": "Broken Parking Meter",
+      "descriptor": "Missing/Stump",
+      "records": "43"
+    },
+    {
+      "complaint_type": "Broken Parking Meter",
+      "descriptor": "No Receipt",
+      "records": "704"
+    },
+    {
+      "complaint_type": "Broken Parking Meter",
+      "descriptor": "Out of Order",
+      "records": "1093"
+    },
+    {
+      "complaint_type": "Broken Parking Meter",
+      "descriptor": "Parking Card Stuck in Meter",
+      "records": "17"
+    },
+    {
+      "complaint_type": "Broken Parking Meter",
+      "descriptor": "Relocation of Parking Meter",
+      "records": "11"
+    },
+    {
+      "complaint_type": "Broken Parking Meter",
+      "descriptor": "Timer Defect - Fast/Fail",
+      "records": "100"
+    },
+    {
+      "complaint_type": "Building Condition",
+      "descriptor": "Bikes in Buildings",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Building Drinking Water Tank",
+      "descriptor": "Broken or Defective",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Building Drinking Water Tank",
+      "descriptor": "Unsanitary Condition",
+      "records": "63"
+    },
+    {
+      "complaint_type": "Building Marshal's Office",
+      "descriptor": "Tenant Safety Inspection",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Building/Use",
+      "descriptor": "Illegal. Commercial Use In Resident Zone",
+      "records": "1301"
+    },
+    {
+      "complaint_type": "Building/Use",
+      "descriptor": "Illegal Conversion Of Residential Building/Space",
+      "records": "14905"
+    },
+    {
+      "complaint_type": "Building/Use",
+      "descriptor": "No Certificate Of Occupancy/Illegal/Contrary To CO",
+      "records": "1865"
+    },
+    {
+      "complaint_type": "Building/Use",
+      "descriptor": "SRO - Illegal Work/No Permit/Change In Occupancy/Use",
+      "records": "857"
+    },
+    {
+      "complaint_type": "Building/Use",
+      "descriptor": "Zoning - Non-Conforming/Illegal Vehicle Storage",
+      "records": "1830"
+    },
+    {
+      "complaint_type": "Bus Stop Shelter Complaint",
+      "descriptor": "Broken Glass",
+      "records": "328"
+    },
+    {
+      "complaint_type": "Bus Stop Shelter Complaint",
+      "descriptor": "Damaged Bench",
+      "records": "49"
+    },
+    {
+      "complaint_type": "Bus Stop Shelter Complaint",
+      "descriptor": "Damaged Leg or Pole Bent",
+      "records": "12"
+    },
+    {
+      "complaint_type": "Bus Stop Shelter Complaint",
+      "descriptor": "Damaged or Leaking Roof",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Bus Stop Shelter Complaint",
+      "descriptor": "Damaged or Missing Ad Box",
+      "records": "19"
+    },
+    {
+      "complaint_type": "Bus Stop Shelter Complaint",
+      "descriptor": "Damaged Other",
+      "records": "146"
+    },
+    {
+      "complaint_type": "Bus Stop Shelter Complaint",
+      "descriptor": "Dirty/Graffiti",
+      "records": "363"
+    },
+    {
+      "complaint_type": "Bus Stop Shelter Complaint",
+      "descriptor": "Lighting",
+      "records": "133"
+    },
+    {
+      "complaint_type": "Bus Stop Shelter Complaint",
+      "descriptor": "Sign Missing or Defective",
+      "records": "64"
+    },
+    {
+      "complaint_type": "Bus Stop Shelter Complaint",
+      "descriptor": "Snow Removal Requested",
+      "records": "96"
+    },
+    {
+      "complaint_type": "Bus Stop Shelter Placement",
+      "descriptor": "New Bus Stop Shelter Placement",
+      "records": "250"
+    },
+    {
+      "complaint_type": "Bus Stop Shelter Placement",
+      "descriptor": "Relocation of Bus Stop Shelter",
+      "records": "11"
+    },
+    {
+      "complaint_type": "Calorie Labeling",
+      "descriptor": "Failure to Post Calorie Information",
+      "records": "6"
+    },
+    {
+      "complaint_type": "Cannabis Retailer",
+      "descriptor": "Product Concerns",
+      "records": "55"
+    },
+    {
+      "complaint_type": "Cannabis Retailer",
+      "descriptor": "Sales to Minors Under 21",
+      "records": "283"
+    },
+    {
+      "complaint_type": "Cannabis Retailer",
+      "descriptor": "Suspicious Activity",
+      "records": "178"
+    },
+    {
+      "complaint_type": "Cannabis Retailer",
+      "descriptor": "Too Close to a House of Worship",
+      "records": "34"
+    },
+    {
+      "complaint_type": "Cannabis Retailer",
+      "descriptor": "Too Close to a School",
+      "records": "73"
+    },
+    {
+      "complaint_type": "Cannabis Retailer",
+      "descriptor": "Unlicensed",
+      "records": "488"
+    },
+    {
+      "complaint_type": "Commercial Disposal Complaint",
+      "descriptor": "Waste Disposal",
+      "records": "1237"
+    },
+    {
+      "complaint_type": "Commercial Disposal Complaint",
+      "descriptor": "Waste Left in Front of Residence",
+      "records": "482"
+    },
+    {
+      "complaint_type": "Construction Lead Dust",
+      "descriptor": "Coming into Apartment",
+      "records": "291"
+    },
+    {
+      "complaint_type": "Construction Lead Dust",
+      "descriptor": "Common Areas and Apartment",
+      "records": "363"
+    },
+    {
+      "complaint_type": "Construction Lead Dust",
+      "descriptor": "In Common Areas",
+      "records": "678"
+    },
+    {
+      "complaint_type": "Construction Safety Enforcement",
+      "descriptor": "CSC - Monitoring Tracking",
+      "records": "2110"
+    },
+    {
+      "complaint_type": "Construction Safety Enforcement",
+      "descriptor": "CSE - Tracking Compliance",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Airline",
+      "records": "8"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Arcade",
+      "records": "8"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Art Supply Store",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Auction House or Auctioneer",
+      "records": "11"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Automated Employment Decision Tool Use",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Bail Bond Agent",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Barber Shop, Beauty Salon, or Nail Salon",
+      "records": "327"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Bodega, Deli, or Convenience Store",
+      "records": "1316"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Booting Company",
+      "records": "64"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Carpet and Flooring Business",
+      "records": "14"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Car Rental",
+      "records": "163"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Car Wash",
+      "records": "625"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Catering Establishment",
+      "records": "7"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Cell Phone Store",
+      "records": "169"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Clothing, Shoe, or Accessories Store",
+      "records": "322"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Construction Labor Provider",
+      "records": "84"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Dealer in Products for the Disabled",
+      "records": "18"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Debt Collection Agency",
+      "records": "81"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Department Store or Megastore",
+      "records": "186"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Door to Door Sales",
+      "records": "18"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Drug Store or Pharmacy",
+      "records": "378"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Dry Cleaner",
+      "records": "125"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "E-Cigarette Sales",
+      "records": "278"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Electronics or Appliance Repair",
+      "records": "77"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Electronics Store",
+      "records": "240"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Employment Agency",
+      "records": "108"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Entertainment Venue",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "For-Profit College or University",
+      "records": "18"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Funeral Home",
+      "records": "41"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Furniture Store",
+      "records": "212"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Games of Chance",
+      "records": "26"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Gaming Cafe",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Garage or Parking Lot",
+      "records": "888"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Gas Station Convenience Store",
+      "records": "98"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Gas Station Pumps",
+      "records": "178"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "General Vendor",
+      "records": "57"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Gift, Novelty, or Souvenir Store",
+      "records": "50"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Hardware Store",
+      "records": "45"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Home Appliance Store",
+      "records": "71"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Home Heating Oil Company",
+      "records": "23"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Home Improvement Contractor",
+      "records": "474"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Horse-Drawn Cab",
+      "records": "15"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Hotel or Motel",
+      "records": "399"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Immigration Services Provider",
+      "records": "8"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Jewelry Store",
+      "records": "64"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Landlord or Real Estate Agent",
+      "records": "360"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Laundromat",
+      "records": "436"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Locksmith",
+      "records": "45"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Micromobility Device Store",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Mobile Food Vendor",
+      "records": "86"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Movie Theater",
+      "records": "15"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Moving Company",
+      "records": "42"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Newsstand",
+      "records": "31"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Office Supply or Stationery Store",
+      "records": "12"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Online or Mail Order",
+      "records": "78"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Other Store (Non-Food)",
+      "records": "1794"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Pawnbroker",
+      "records": "31"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Pedicab",
+      "records": "157"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Pet Store",
+      "records": "21"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Pool or Billiard Room",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Pregnancy Services Center",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Printing Services",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Process Server",
+      "records": "31"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Publishing Company",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Residential Rental Agency",
+      "records": "119"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Restaurant",
+      "records": "1042"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Scale Dealer or Repairer",
+      "records": "16"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Scrap Metal Processor",
+      "records": "21"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Shipping Company",
+      "records": "132"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Sidewalk Cafe",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Smoking, Cigar, or Vape Store",
+      "records": "80"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Stoop Line Stand",
+      "records": "980"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Storage Warehouse",
+      "records": "239"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Street Fair Vendor",
+      "records": "838"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Supermarket or Grocery Store",
+      "records": "1086"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Tax Preparation Services",
+      "records": "79"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Third-Party Food Delivery Service",
+      "records": "104"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Ticket Seller",
+      "records": "69"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Tobacco Sales",
+      "records": "687"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Tour Bus",
+      "records": "26"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Tour Guide",
+      "records": "67"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Tow Truck Company",
+      "records": "1489"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Travel Agency",
+      "records": "33"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Used Car Dealer",
+      "records": "524"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Used Goods Dealer",
+      "records": "145"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Used Gun Dealer",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Consumer Complaint",
+      "descriptor": "Wholesale Food Market",
+      "records": "33"
+    },
+    {
+      "complaint_type": "Cooling Tower",
+      "descriptor": "Broken/Defective",
+      "records": "15"
+    },
+    {
+      "complaint_type": "Cooling Tower",
+      "descriptor": "Unsanitary Condition",
+      "records": "15"
+    },
+    {
+      "complaint_type": "Cranes and Derricks",
+      "descriptor": "Crane/Suspension Scaffold - No Permit/License/Cert./Unsafe/Illegal",
+      "records": "79"
+    },
+    {
+      "complaint_type": "Curb Condition",
+      "descriptor": "Broken Curb",
+      "records": "5632"
+    },
+    {
+      "complaint_type": "Curb Condition",
+      "descriptor": "Curb Defect-Metal Protruding",
+      "records": "524"
+    },
+    {
+      "complaint_type": "Curb Condition",
+      "descriptor": "Curb Violation",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Curb Condition",
+      "descriptor": "Defacement",
+      "records": "1911"
+    },
+    {
+      "complaint_type": "Damaged Tree",
+      "descriptor": "Branch Cracked and Will Fall",
+      "records": "5729"
+    },
+    {
+      "complaint_type": "Damaged Tree",
+      "descriptor": "Branch or Limb Has Fallen Down",
+      "records": "12241"
+    },
+    {
+      "complaint_type": "Damaged Tree",
+      "descriptor": "Entire Tree Has Fallen Down",
+      "records": "5087"
+    },
+    {
+      "complaint_type": "Damaged Tree",
+      "descriptor": "Tree Alive - in Poor Condition",
+      "records": "3290"
+    },
+    {
+      "complaint_type": "Damaged Tree",
+      "descriptor": "Tree Leaning/Uprooted",
+      "records": "3347"
+    },
+    {
+      "complaint_type": "Damaged Tree",
+      "descriptor": "Tree Trunk Split",
+      "records": "395"
+    },
+    {
+      "complaint_type": "Day Care",
+      "descriptor": "Day Care Facility",
+      "records": "1492"
+    },
+    {
+      "complaint_type": "Day Care",
+      "descriptor": "Other",
+      "records": "7"
+    },
+    {
+      "complaint_type": "Day Care",
+      "descriptor": "Summer Camp",
+      "records": "112"
+    },
+    {
+      "complaint_type": "Day Care",
+      "descriptor": "Unlicensed Day Care",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Dead Animal",
+      "descriptor": "Bird",
+      "records": "1048"
+    },
+    {
+      "complaint_type": "Dead Animal",
+      "descriptor": "Cat",
+      "records": "4204"
+    },
+    {
+      "complaint_type": "Dead Animal",
+      "descriptor": "Deer",
+      "records": "107"
+    },
+    {
+      "complaint_type": "Dead Animal",
+      "descriptor": "Dog",
+      "records": "527"
+    },
+    {
+      "complaint_type": "Dead Animal",
+      "descriptor": "Opossum",
+      "records": "846"
+    },
+    {
+      "complaint_type": "Dead Animal",
+      "descriptor": "Other",
+      "records": "724"
+    },
+    {
+      "complaint_type": "Dead Animal",
+      "descriptor": "Raccoon",
+      "records": "1315"
+    },
+    {
+      "complaint_type": "Dead Animal",
+      "descriptor": "Rat or Mouse",
+      "records": "1206"
+    },
+    {
+      "complaint_type": "Dead Animal",
+      "descriptor": "Squirrel",
+      "records": "734"
+    },
+    {
+      "complaint_type": "Dead/Dying Tree",
+      "descriptor": "Planted Less Than 2 Years Ago",
+      "records": "707"
+    },
+    {
+      "complaint_type": "Dead/Dying Tree",
+      "descriptor": "Planted More Than 2 Years Ago",
+      "records": "9766"
+    },
+    {
+      "complaint_type": "DEP Highway Condition",
+      "descriptor": "Failed Street Cut - DEP",
+      "records": "2"
+    },
+    {
+      "complaint_type": "DEP Highway Condition",
+      "descriptor": "Plate Condition - DEP",
+      "records": "1"
+    },
+    {
+      "complaint_type": "DEP Highway Condition",
+      "descriptor": "Sunken Pavement",
+      "records": "1"
+    },
+    {
+      "complaint_type": "DEP Sidewalk Condition",
+      "descriptor": "Cave-in",
+      "records": "1"
+    },
+    {
+      "complaint_type": "DEP Street Condition",
+      "descriptor": "Cave-in",
+      "records": "6"
+    },
+    {
+      "complaint_type": "DEP Street Condition",
+      "descriptor": "Ponding",
+      "records": "3"
+    },
+    {
+      "complaint_type": "DEP Street Condition",
+      "descriptor": "Sunken Pavement",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Dept of Investigations",
+      "descriptor": "Integrity Complaint Referral",
+      "records": "22"
+    },
+    {
+      "complaint_type": "Derelict Vehicles",
+      "descriptor": "Derelict Vehicles",
+      "records": "43229"
+    },
+    {
+      "complaint_type": "Dirty Condition",
+      "descriptor": "Broken Glass",
+      "records": "1107"
+    },
+    {
+      "complaint_type": "Dirty Condition",
+      "descriptor": "Debris from Car Accident",
+      "records": "438"
+    },
+    {
+      "complaint_type": "Dirty Condition",
+      "descriptor": "Dirt or Gravel",
+      "records": "1136"
+    },
+    {
+      "complaint_type": "Dirty Condition",
+      "descriptor": "Dog Waste",
+      "records": "2660"
+    },
+    {
+      "complaint_type": "Dirty Condition",
+      "descriptor": "Syringes",
+      "records": "840"
+    },
+    {
+      "complaint_type": "Dirty Condition",
+      "descriptor": "Trash",
+      "records": "54866"
+    },
+    {
+      "complaint_type": "Disorderly Youth",
+      "descriptor": "Nuisance/Truant",
+      "records": "106"
+    },
+    {
+      "complaint_type": "Disorderly Youth",
+      "descriptor": "Playing in Unsuitable Place",
+      "records": "100"
+    },
+    {
+      "complaint_type": "DOOR/WINDOW",
+      "descriptor": "DOOR",
+      "records": "24164"
+    },
+    {
+      "complaint_type": "DOOR/WINDOW",
+      "descriptor": "DOOR FRAME",
+      "records": "3649"
+    },
+    {
+      "complaint_type": "DOOR/WINDOW",
+      "descriptor": "DOOR TO DUMBWAITER",
+      "records": "130"
+    },
+    {
+      "complaint_type": "DOOR/WINDOW",
+      "descriptor": "WINDOW FRAME",
+      "records": "14733"
+    },
+    {
+      "complaint_type": "DOOR/WINDOW",
+      "descriptor": "WINDOW PANE",
+      "records": "2787"
+    },
+    {
+      "complaint_type": "Drinking",
+      "descriptor": "After Hours - Licensed Est",
+      "records": "296"
+    },
+    {
+      "complaint_type": "Drinking",
+      "descriptor": "In Public",
+      "records": "4106"
+    },
+    {
+      "complaint_type": "Drinking",
+      "descriptor": "Underage - Licensed Est",
+      "records": "470"
+    },
+    {
+      "complaint_type": "Drinking Water",
+      "descriptor": "Illness Caused by Drinking Water",
+      "records": "364"
+    },
+    {
+      "complaint_type": "Drug Activity",
+      "descriptor": "Use Indoor",
+      "records": "2969"
+    },
+    {
+      "complaint_type": "Drug Activity",
+      "descriptor": "Use Outside",
+      "records": "24995"
+    },
+    {
+      "complaint_type": "DSNY Internal",
+      "descriptor": "Other Request for Enforcement",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Dumpster Complaint",
+      "descriptor": "Blocking Sidewalk or Street",
+      "records": "807"
+    },
+    {
+      "complaint_type": "Dumpster Complaint",
+      "descriptor": "Overflowing dumpster",
+      "records": "928"
+    },
+    {
+      "complaint_type": "Dumpster Complaint",
+      "descriptor": "Small uncovered dumpster",
+      "records": "183"
+    },
+    {
+      "complaint_type": "ELECTRIC",
+      "descriptor": "LIGHTING",
+      "records": "4477"
+    },
+    {
+      "complaint_type": "ELECTRIC",
+      "descriptor": "NO LIGHTING",
+      "records": "7050"
+    },
+    {
+      "complaint_type": "ELECTRIC",
+      "descriptor": "OUTLET/SWITCH",
+      "records": "7544"
+    },
+    {
+      "complaint_type": "ELECTRIC",
+      "descriptor": "POWER OUTAGE",
+      "records": "8256"
+    },
+    {
+      "complaint_type": "ELECTRIC",
+      "descriptor": "WIRING",
+      "records": "3269"
+    },
+    {
+      "complaint_type": "Electrical",
+      "descriptor": "Electrical Wiring Defective/Exposed",
+      "records": "2121"
+    },
+    {
+      "complaint_type": "Elevator",
+      "descriptor": "Elevator - Multiple Devices On Property",
+      "records": "8271"
+    },
+    {
+      "complaint_type": "Elevator",
+      "descriptor": "Elevator - Single Device On Property/No Alternate Service",
+      "records": "13153"
+    },
+    {
+      "complaint_type": "ELEVATOR",
+      "descriptor": "MAINTENANCE",
+      "records": "1642"
+    },
+    {
+      "complaint_type": "Emergency Response Team (ERT)",
+      "descriptor": "After Hours Work - Illegal",
+      "records": "2769"
+    },
+    {
+      "complaint_type": "Emergency Response Team (ERT)",
+      "descriptor": "Lights From Parking Lot Shining On Building",
+      "records": "426"
+    },
+    {
+      "complaint_type": "Encampment",
+      "descriptor": "N/A",
+      "records": "47998"
+    },
+    {
+      "complaint_type": "E-Scooter",
+      "descriptor": "Damaged or Vandalized",
+      "records": "13"
+    },
+    {
+      "complaint_type": "E-Scooter",
+      "descriptor": "Improperly Parked or Abandoned",
+      "records": "466"
+    },
+    {
+      "complaint_type": "E-Scooter",
+      "descriptor": "Parking Corral Not Maintained",
+      "records": "20"
+    },
+    {
+      "complaint_type": "Ferry Complaint",
+      "descriptor": "Announcements",
+      "records": "7"
+    },
+    {
+      "complaint_type": "Ferry Complaint",
+      "descriptor": "Cleanliness",
+      "records": "13"
+    },
+    {
+      "complaint_type": "Ferry Complaint",
+      "descriptor": "Delays",
+      "records": "24"
+    },
+    {
+      "complaint_type": "Ferry Complaint",
+      "descriptor": "Disruptive Passenger",
+      "records": "11"
+    },
+    {
+      "complaint_type": "Ferry Complaint",
+      "descriptor": "General Complaint",
+      "records": "96"
+    },
+    {
+      "complaint_type": "Ferry Complaint",
+      "descriptor": "Homeless Issue",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Ferry Complaint",
+      "descriptor": "Restrooms",
+      "records": "17"
+    },
+    {
+      "complaint_type": "Ferry Inquiry",
+      "descriptor": "General Inquiry",
+      "records": "12"
+    },
+    {
+      "complaint_type": "Ferry Inquiry",
+      "descriptor": "Lost and Found",
+      "records": "359"
+    },
+    {
+      "complaint_type": "FHV Licensee Complaint",
+      "descriptor": "Car Service Company Complaint",
+      "records": "1"
+    },
+    {
+      "complaint_type": "FHV Licensee Complaint",
+      "descriptor": "Licensee Complaint",
+      "records": "2"
+    },
+    {
+      "complaint_type": "FLOORING/STAIRS",
+      "descriptor": "FLOOR",
+      "records": "25507"
+    },
+    {
+      "complaint_type": "FLOORING/STAIRS",
+      "descriptor": "STAIRS",
+      "records": "1095"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Allergy Information",
+      "records": "55"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Bare Hands in Contact w/ Food",
+      "records": "670"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Dishwashing/Utensils",
+      "records": "90"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Facility Construction",
+      "records": "52"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Food Contains Foreign Object",
+      "records": "505"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Food Contaminated",
+      "records": "663"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Food Preparation Location",
+      "records": "176"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Food Protection",
+      "records": "268"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Food Spoiled",
+      "records": "1153"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Food Temperature",
+      "records": "383"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Food Worker Activity",
+      "records": "74"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Food Worker Hygiene",
+      "records": "363"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Food Worker Illness",
+      "records": "38"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Handwashing",
+      "records": "87"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Kitchen/Food Prep Area",
+      "records": "487"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Letter Grading",
+      "records": "1061"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Lighting",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Milk Not Pasteurized",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "No Permit or License",
+      "records": "553"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Odor",
+      "records": "317"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Permit/License/Certificate",
+      "records": "136"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Pesticide",
+      "records": "20"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Pet/Animal",
+      "records": "1525"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Plumbing",
+      "records": "25"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Rodents/Insects/Garbage",
+      "records": "3719"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Sewage",
+      "records": "38"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Sign",
+      "records": "17"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Sodium Warning",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Toilet Facility",
+      "records": "335"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Toxic Chemical/Material",
+      "records": "37"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Ventilation",
+      "records": "58"
+    },
+    {
+      "complaint_type": "Food Establishment",
+      "descriptor": "Water",
+      "records": "21"
+    },
+    {
+      "complaint_type": "Food Poisoning",
+      "descriptor": "1 or 2",
+      "records": "2493"
+    },
+    {
+      "complaint_type": "Food Poisoning",
+      "descriptor": "3 or More",
+      "records": "524"
+    },
+    {
+      "complaint_type": "For Hire Vehicle Complaint",
+      "descriptor": "Amount Owed Dispute",
+      "records": "1"
+    },
+    {
+      "complaint_type": "For Hire Vehicle Complaint",
+      "descriptor": "Car Service Company Complaint",
+      "records": "857"
+    },
+    {
+      "complaint_type": "For Hire Vehicle Complaint",
+      "descriptor": "Driver Complaint - Non Passenger",
+      "records": "15305"
+    },
+    {
+      "complaint_type": "For Hire Vehicle Complaint",
+      "descriptor": "Driver Complaint - Passenger",
+      "records": "1853"
+    },
+    {
+      "complaint_type": "For Hire Vehicle Complaint",
+      "descriptor": "Driver Report - Non Passenger",
+      "records": "118"
+    },
+    {
+      "complaint_type": "For Hire Vehicle Complaint",
+      "descriptor": "Equipment Complaint",
+      "records": "124"
+    },
+    {
+      "complaint_type": "For Hire Vehicle Report",
+      "descriptor": "Car Service Company Complaint",
+      "records": "1"
+    },
+    {
+      "complaint_type": "For Hire Vehicle Report",
+      "descriptor": "Car Service Company Report",
+      "records": "102"
+    },
+    {
+      "complaint_type": "For Hire Vehicle Report",
+      "descriptor": "Driver Report - Non Passenger",
+      "records": "218"
+    },
+    {
+      "complaint_type": "For Hire Vehicle Report",
+      "descriptor": "Driver Report - Passenger",
+      "records": "116"
+    },
+    {
+      "complaint_type": "For Hire Vehicle Report",
+      "descriptor": "Equipment Complaint",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Found Property",
+      "descriptor": "Bag/Wallet",
+      "records": "35"
+    },
+    {
+      "complaint_type": "Found Property",
+      "descriptor": "Clothing/Glasses",
+      "records": "9"
+    },
+    {
+      "complaint_type": "Found Property",
+      "descriptor": "Electronics/Phones",
+      "records": "28"
+    },
+    {
+      "complaint_type": "Found Property",
+      "descriptor": "Jewelry",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Found Property",
+      "descriptor": "Other",
+      "records": "20"
+    },
+    {
+      "complaint_type": "GENERAL",
+      "descriptor": "BELL/BUZZER/INTERCOM",
+      "records": "9681"
+    },
+    {
+      "complaint_type": "GENERAL",
+      "descriptor": "CABINET",
+      "records": "9002"
+    },
+    {
+      "complaint_type": "GENERAL",
+      "descriptor": "COOKING GAS",
+      "records": "5512"
+    },
+    {
+      "complaint_type": "GENERAL",
+      "descriptor": "JANITOR/SUPER",
+      "records": "2383"
+    },
+    {
+      "complaint_type": "GENERAL",
+      "descriptor": "MAILBOX",
+      "records": "1513"
+    },
+    {
+      "complaint_type": "GENERAL",
+      "descriptor": "SIGNAGE MISSING",
+      "records": "1562"
+    },
+    {
+      "complaint_type": "GENERAL",
+      "descriptor": "VENTILATION SYSTEM",
+      "records": "3534"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Adjacent Buildings Not Protected",
+      "records": "760"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Building Permit - None",
+      "records": "8873"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Building Shaking/Vibrating/Structural Stability",
+      "records": "3022"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Building - Vacant, Open And Unguarded",
+      "records": "983"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Cons - Contrary/Beyond Approved Plans/Permits",
+      "records": "2994"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Construction - Change Grade/Watercourse",
+      "records": "131"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Curb Cut/Driveway/Carport - Illegal",
+      "records": "2526"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Debris - Excessive",
+      "records": "1109"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Debris - Falling Or In Danger Of Falling",
+      "records": "1129"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Demolition - No Permit",
+      "records": "1"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Egress - Doors Locked/Blocked/Improper/No Secondary Means",
+      "records": "1544"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Excavation Undermining Adjacent Building",
+      "records": "95"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Failure to Comply with Vacate Order",
+      "records": "210"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Failure To Maintain",
+      "records": "802"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Fence - None/Inadequate",
+      "records": "1906"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Illegal Conversion Of Commercial Bldg/Space To Other Uses",
+      "records": "208"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Inadequate Support Shoring",
+      "records": "17"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Landmark Bldg - Illegal Work",
+      "records": "69"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Material Storage - Unsafe",
+      "records": "35"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Posted Notice Or Order Removed/Tampered With",
+      "records": "316"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Safety Inspection-Retaining Walls (May 2005)",
+      "records": "6"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Safety Netting/Guard Rails - Damaged/Inadequate/None (6 Stories/75 Feet Or Less)",
+      "records": "138"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Sidewalk Shed/Pipe Scafford - Inadequate Defective/None",
+      "records": "3799"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Site Conditions Endangering Workers",
+      "records": "744"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Smoking Ban - Smoking on Construction Site",
+      "records": "23"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Smoking Signs - \"No Smoking\" Signs Not Observed on Construction Site",
+      "records": "25"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Structural Stability Impacted - New Building Under Construction",
+      "records": "77"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Vent/Exhaust - Illegal/Improper",
+      "records": "1054"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Wall/Retaining Wall - Bulging/Cracked",
+      "records": "391"
+    },
+    {
+      "complaint_type": "General Construction/Plumbing",
+      "descriptor": "Working Contrary To Stop Work Order",
+      "records": "2163"
+    },
+    {
+      "complaint_type": "Graffiti",
+      "descriptor": "Graffiti",
+      "records": "18323"
+    },
+    {
+      "complaint_type": "Graffiti",
+      "descriptor": "Police Report Not Requested",
+      "records": "713"
+    },
+    {
+      "complaint_type": "Graffiti",
+      "descriptor": "Police Report Requested",
+      "records": "189"
+    },
+    {
+      "complaint_type": "Green Taxi Complaint",
+      "descriptor": "Driver Complaint - Non Passenger",
+      "records": "147"
+    },
+    {
+      "complaint_type": "Green Taxi Complaint",
+      "descriptor": "Driver Complaint - Passenger",
+      "records": "227"
+    },
+    {
+      "complaint_type": "Green Taxi Complaint",
+      "descriptor": "Vehicle Complaint",
+      "records": "18"
+    },
+    {
+      "complaint_type": "Green Taxi Report",
+      "descriptor": "Driver Report - Non Passenger",
+      "records": "24"
+    },
+    {
+      "complaint_type": "Green Taxi Report",
+      "descriptor": "Driver Report - Passenger",
+      "records": "30"
+    },
+    {
+      "complaint_type": "Green Taxi Report",
+      "descriptor": "Vehicle Report",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Harboring Bees/Wasps",
+      "descriptor": "Beekeeping - Honeybees",
+      "records": "70"
+    },
+    {
+      "complaint_type": "Harboring Bees/Wasps",
+      "descriptor": "Bees/Wasps - Not a beekeper",
+      "records": "478"
+    },
+    {
+      "complaint_type": "Hazardous Materials",
+      "descriptor": "Chemical Odor (HD1)",
+      "records": "1358"
+    },
+    {
+      "complaint_type": "Hazardous Materials",
+      "descriptor": "Chemical Spill/Release (HA1)",
+      "records": "361"
+    },
+    {
+      "complaint_type": "Hazardous Materials",
+      "descriptor": "Oil Spill On Street, Large (HQL)",
+      "records": "234"
+    },
+    {
+      "complaint_type": "Hazardous Materials",
+      "descriptor": "Oil Spill On Street, Small (HQS)",
+      "records": "142"
+    },
+    {
+      "complaint_type": "Hazardous Materials",
+      "descriptor": "Unsafe Chemical, Abandoned (HC2)",
+      "records": "76"
+    },
+    {
+      "complaint_type": "Hazardous Materials",
+      "descriptor": "Unsafe Chemical, Storage (HC1)",
+      "records": "88"
+    },
+    {
+      "complaint_type": "HEAT/HOT WATER",
+      "descriptor": "APARTMENT ONLY",
+      "records": "107851"
+    },
+    {
+      "complaint_type": "HEAT/HOT WATER",
+      "descriptor": "ENTIRE BUILDING",
+      "records": "208095"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "Cave-in",
+      "records": "255"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "Concrete Barrier",
+      "records": "7"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "Crash Cushion Defect",
+      "records": "52"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "Dead Animal",
+      "records": "183"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "Graffiti - Highway",
+      "records": "377"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "Guard Rail - Highway",
+      "records": "14"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "High Grass",
+      "records": "71"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "Highway Fence",
+      "records": "73"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "Litter",
+      "records": "864"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "Loose Plate",
+      "records": "78"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "Painted Line/Marking",
+      "records": "123"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "Pothole - Highway",
+      "records": "1566"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "Sign Blocked by Tree",
+      "records": "14"
+    },
+    {
+      "complaint_type": "Highway Condition",
+      "descriptor": "Unsafe Worksite",
+      "records": "68"
+    },
+    {
+      "complaint_type": "Highway Sign - Damaged",
+      "descriptor": "Construction",
+      "records": "8"
+    },
+    {
+      "complaint_type": "Highway Sign - Damaged",
+      "descriptor": "Electronic Sign - Overhead",
+      "records": "25"
+    },
+    {
+      "complaint_type": "Highway Sign - Damaged",
+      "descriptor": "Electronic Sign - Portable",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Highway Sign - Damaged",
+      "descriptor": "Exit/Route",
+      "records": "24"
+    },
+    {
+      "complaint_type": "Highway Sign - Damaged",
+      "descriptor": "Other/Unknown",
+      "records": "33"
+    },
+    {
+      "complaint_type": "Highway Sign - Damaged",
+      "descriptor": "Speed Limit",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Highway Sign - Dangling",
+      "descriptor": "Exit/Route",
+      "records": "11"
+    },
+    {
+      "complaint_type": "Highway Sign - Dangling",
+      "descriptor": "Other/Unknown",
+      "records": "9"
+    },
+    {
+      "complaint_type": "Highway Sign - Dangling",
+      "descriptor": "Speed Limit",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Highway Sign - Missing",
+      "descriptor": "Construction",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Highway Sign - Missing",
+      "descriptor": "Exit/Route",
+      "records": "19"
+    },
+    {
+      "complaint_type": "Highway Sign - Missing",
+      "descriptor": "Other/Unknown",
+      "records": "19"
+    },
+    {
+      "complaint_type": "Homeless Person Assistance",
+      "descriptor": "Chronic",
+      "records": "8598"
+    },
+    {
+      "complaint_type": "Homeless Person Assistance",
+      "descriptor": "Non-Chronic",
+      "records": "20261"
+    },
+    {
+      "complaint_type": "Illegal Animal Kept as Pet",
+      "descriptor": "Farm Animal",
+      "records": "72"
+    },
+    {
+      "complaint_type": "Illegal Animal Kept as Pet",
+      "descriptor": "Ferret",
+      "records": "10"
+    },
+    {
+      "complaint_type": "Illegal Animal Kept as Pet",
+      "descriptor": "Iguana",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Illegal Animal Kept as Pet",
+      "descriptor": "Monkey",
+      "records": "7"
+    },
+    {
+      "complaint_type": "Illegal Animal Kept as Pet",
+      "descriptor": "Other",
+      "records": "133"
+    },
+    {
+      "complaint_type": "Illegal Animal Kept as Pet",
+      "descriptor": "Rooster",
+      "records": "439"
+    },
+    {
+      "complaint_type": "Illegal Animal Kept as Pet",
+      "descriptor": "Snake",
+      "records": "27"
+    },
+    {
+      "complaint_type": "Illegal Animal Kept as Pet",
+      "descriptor": "Turtle Under 4 inches Long",
+      "records": "10"
+    },
+    {
+      "complaint_type": "Illegal Animal Sold",
+      "descriptor": "Farm Animal",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Illegal Animal Sold",
+      "descriptor": "Ferret",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Illegal Animal Sold",
+      "descriptor": "Monkey",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Illegal Animal Sold",
+      "descriptor": "Other",
+      "records": "63"
+    },
+    {
+      "complaint_type": "Illegal Animal Sold",
+      "descriptor": "Rooster",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Illegal Animal Sold",
+      "descriptor": "Snake",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Illegal Animal Sold",
+      "descriptor": "Turtle Under 4 inches Long",
+      "records": "59"
+    },
+    {
+      "complaint_type": "Illegal Dumping",
+      "descriptor": "Chronic Dumping",
+      "records": "4441"
+    },
+    {
+      "complaint_type": "Illegal Dumping",
+      "descriptor": "Removal Request",
+      "records": "34561"
+    },
+    {
+      "complaint_type": "Illegal Fireworks",
+      "descriptor": "N/A",
+      "records": "11527"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Blocked Bike Lane",
+      "records": "18887"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Blocked Crosswalk",
+      "records": "31312"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Blocked Hydrant",
+      "records": "165466"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Blocked Sidewalk",
+      "records": "83628"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Commercial Overnight Parking",
+      "records": "42595"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Detached Trailer",
+      "records": "1809"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Double Parked Blocking Traffic",
+      "records": "29988"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Double Parked Blocking Vehicle",
+      "records": "15931"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "License Plate Obscured",
+      "records": "14211"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Loud Music/Party",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Overnight Commercial Storage",
+      "records": "3787"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Paper License Plates",
+      "records": "7194"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Parking Permit Improper Use",
+      "records": "24631"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Posted Parking Sign Violation",
+      "records": "133012"
+    },
+    {
+      "complaint_type": "Illegal Parking",
+      "descriptor": "Unauthorized Bus Layover",
+      "records": "4805"
+    },
+    {
+      "complaint_type": "Illegal Posting",
+      "descriptor": "Flyer or Handbill",
+      "records": "200"
+    },
+    {
+      "complaint_type": "Illegal Posting",
+      "descriptor": "Poster or Sign",
+      "records": "4620"
+    },
+    {
+      "complaint_type": "Illegal Posting",
+      "descriptor": "Sticker or Decal",
+      "records": "521"
+    },
+    {
+      "complaint_type": "Illegal Tree Damage",
+      "descriptor": "Bicycle Chained to Tree",
+      "records": "560"
+    },
+    {
+      "complaint_type": "Illegal Tree Damage",
+      "descriptor": "Branches Damaged",
+      "records": "1580"
+    },
+    {
+      "complaint_type": "Illegal Tree Damage",
+      "descriptor": "Roots Damaged",
+      "records": "975"
+    },
+    {
+      "complaint_type": "Illegal Tree Damage",
+      "descriptor": "Trunk Damaged",
+      "records": "1094"
+    },
+    {
+      "complaint_type": "Illegal Tree Damage",
+      "descriptor": "Unauthorized Tree Pruning",
+      "records": "316"
+    },
+    {
+      "complaint_type": "Illegal Tree Damage",
+      "descriptor": "Unauthorized Tree Removal",
+      "records": "859"
+    },
+    {
+      "complaint_type": "Incorrect Data",
+      "descriptor": "Collection Days",
+      "records": "45"
+    },
+    {
+      "complaint_type": "Indoor Air Quality",
+      "descriptor": "Chemical Vapors/Gases/Odors",
+      "records": "2816"
+    },
+    {
+      "complaint_type": "Indoor Air Quality",
+      "descriptor": "Dry Cleaning Vapors (PERC)",
+      "records": "39"
+    },
+    {
+      "complaint_type": "Indoor Air Quality",
+      "descriptor": "Dust from construction",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Indoor Air Quality",
+      "descriptor": "Dust from Construction",
+      "records": "830"
+    },
+    {
+      "complaint_type": "Indoor Air Quality",
+      "descriptor": "Human Feces",
+      "records": "256"
+    },
+    {
+      "complaint_type": "Indoor Air Quality",
+      "descriptor": "Other (Explain Below)",
+      "records": "1163"
+    },
+    {
+      "complaint_type": "Indoor Air Quality",
+      "descriptor": "Sewage Odor",
+      "records": "1489"
+    },
+    {
+      "complaint_type": "Indoor Air Quality",
+      "descriptor": "Unsafe Mold Cleanup",
+      "records": "206"
+    },
+    {
+      "complaint_type": "Indoor Air Quality",
+      "descriptor": "Ventilation",
+      "records": "1816"
+    },
+    {
+      "complaint_type": "Indoor Sewage",
+      "descriptor": "Sewage Leak",
+      "records": "511"
+    },
+    {
+      "complaint_type": "Industrial Waste",
+      "descriptor": "Chemical Spill (IAC)",
+      "records": "64"
+    },
+    {
+      "complaint_type": "Industrial Waste",
+      "descriptor": "Concrete In Catch Basin (IEA)",
+      "records": "145"
+    },
+    {
+      "complaint_type": "Industrial Waste",
+      "descriptor": "Gasoline Spill (IAA)",
+      "records": "6"
+    },
+    {
+      "complaint_type": "Industrial Waste",
+      "descriptor": "Grease In Sewer/Catch Basin (IDG)",
+      "records": "181"
+    },
+    {
+      "complaint_type": "Industrial Waste",
+      "descriptor": "Odor In Sewer/Catch Basin (ICB)",
+      "records": "104"
+    },
+    {
+      "complaint_type": "Industrial Waste",
+      "descriptor": "Oil Spill Into Basin/Sewer - Large (IABL)",
+      "records": "46"
+    },
+    {
+      "complaint_type": "Industrial Waste",
+      "descriptor": "Oil Spill Into Basin/Sewer - Small (IABS)",
+      "records": "29"
+    },
+    {
+      "complaint_type": "Industrial Waste",
+      "descriptor": "Wastewater Into Catch Basin (IEB)",
+      "records": "221"
+    },
+    {
+      "complaint_type": "Industrial Waste",
+      "descriptor": "Waterway-Color (IHD)",
+      "records": "45"
+    },
+    {
+      "complaint_type": "Industrial Waste",
+      "descriptor": "Waterway-Sewage (IHA)",
+      "records": "12"
+    },
+    {
+      "complaint_type": "Institution Disposal Complaint",
+      "descriptor": "Recycling Posters Not Posted",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Institution Disposal Complaint",
+      "descriptor": "Storage Area Not Provided",
+      "records": "35"
+    },
+    {
+      "complaint_type": "Institution Disposal Complaint",
+      "descriptor": "Trash Not Separated from Recycling",
+      "records": "16"
+    },
+    {
+      "complaint_type": "Investigations and Discipline (IAD)",
+      "descriptor": "Investigative Inspection",
+      "records": "507"
+    },
+    {
+      "complaint_type": "Investigations and Discipline (IAD)",
+      "descriptor": "Plumbing Work - Unlicensed/Illegal/Improper Work In Progress",
+      "records": "153"
+    },
+    {
+      "complaint_type": "Lead",
+      "descriptor": "Lead Kit Request (Residential) (L10)",
+      "records": "18495"
+    },
+    {
+      "complaint_type": "Leaning Bar",
+      "descriptor": "Damaged/Bent/Loose/Leaning",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Lifeguard",
+      "descriptor": "Absent",
+      "records": "17"
+    },
+    {
+      "complaint_type": "Lifeguard",
+      "descriptor": "Inattentive",
+      "records": "12"
+    },
+    {
+      "complaint_type": "Lifeguard",
+      "descriptor": "Not Certified",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Lifeguard",
+      "descriptor": "Too Few on Duty",
+      "records": "5"
+    },
+    {
+      "complaint_type": "LinkNYC",
+      "descriptor": "Blocking Sidewalk",
+      "records": "15"
+    },
+    {
+      "complaint_type": "LinkNYC",
+      "descriptor": "Damaged/Defective",
+      "records": "105"
+    },
+    {
+      "complaint_type": "LinkNYC",
+      "descriptor": "Graffiti/Dirty Condition",
+      "records": "22"
+    },
+    {
+      "complaint_type": "LinkNYC",
+      "descriptor": "Touchscreen/Button Not Working",
+      "records": "25"
+    },
+    {
+      "complaint_type": "LinkNYC",
+      "descriptor": "WiFi/Internet Not Working/Slow",
+      "records": "41"
+    },
+    {
+      "complaint_type": "Litter Basket Complaint",
+      "descriptor": "Misuse",
+      "records": "237"
+    },
+    {
+      "complaint_type": "Litter Basket Complaint",
+      "descriptor": "Overflowing",
+      "records": "1116"
+    },
+    {
+      "complaint_type": "Litter Basket Request",
+      "descriptor": "New Basket",
+      "records": "1963"
+    },
+    {
+      "complaint_type": "Litter Basket Request",
+      "descriptor": "Replacement Basket",
+      "records": "2000"
+    },
+    {
+      "complaint_type": "Lost Property",
+      "descriptor": "Bag/Wallet",
+      "records": "3074"
+    },
+    {
+      "complaint_type": "Lost Property",
+      "descriptor": "Book/Stationery",
+      "records": "43"
+    },
+    {
+      "complaint_type": "Lost Property",
+      "descriptor": "Clothing/Glasses",
+      "records": "531"
+    },
+    {
+      "complaint_type": "Lost Property",
+      "descriptor": "Electronics/Phones",
+      "records": "1901"
+    },
+    {
+      "complaint_type": "Lost Property",
+      "descriptor": "Jewelry",
+      "records": "76"
+    },
+    {
+      "complaint_type": "Lost Property",
+      "descriptor": "Musical Instrument",
+      "records": "11"
+    },
+    {
+      "complaint_type": "Lost Property",
+      "descriptor": "Other",
+      "records": "823"
+    },
+    {
+      "complaint_type": "Lost Property",
+      "descriptor": "Sports Equipment",
+      "records": "17"
+    },
+    {
+      "complaint_type": "Lost Property",
+      "descriptor": "Vehicle Complaint",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Lot Condition",
+      "descriptor": "Appliances",
+      "records": "40"
+    },
+    {
+      "complaint_type": "Lot Condition",
+      "descriptor": "Construction Debris",
+      "records": "140"
+    },
+    {
+      "complaint_type": "Lot Condition",
+      "descriptor": "Trash",
+      "records": "1360"
+    },
+    {
+      "complaint_type": "Maintenance or Facility",
+      "descriptor": "Broken Glass",
+      "records": "301"
+    },
+    {
+      "complaint_type": "Maintenance or Facility",
+      "descriptor": "Garbage or Litter",
+      "records": "4829"
+    },
+    {
+      "complaint_type": "Maintenance or Facility",
+      "descriptor": "Graffiti or Vandalism",
+      "records": "1456"
+    },
+    {
+      "complaint_type": "Maintenance or Facility",
+      "descriptor": "Grass/Weeds",
+      "records": "1939"
+    },
+    {
+      "complaint_type": "Maintenance or Facility",
+      "descriptor": "Hours of Operation",
+      "records": "1317"
+    },
+    {
+      "complaint_type": "Maintenance or Facility",
+      "descriptor": "Recreation Center",
+      "records": "592"
+    },
+    {
+      "complaint_type": "Maintenance or Facility",
+      "descriptor": "Rodent Sighting",
+      "records": "2671"
+    },
+    {
+      "complaint_type": "Maintenance or Facility",
+      "descriptor": "Snow or Ice",
+      "records": "860"
+    },
+    {
+      "complaint_type": "Maintenance or Facility",
+      "descriptor": "Structure - Indoors",
+      "records": "657"
+    },
+    {
+      "complaint_type": "Maintenance or Facility",
+      "descriptor": "Structure - Outdoors",
+      "records": "7733"
+    },
+    {
+      "complaint_type": "Maintenance or Facility",
+      "descriptor": "Unsecured Facility",
+      "records": "1697"
+    },
+    {
+      "complaint_type": "Missed Collection",
+      "descriptor": "Bulky Recycling",
+      "records": "2208"
+    },
+    {
+      "complaint_type": "Missed Collection",
+      "descriptor": "Bulky Trash",
+      "records": "4264"
+    },
+    {
+      "complaint_type": "Missed Collection",
+      "descriptor": "Compost",
+      "records": "11679"
+    },
+    {
+      "complaint_type": "Missed Collection",
+      "descriptor": "Recycling - Metal/Glass/Rigid Plastic",
+      "records": "2871"
+    },
+    {
+      "complaint_type": "Missed Collection",
+      "descriptor": "Recycling - Paper",
+      "records": "3792"
+    },
+    {
+      "complaint_type": "Missed Collection",
+      "descriptor": "Recycling - Paper/Metal/Glass/Rigid Plastic",
+      "records": "4845"
+    },
+    {
+      "complaint_type": "Missed Collection",
+      "descriptor": "Trash",
+      "records": "12492"
+    },
+    {
+      "complaint_type": "Missed Collection",
+      "descriptor": "Trash and Bulky Trash",
+      "records": "826"
+    },
+    {
+      "complaint_type": "Mobile Food Vendor",
+      "descriptor": "Equipment",
+      "records": "871"
+    },
+    {
+      "complaint_type": "Mobile Food Vendor",
+      "descriptor": "Food Source/Protection",
+      "records": "885"
+    },
+    {
+      "complaint_type": "Mobile Food Vendor",
+      "descriptor": "Food Temperature",
+      "records": "1056"
+    },
+    {
+      "complaint_type": "Mobile Food Vendor",
+      "descriptor": "Food Worker Activity",
+      "records": "884"
+    },
+    {
+      "complaint_type": "Mobile Food Vendor",
+      "descriptor": "Insects / Pests",
+      "records": "378"
+    },
+    {
+      "complaint_type": "Mobile Food Vendor",
+      "descriptor": "Milk/Dairy Products",
+      "records": "12"
+    },
+    {
+      "complaint_type": "Mobile Food Vendor",
+      "descriptor": "Permit/License/Certificate",
+      "records": "153"
+    },
+    {
+      "complaint_type": "Mobile Food Vendor",
+      "descriptor": "Plumbing",
+      "records": "96"
+    },
+    {
+      "complaint_type": "Mobile Food Vendor",
+      "descriptor": "Smoke/Odor",
+      "records": "573"
+    },
+    {
+      "complaint_type": "Mold",
+      "descriptor": "Loft Building",
+      "records": "30"
+    },
+    {
+      "complaint_type": "Mold",
+      "descriptor": "Public Complaint - Comm Location",
+      "records": "367"
+    },
+    {
+      "complaint_type": "Mold",
+      "descriptor": "Workplace - 10 or Less Staff",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Mosquitoes",
+      "descriptor": "Large Number of Mosquitoes",
+      "records": "334"
+    },
+    {
+      "complaint_type": "Municipal Parking Facility",
+      "descriptor": "Dirt, Litter, Debris - Garage",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Municipal Parking Facility",
+      "descriptor": "Dirt, Litter, Debris - Lot",
+      "records": "12"
+    },
+    {
+      "complaint_type": "Municipal Parking Facility",
+      "descriptor": "General Maintenance",
+      "records": "24"
+    },
+    {
+      "complaint_type": "Municipal Parking Facility",
+      "descriptor": "Lighting - Garage",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Municipal Parking Facility",
+      "descriptor": "Sign Defect - Garage",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Municipal Parking Facility",
+      "descriptor": "Sign Defect - Lot",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Municipal Parking Facility",
+      "descriptor": "Snow Removal",
+      "records": "6"
+    },
+    {
+      "complaint_type": "New Tree Request",
+      "descriptor": "For One Address",
+      "records": "785"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Construction",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Dog",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Lawn Care Equipment",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Noise: air condition/ventilation equipment (NV1)",
+      "records": "4414"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Noise: Alarms (NR3)",
+      "records": "6827"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Noise, Barking Dog (NR5)",
+      "records": "8327"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Noise: Boat(Engine,Music,Etc) (NR10)",
+      "records": "575"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Noise: Construction Before/After Hours (NM1)",
+      "records": "21078"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Noise: Construction Equipment (NC1)",
+      "records": "7417"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Noise, Ice Cream Truck (NR4)",
+      "records": "1281"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Noise: Jack Hammering (NC2)",
+      "records": "2447"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Noise:  lawn care equipment (NCL)",
+      "records": "1288"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Noise: Manufacturing Noise (NK1)",
+      "records": "1009"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Noise, Other Animals (NR6)",
+      "records": "331"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Noise: Other Noise Sources (Use Comments) (NZZ)",
+      "records": "24"
+    },
+    {
+      "complaint_type": "Noise",
+      "descriptor": "Noise: Private Carting Noise (NQ1)",
+      "records": "699"
+    },
+    {
+      "complaint_type": "Noise - Commercial",
+      "descriptor": "Banging/Pounding",
+      "records": "7025"
+    },
+    {
+      "complaint_type": "Noise - Commercial",
+      "descriptor": "Car/Truck Horn",
+      "records": "559"
+    },
+    {
+      "complaint_type": "Noise - Commercial",
+      "descriptor": "Car/Truck Music",
+      "records": "851"
+    },
+    {
+      "complaint_type": "Noise - Commercial",
+      "descriptor": "Loud Music/Party",
+      "records": "50353"
+    },
+    {
+      "complaint_type": "Noise - Commercial",
+      "descriptor": "Loud Talking",
+      "records": "5059"
+    },
+    {
+      "complaint_type": "Noise - Commercial",
+      "descriptor": "Loud Television",
+      "records": "111"
+    },
+    {
+      "complaint_type": "Noise - Helicopter",
+      "descriptor": "News Gathering",
+      "records": "267"
+    },
+    {
+      "complaint_type": "Noise - Helicopter",
+      "descriptor": "NYPD",
+      "records": "271"
+    },
+    {
+      "complaint_type": "Noise - Helicopter",
+      "descriptor": "Other",
+      "records": "20016"
+    },
+    {
+      "complaint_type": "Noise - House of Worship",
+      "descriptor": "Banging/Pounding",
+      "records": "92"
+    },
+    {
+      "complaint_type": "Noise - House of Worship",
+      "descriptor": "Loud Music/Party",
+      "records": "684"
+    },
+    {
+      "complaint_type": "Noise - House of Worship",
+      "descriptor": "Loud Talking",
+      "records": "2287"
+    },
+    {
+      "complaint_type": "Noise - House of Worship",
+      "descriptor": "Loud Television",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Noise - Park",
+      "descriptor": "Loud Music/Party",
+      "records": "8015"
+    },
+    {
+      "complaint_type": "Noise - Park",
+      "descriptor": "Loud Talking",
+      "records": "2066"
+    },
+    {
+      "complaint_type": "Noise - Residential",
+      "descriptor": "Banging/Pounding",
+      "records": "126388"
+    },
+    {
+      "complaint_type": "Noise - Residential",
+      "descriptor": "Loud Music/Party",
+      "records": "300120"
+    },
+    {
+      "complaint_type": "Noise - Residential",
+      "descriptor": "Loud Talking",
+      "records": "30836"
+    },
+    {
+      "complaint_type": "Noise - Residential",
+      "descriptor": "Loud Television",
+      "records": "6005"
+    },
+    {
+      "complaint_type": "Noise - Street/Sidewalk",
+      "descriptor": "Loud Music/Party",
+      "records": "135318"
+    },
+    {
+      "complaint_type": "Noise - Street/Sidewalk",
+      "descriptor": "Loud Talking",
+      "records": "37731"
+    },
+    {
+      "complaint_type": "Noise - Vehicle",
+      "descriptor": "Car/Truck Horn",
+      "records": "10888"
+    },
+    {
+      "complaint_type": "Noise - Vehicle",
+      "descriptor": "Car/Truck Music",
+      "records": "21957"
+    },
+    {
+      "complaint_type": "Noise - Vehicle",
+      "descriptor": "Engine Idling",
+      "records": "10378"
+    },
+    {
+      "complaint_type": "Non-Emergency Police Matter",
+      "descriptor": "Other (complaint details)",
+      "records": "16294"
+    },
+    {
+      "complaint_type": "Non-Emergency Police Matter",
+      "descriptor": "Street Con Game",
+      "records": "57"
+    },
+    {
+      "complaint_type": "Non-Emergency Police Matter",
+      "descriptor": "Ticket Scalping",
+      "records": "12"
+    },
+    {
+      "complaint_type": "Non-Emergency Police Matter",
+      "descriptor": "Trespassing",
+      "records": "8347"
+    },
+    {
+      "complaint_type": "Non-Residential Heat",
+      "descriptor": "Inadequate or No Heat",
+      "records": "1172"
+    },
+    {
+      "complaint_type": "Obstruction",
+      "descriptor": "Coin-Operated Ride",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Obstruction",
+      "descriptor": "Cone",
+      "records": "7208"
+    },
+    {
+      "complaint_type": "Obstruction",
+      "descriptor": "Donation Collection Bin",
+      "records": "39"
+    },
+    {
+      "complaint_type": "Obstruction",
+      "descriptor": "Merchandise",
+      "records": "1867"
+    },
+    {
+      "complaint_type": "Obstruction",
+      "descriptor": "Sidewalk Display",
+      "records": "175"
+    },
+    {
+      "complaint_type": "Obstruction",
+      "descriptor": "Sign",
+      "records": "934"
+    },
+    {
+      "complaint_type": "Obstruction",
+      "descriptor": "Trash or Recycling",
+      "records": "6262"
+    },
+    {
+      "complaint_type": "Obstruction",
+      "descriptor": "Weeds or Grass",
+      "records": "3349"
+    },
+    {
+      "complaint_type": "Oil or Gas Spill",
+      "descriptor": "Emergency Personnel Report",
+      "records": "9"
+    },
+    {
+      "complaint_type": "Outdoor Dining",
+      "descriptor": "Barrier Condition",
+      "records": "210"
+    },
+    {
+      "complaint_type": "Outdoor Dining",
+      "descriptor": "Restaurant Status",
+      "records": "476"
+    },
+    {
+      "complaint_type": "Outdoor Dining",
+      "descriptor": "Sidewalk Zone Blocked",
+      "records": "2050"
+    },
+    {
+      "complaint_type": "Outdoor Dining",
+      "descriptor": "Site Setup Condition",
+      "records": "744"
+    },
+    {
+      "complaint_type": "Outdoor Dining",
+      "descriptor": "Street Zone Blocked",
+      "records": "301"
+    },
+    {
+      "complaint_type": "Outdoor Dining",
+      "descriptor": "Unauthorized Restaurant",
+      "records": "161"
+    },
+    {
+      "complaint_type": "OUTSIDE BUILDING",
+      "descriptor": "GUTTER/LEADER",
+      "records": "89"
+    },
+    {
+      "complaint_type": "OUTSIDE BUILDING",
+      "descriptor": "PAVEMENT",
+      "records": "232"
+    },
+    {
+      "complaint_type": "OUTSIDE BUILDING",
+      "descriptor": "PORCH/BALCONY",
+      "records": "92"
+    },
+    {
+      "complaint_type": "OUTSIDE BUILDING",
+      "descriptor": "ROOF DOOR/HATCH",
+      "records": "116"
+    },
+    {
+      "complaint_type": "OUTSIDE BUILDING",
+      "descriptor": "ROOFING",
+      "records": "352"
+    },
+    {
+      "complaint_type": "OUTSIDE BUILDING",
+      "descriptor": "SKYLIGHT",
+      "records": "30"
+    },
+    {
+      "complaint_type": "Overgrown Tree/Branches",
+      "descriptor": "Blocking Street",
+      "records": "3799"
+    },
+    {
+      "complaint_type": "Overgrown Tree/Branches",
+      "descriptor": "Clear Street Light",
+      "records": "677"
+    },
+    {
+      "complaint_type": "Overgrown Tree/Branches",
+      "descriptor": "Dead Branches in Tree",
+      "records": "3103"
+    },
+    {
+      "complaint_type": "Overgrown Tree/Branches",
+      "descriptor": "Hitting Building",
+      "records": "7131"
+    },
+    {
+      "complaint_type": "Overgrown Tree/Branches",
+      "descriptor": "Hitting Phone/Cable Lines",
+      "records": "1232"
+    },
+    {
+      "complaint_type": "Overgrown Tree/Branches",
+      "descriptor": "Hitting Power Lines",
+      "records": "2534"
+    },
+    {
+      "complaint_type": "Overgrown Tree/Branches",
+      "descriptor": "Traffic Sign or Signal Blocked",
+      "records": "614"
+    },
+    {
+      "complaint_type": "PAINT/PLASTER",
+      "descriptor": "CABINET",
+      "records": "764"
+    },
+    {
+      "complaint_type": "PAINT/PLASTER",
+      "descriptor": "CEILING",
+      "records": "26441"
+    },
+    {
+      "complaint_type": "PAINT/PLASTER",
+      "descriptor": "DOOR/FRAME",
+      "records": "874"
+    },
+    {
+      "complaint_type": "PAINT/PLASTER",
+      "descriptor": "RADIATOR",
+      "records": "900"
+    },
+    {
+      "complaint_type": "PAINT/PLASTER",
+      "descriptor": "WALL",
+      "records": "29305"
+    },
+    {
+      "complaint_type": "PAINT/PLASTER",
+      "descriptor": "WINDOW/FRAME",
+      "records": "958"
+    },
+    {
+      "complaint_type": "Panhandling",
+      "descriptor": "N/A",
+      "records": "12453"
+    },
+    {
+      "complaint_type": "Pet Sale",
+      "descriptor": "Animals Sold From Residence",
+      "records": "92"
+    },
+    {
+      "complaint_type": "Pet Sale",
+      "descriptor": "Cat Sold",
+      "records": "11"
+    },
+    {
+      "complaint_type": "Pet Sale",
+      "descriptor": "Dog Sold",
+      "records": "19"
+    },
+    {
+      "complaint_type": "Pet Sale",
+      "descriptor": "Illegal Animal Sold",
+      "records": "7"
+    },
+    {
+      "complaint_type": "Pet Sale",
+      "descriptor": "Inadequate Care",
+      "records": "28"
+    },
+    {
+      "complaint_type": "Pet Sale",
+      "descriptor": "No Animal Handling Certificate",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Pet Sale",
+      "descriptor": "No Permit",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Pet Sale",
+      "descriptor": "Unsanitary Conditions",
+      "records": "23"
+    },
+    {
+      "complaint_type": "Pet Shop",
+      "descriptor": "Dogs or Cats Not Sold",
+      "records": "25"
+    },
+    {
+      "complaint_type": "Pet Shop",
+      "descriptor": "Dogs or Cats Sold",
+      "records": "28"
+    },
+    {
+      "complaint_type": "Plant",
+      "descriptor": "DRY WEATHER DISCHARGE - DWD",
+      "records": "10"
+    },
+    {
+      "complaint_type": "Plant",
+      "descriptor": "Plants- Noise Related Problems (PN1)",
+      "records": "7"
+    },
+    {
+      "complaint_type": "Plant",
+      "descriptor": "Plants- Odor Related Problems (PO1)",
+      "records": "176"
+    },
+    {
+      "complaint_type": "Plumbing",
+      "descriptor": "Failure To Retain Water/Improper Drainage- (LL103/89)",
+      "records": "1038"
+    },
+    {
+      "complaint_type": "Plumbing",
+      "descriptor": "Gas Hook-Up/Piping - Illegal Or Defective",
+      "records": "404"
+    },
+    {
+      "complaint_type": "Plumbing",
+      "descriptor": "Plumbing-Defective/Leaking/Not Maintained",
+      "records": "709"
+    },
+    {
+      "complaint_type": "Plumbing",
+      "descriptor": "Plumbing Work - Illegal/No Permit/Standpipe/Sprinkler",
+      "records": "818"
+    },
+    {
+      "complaint_type": "Plumbing",
+      "descriptor": "Sprinkler System - Inadequate",
+      "records": "140"
+    },
+    {
+      "complaint_type": "PLUMBING",
+      "descriptor": "BASIN/SINK",
+      "records": "17756"
+    },
+    {
+      "complaint_type": "PLUMBING",
+      "descriptor": "BATHTUB/SHOWER",
+      "records": "14461"
+    },
+    {
+      "complaint_type": "PLUMBING",
+      "descriptor": "BOILER",
+      "records": "130"
+    },
+    {
+      "complaint_type": "PLUMBING",
+      "descriptor": "RADIATOR",
+      "records": "4701"
+    },
+    {
+      "complaint_type": "PLUMBING",
+      "descriptor": "SEWER",
+      "records": "112"
+    },
+    {
+      "complaint_type": "PLUMBING",
+      "descriptor": "STEAM PIPE/RISER",
+      "records": "1698"
+    },
+    {
+      "complaint_type": "PLUMBING",
+      "descriptor": "TOILET",
+      "records": "9772"
+    },
+    {
+      "complaint_type": "PLUMBING",
+      "descriptor": "WATER SUPPLY",
+      "records": "20918"
+    },
+    {
+      "complaint_type": "Poison Ivy",
+      "descriptor": "N/A",
+      "records": "137"
+    },
+    {
+      "complaint_type": "Posting Advertisement",
+      "descriptor": "Building",
+      "records": "107"
+    },
+    {
+      "complaint_type": "Posting Advertisement",
+      "descriptor": "Vehicle",
+      "records": "36"
+    },
+    {
+      "complaint_type": "Public Payphone Complaint",
+      "descriptor": "Damaged Telephone",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Public Payphone Complaint",
+      "descriptor": "Graffiti/Litter on Phone",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Public Payphone Complaint",
+      "descriptor": "No Dial Tone",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Public Payphone Complaint",
+      "descriptor": "Phone Blocking Sidewalk",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Public Toilet",
+      "descriptor": "Damaged Door",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Public Toilet",
+      "descriptor": "Damaged/Leaking Roof",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Public Toilet",
+      "descriptor": "Damaged Other",
+      "records": "10"
+    },
+    {
+      "complaint_type": "Public Toilet",
+      "descriptor": "Damaged Toilet/Sink",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Public Toilet",
+      "descriptor": "Dirty/Graffiti",
+      "records": "6"
+    },
+    {
+      "complaint_type": "Public Toilet",
+      "descriptor": "Flooded",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Public Toilet",
+      "descriptor": "New Automatic Public Toilet Request",
+      "records": "21"
+    },
+    {
+      "complaint_type": "Radioactive Material",
+      "descriptor": "Contamination Risk",
+      "records": "15"
+    },
+    {
+      "complaint_type": "Radioactive Material",
+      "descriptor": "Material Stored Improperly",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Radioactive Material",
+      "descriptor": "User Unlicensed",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Real Time Enforcement",
+      "descriptor": "Work Without A Permit - Occupied Multiple Dwelling",
+      "records": "5645"
+    },
+    {
+      "complaint_type": "Recycling Basket Complaint",
+      "descriptor": "Misuse",
+      "records": "25"
+    },
+    {
+      "complaint_type": "Recycling Basket Complaint",
+      "descriptor": "Overflowing",
+      "records": "94"
+    },
+    {
+      "complaint_type": "Residential Disposal Complaint",
+      "descriptor": "Bin Not Used",
+      "records": "1772"
+    },
+    {
+      "complaint_type": "Residential Disposal Complaint",
+      "descriptor": "Containers Left Out After Collection",
+      "records": "258"
+    },
+    {
+      "complaint_type": "Residential Disposal Complaint",
+      "descriptor": "Containers Set Out Too Early",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Residential Disposal Complaint",
+      "descriptor": "Curbside Composting",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Residential Disposal Complaint",
+      "descriptor": "Mattress or Box Spring Uncovered",
+      "records": "500"
+    },
+    {
+      "complaint_type": "Residential Disposal Complaint",
+      "descriptor": "Recycling Posters Not Posted",
+      "records": "29"
+    },
+    {
+      "complaint_type": "Residential Disposal Complaint",
+      "descriptor": "Refrigerator or Freezer Door Attached",
+      "records": "112"
+    },
+    {
+      "complaint_type": "Residential Disposal Complaint",
+      "descriptor": "Storage Area Not Provided",
+      "records": "953"
+    },
+    {
+      "complaint_type": "Residential Disposal Complaint",
+      "descriptor": "Trash Not Separated from Recycling",
+      "records": "222"
+    },
+    {
+      "complaint_type": "Residential Disposal Complaint",
+      "descriptor": "Trash or Recycling Not Secure",
+      "records": "5378"
+    },
+    {
+      "complaint_type": "Residential Disposal Complaint",
+      "descriptor": "Waste Left in Front of Other Residence",
+      "records": "1818"
+    },
+    {
+      "complaint_type": "Residential Disposal Complaint",
+      "descriptor": "Waste Not Separated",
+      "records": "3031"
+    },
+    {
+      "complaint_type": "Residential Disposal Complaint",
+      "descriptor": "Waste Set Out Too Early or Too Late",
+      "records": "2309"
+    },
+    {
+      "complaint_type": "Rodent",
+      "descriptor": "Condition Attracting Rodents",
+      "records": "6030"
+    },
+    {
+      "complaint_type": "Rodent",
+      "descriptor": "Mouse Sighting",
+      "records": "1398"
+    },
+    {
+      "complaint_type": "Rodent",
+      "descriptor": "Rat Sighting",
+      "records": "19896"
+    },
+    {
+      "complaint_type": "Rodent",
+      "descriptor": "Signs of Rodents",
+      "records": "3988"
+    },
+    {
+      "complaint_type": "Root/Sewer/Sidewalk Condition",
+      "descriptor": "Affecting Sewer or Foundation",
+      "records": "49"
+    },
+    {
+      "complaint_type": "Root/Sewer/Sidewalk Condition",
+      "descriptor": "Trees and Sidewalks Program",
+      "records": "10397"
+    },
+    {
+      "complaint_type": "SAFETY",
+      "descriptor": "CARBON MONOXIDE DETECTOR",
+      "records": "2943"
+    },
+    {
+      "complaint_type": "SAFETY",
+      "descriptor": "FIRE ESCAPE",
+      "records": "2528"
+    },
+    {
+      "complaint_type": "SAFETY",
+      "descriptor": "OUTLET COVER",
+      "records": "32"
+    },
+    {
+      "complaint_type": "SAFETY",
+      "descriptor": "SMOKE DETECTOR",
+      "records": "4050"
+    },
+    {
+      "complaint_type": "SAFETY",
+      "descriptor": "SPRINKLER",
+      "records": "489"
+    },
+    {
+      "complaint_type": "SAFETY",
+      "descriptor": "WINDOW GUARD BROKEN/MISSING",
+      "records": "2710"
+    },
+    {
+      "complaint_type": "Sanitation Worker or Vehicle Complaint",
+      "descriptor": "Idling or Blocking Traffic",
+      "records": "134"
+    },
+    {
+      "complaint_type": "Sanitation Worker or Vehicle Complaint",
+      "descriptor": "Inappropriate Behavior",
+      "records": "1261"
+    },
+    {
+      "complaint_type": "Sanitation Worker or Vehicle Complaint",
+      "descriptor": "Noise",
+      "records": "520"
+    },
+    {
+      "complaint_type": "Sanitation Worker or Vehicle Complaint",
+      "descriptor": "Spilled Garbage",
+      "records": "973"
+    },
+    {
+      "complaint_type": "Sanitation Worker or Vehicle Complaint",
+      "descriptor": "Unsafe Driving",
+      "records": "222"
+    },
+    {
+      "complaint_type": "Scaffold Safety",
+      "descriptor": "Suspended (Hanging) Scaffolds - No Pmt/Lic/Dangerous/Accident",
+      "records": "148"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Air Conditioning Problem",
+      "records": "375"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Asbestos",
+      "records": "13"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Broken Fence",
+      "records": "4"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Broken Lock",
+      "records": "12"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Broken Water Fountain",
+      "records": "24"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Broken Window",
+      "records": "6"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Graffiti",
+      "records": "22"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Heating Problem",
+      "records": "310"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Lack of Supplies",
+      "records": "18"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Leaky Roof",
+      "records": "17"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Other School Condition",
+      "records": "290"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Plumbing Problem",
+      "records": "74"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Poison Ivy",
+      "records": "5"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Rodents/Mice",
+      "records": "261"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Snow/Ice",
+      "records": "63"
+    },
+    {
+      "complaint_type": "School Maintenance",
+      "descriptor": "Unclean Condition",
+      "records": "243"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "Catch Basin Clogged/Flooding (Use Comments) (SC)",
+      "records": "6395"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "Catch Basin Grating Missing (SA4)",
+      "records": "193"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "Catch Basin Search (SC2)",
+      "records": "1702"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "Catch Basin Sunken/Damaged/Raised (SC1)",
+      "records": "1231"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "Culvert Blocked/Needs Cleaning (SE)",
+      "records": "648"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "Defective/Missing Curb Piece (SC4)",
+      "records": "265"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "Highway Flooding (SH)",
+      "records": "53"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "Manhole Cover Missing (Emergency) (SA3)",
+      "records": "1020"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "Manhole Overflow (Use Comments) (SA1)",
+      "records": "950"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "RAIN GARDEN DEBRIS (GIRGD)",
+      "records": "441"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "RAIN GARDEN PLANTING (GIRGP)",
+      "records": "126"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "RAIN GARDEN STRUCTURE (GIRGS)",
+      "records": "99"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "Sewer Backup (Use Comments) (SA)",
+      "records": "8149"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "Sewer Odor (SA2)",
+      "records": "1180"
+    },
+    {
+      "complaint_type": "Sewer",
+      "descriptor": "Street Flooding (SJ)",
+      "records": "3617"
+    },
+    {
+      "complaint_type": "Sewer Maintenance",
+      "descriptor": "Backup",
+      "records": "18"
+    },
+    {
+      "complaint_type": "Sewer Maintenance",
+      "descriptor": "Catch Basin Clogged",
+      "records": "6"
+    },
+    {
+      "complaint_type": "Sewer Maintenance",
+      "descriptor": "Catch Basin Sunken",
+      "records": "14"
+    },
+    {
+      "complaint_type": "Sewer Maintenance",
+      "descriptor": "Curb Piece",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Sewer Maintenance",
+      "descriptor": "Flooding on Street",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Sewer Maintenance",
+      "descriptor": "Manhole Cover Missing",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Sewer Maintenance",
+      "descriptor": "Odor",
+      "records": "24"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Blocked - ATM",
+      "records": "104"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Blocked - Construction",
+      "records": "3406"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Broken Sidewalk",
+      "records": "9988"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Canopy Complaint",
+      "records": "64"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Cellar Door Defective",
+      "records": "61"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Cellar Door New",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Cellar Door Open/Unprotected",
+      "records": "75"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Defacement",
+      "records": "14"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Defective Hardware",
+      "records": "465"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Dumpster - Construction Waste",
+      "records": "236"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Metal Protruding - Sign Stump",
+      "records": "91"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Newspaper Box Complaint",
+      "records": "185"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Pedestrian Ramp Defective",
+      "records": "715"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Sidewalk Collapsed",
+      "records": "603"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Sidewalk Grating - Defective",
+      "records": "220"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Sidewalk Grating - Missing",
+      "records": "39"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Sidewalk Staircase",
+      "records": "103"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Sidewalk Violation",
+      "records": "9427"
+    },
+    {
+      "complaint_type": "Sidewalk Condition",
+      "descriptor": "Unsafe Worksite",
+      "records": "9"
+    },
+    {
+      "complaint_type": "Smoking or Vaping",
+      "descriptor": "Allowed in Smoke Free Area",
+      "records": "6168"
+    },
+    {
+      "complaint_type": "Smoking or Vaping",
+      "descriptor": "Ashtray in Smoke-Free Area",
+      "records": "24"
+    },
+    {
+      "complaint_type": "Smoking or Vaping",
+      "descriptor": "Sign Inadequate",
+      "records": "71"
+    },
+    {
+      "complaint_type": "Smoking or Vaping",
+      "descriptor": "Workplace Policy Not Provided or Inadequate",
+      "records": "11"
+    },
+    {
+      "complaint_type": "Snow or Ice",
+      "descriptor": "Bike Lane",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Snow or Ice",
+      "descriptor": "Pedestrian Feature",
+      "records": "27"
+    },
+    {
+      "complaint_type": "Snow or Ice",
+      "descriptor": "Roadway",
+      "records": "2045"
+    },
+    {
+      "complaint_type": "Snow or Ice",
+      "descriptor": "Sidewalk",
+      "records": "13769"
+    },
+    {
+      "complaint_type": "Snow or Ice",
+      "descriptor": "Snow Tracking",
+      "records": "853"
+    },
+    {
+      "complaint_type": "Special Natural Area District (SNAD)",
+      "descriptor": "Illegal Tree Removal/Topo. Change in SNAD",
+      "records": "43"
+    },
+    {
+      "complaint_type": "Special Operations",
+      "descriptor": "Special Operations Compliance Inspection",
+      "records": "125"
+    },
+    {
+      "complaint_type": "Special Projects Inspection Team (SPIT)",
+      "descriptor": "Adult Establishment",
+      "records": "223"
+    },
+    {
+      "complaint_type": "Special Projects Inspection Team (SPIT)",
+      "descriptor": "Advertising Sign/Billboard/Posters/Flexible Fabric - Illegal",
+      "records": "470"
+    },
+    {
+      "complaint_type": "Special Projects Inspection Team (SPIT)",
+      "descriptor": "Illegal Conversion Of Manufacturing/Industrial Space",
+      "records": "21"
+    },
+    {
+      "complaint_type": "Special Projects Inspection Team (SPIT)",
+      "descriptor": "Illegal Hotel Rooms In Residential Building",
+      "records": "2021"
+    },
+    {
+      "complaint_type": "Special Projects Inspection Team (SPIT)",
+      "descriptor": "Privately Owned Public Space/Non-Compliance",
+      "records": "230"
+    },
+    {
+      "complaint_type": "Special Projects Inspection Team (SPIT)",
+      "descriptor": "Sign/Awning/Marquee - Illegal/No Permit",
+      "records": "883"
+    },
+    {
+      "complaint_type": "Special Projects Inspection Team (SPIT)",
+      "descriptor": "Sign - In Danger Of Falling",
+      "records": "90"
+    },
+    {
+      "complaint_type": "Squeegee",
+      "descriptor": "N/A",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Basement",
+      "records": "19"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Bird Bath",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Building Foundation",
+      "records": "22"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Container - Over 5 Gallons",
+      "records": "103"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Container - Under 5 Gallons",
+      "records": "11"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Flower Planters",
+      "records": "11"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Fountain - Over 5 Gallons",
+      "records": "15"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Other - Explain Below",
+      "records": "300"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Puddle in Ground",
+      "records": "176"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Puddle on Driveway",
+      "records": "39"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Puddle on Roof",
+      "records": "49"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Puddle on Sidewalk",
+      "records": "118"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Roof Gutters",
+      "records": "8"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Sewer or Drain",
+      "records": "86"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Swimming Pool Cover",
+      "records": "36"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Swimming Pool - Unmaintained",
+      "records": "260"
+    },
+    {
+      "complaint_type": "Standing Water",
+      "descriptor": "Tires",
+      "records": "17"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Blocked - Construction",
+      "records": "4245"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Cave-in",
+      "records": "9647"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Crash Cushion Defect",
+      "records": "225"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Defacement",
+      "records": "20"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Defective Hardware",
+      "records": "5490"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Depression Maintenance",
+      "records": "31"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Dumpster - Construction Waste",
+      "records": "584"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Failed Street Repair",
+      "records": "3487"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Guard Rail - Street",
+      "records": "106"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Hummock",
+      "records": "18"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Line/Marking - After Repaving",
+      "records": "507"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Line/Marking - Faded",
+      "records": "386"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Plate Condition - Anti-Skid",
+      "records": "53"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Plate Condition - Noisy",
+      "records": "2927"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Plate Condition - Open",
+      "records": "65"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Plate Condition - Shifted",
+      "records": "622"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Pothole",
+      "records": "38438"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Rough, Pitted or Cracked Roads",
+      "records": "3121"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Strip Paving",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Unsafe Worksite",
+      "records": "66"
+    },
+    {
+      "complaint_type": "Street Condition",
+      "descriptor": "Wear & Tear",
+      "records": "291"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Bracket Arm Bent",
+      "records": "6"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Bracket Arm Broken",
+      "records": "17"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Bracket Arm Loose",
+      "records": "14"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Bracket Arm Missing",
+      "records": "42"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Control Panel Damaged",
+      "records": "11"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Defective Streetlight",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Fire Alarm Lamp Cycling",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Fire Alarm Lamp Dayburning",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Fire Alarm Lamp Missing",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Fire Globe Missing",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Fixture/Luminaire Damaged",
+      "records": "149"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Fixture/Luminaire Door Open",
+      "records": "133"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Fixture/Luminaire Hanging",
+      "records": "621"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Fixture/Luminaire Missing",
+      "records": "120"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Fixture/Luminaire Out Of Position",
+      "records": "189"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Flood Light Lamp Cycling",
+      "records": "23"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Flood Light Lamp Dayburning",
+      "records": "10"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Flood Light Lamp Dim",
+      "records": "10"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Flood Light Lamp Missing",
+      "records": "6"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Flood Light Lamp Out",
+      "records": "102"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Foreign Attachment On Lamppost",
+      "records": "37"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Foreign Attachment On Wood Pole",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Glassware Broken",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Glassware Hanging",
+      "records": "31"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Glassware Missing",
+      "records": "15"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "In-Line Fuse Missing",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Lamppost Base Door/Cover Damaged",
+      "records": "94"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Lamppost Base Door/Cover Missing",
+      "records": "139"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Lamppost Base Door/Cover Open",
+      "records": "336"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Lamppost Damaged",
+      "records": "488"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Lamppost Knocked Down",
+      "records": "654"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Lamppost Leaning",
+      "records": "385"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Lamppost Missing",
+      "records": "353"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Lamppost Wire Exposed",
+      "records": "505"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Multiple St Lts Dayburning",
+      "records": "63"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Multiple Street Lights Out",
+      "records": "778"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "New Con Ed Service Request",
+      "records": "68"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Street Light Cycling",
+      "records": "510"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Street Light Dayburning",
+      "records": "617"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Street Light Lamp Dim",
+      "records": "368"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Street Light Lamp Missing",
+      "records": "344"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Street Light Out",
+      "records": "26102"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Time Clock Maladjusted",
+      "records": "13"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Traffic Signal Light",
+      "records": "446"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Wood Pole Damaged",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Wood Pole Knocked Down",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Wood Pole Leaning",
+      "records": "6"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Wood Pole Missing",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Street Light Condition",
+      "descriptor": "Wood Pole Wires Exposed",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "Bus Stop",
+      "records": "331"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "Construction",
+      "records": "104"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "Detour",
+      "records": "15"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "Do Not Block the Box",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "Do Not Enter",
+      "records": "87"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "Honorary",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "No Idling",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "No Parking, Standing, Stopping",
+      "records": "1047"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "One Way",
+      "records": "244"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "Other/Unknown",
+      "records": "1645"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "School Crossing",
+      "records": "32"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "Speed Limit",
+      "records": "69"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "St Name - Attached to Pole",
+      "records": "427"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "St Name - Over Intersection",
+      "records": "33"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "Stop",
+      "records": "799"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "Street Cleaning - ASP",
+      "records": "359"
+    },
+    {
+      "complaint_type": "Street Sign - Damaged",
+      "descriptor": "Yield",
+      "records": "34"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "Bus Stop",
+      "records": "139"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "Construction",
+      "records": "21"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "Detour",
+      "records": "15"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "Do Not Block the Box",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "Do Not Enter",
+      "records": "50"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "Honorary",
+      "records": "9"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "No Idling",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "No Parking, Standing, Stopping",
+      "records": "736"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "One Way",
+      "records": "158"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "Other/Unknown",
+      "records": "843"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "School Crossing",
+      "records": "48"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "Speed Limit",
+      "records": "144"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "St Name - Attached to Pole",
+      "records": "523"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "St Name - Over Intersection",
+      "records": "198"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "Stop",
+      "records": "618"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "Street Cleaning - ASP",
+      "records": "279"
+    },
+    {
+      "complaint_type": "Street Sign - Dangling",
+      "descriptor": "Yield",
+      "records": "22"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "Bus Stop",
+      "records": "222"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "Construction",
+      "records": "28"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "Detour",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "Do Not Block the Box",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "Do Not Enter",
+      "records": "46"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "Honorary",
+      "records": "18"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "No Idling",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "No Parking, Standing, Stopping",
+      "records": "1075"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "One Way",
+      "records": "46"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "Other/Unknown",
+      "records": "696"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "School Crossing",
+      "records": "25"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "Speed Limit",
+      "records": "28"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "St Name - Attached to Pole",
+      "records": "284"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "St Name - Over Intersection",
+      "records": "20"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "Stop",
+      "records": "544"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "Street Cleaning - ASP",
+      "records": "292"
+    },
+    {
+      "complaint_type": "Street Sign - Missing",
+      "descriptor": "Yield",
+      "records": "17"
+    },
+    {
+      "complaint_type": "Street Sweeping Complaint",
+      "descriptor": "Inadequate Sweeping",
+      "records": "4894"
+    },
+    {
+      "complaint_type": "Street Sweeping Complaint",
+      "descriptor": "Street Not Swept",
+      "records": "2363"
+    },
+    {
+      "complaint_type": "Tanning",
+      "descriptor": "Facility General",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Tanning",
+      "descriptor": "Injury or Illness from Tanning",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Tattooing",
+      "descriptor": "Dirty/Inadequate Eqp/Facility",
+      "records": "65"
+    },
+    {
+      "complaint_type": "Tattooing",
+      "descriptor": "Minor Received Tattoo",
+      "records": "23"
+    },
+    {
+      "complaint_type": "Tattooing",
+      "descriptor": "No Consent Form",
+      "records": "12"
+    },
+    {
+      "complaint_type": "Tattooing",
+      "descriptor": "Tattoo Artist Unlicensed",
+      "records": "114"
+    },
+    {
+      "complaint_type": "Taxi Complaint",
+      "descriptor": "Car Service Company Report",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Taxi Complaint",
+      "descriptor": "Driver Complaint - Non Passenger",
+      "records": "3071"
+    },
+    {
+      "complaint_type": "Taxi Complaint",
+      "descriptor": "Driver Complaint - Passenger",
+      "records": "6370"
+    },
+    {
+      "complaint_type": "Taxi Complaint",
+      "descriptor": "Driver Report - Passenger",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Taxi Complaint",
+      "descriptor": "Vehicle Complaint",
+      "records": "149"
+    },
+    {
+      "complaint_type": "Taxi Compliment",
+      "descriptor": "Driver Compliment",
+      "records": "101"
+    },
+    {
+      "complaint_type": "Taxi Licensee Complaint",
+      "descriptor": "Driver Complaint",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Taxi Licensee Complaint",
+      "descriptor": "Driver Complaint - Passenger",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Taxi Licensee Complaint",
+      "descriptor": "Owner/Broker/Agent Complaint",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Taxi Report",
+      "descriptor": "Driver Report - Non Passenger",
+      "records": "164"
+    },
+    {
+      "complaint_type": "Taxi Report",
+      "descriptor": "Driver Report - Passenger",
+      "records": "620"
+    },
+    {
+      "complaint_type": "Taxi Report",
+      "descriptor": "Vehicle Report",
+      "records": "24"
+    },
+    {
+      "complaint_type": "Tobacco or Non-Tobacco Sale",
+      "descriptor": "Banned Tobacco Flavors Sold",
+      "records": "46"
+    },
+    {
+      "complaint_type": "Tobacco or Non-Tobacco Sale",
+      "descriptor": "Original Labels or Packaging Not Kept",
+      "records": "58"
+    },
+    {
+      "complaint_type": "Tobacco or Non-Tobacco Sale",
+      "descriptor": "Shisha Sold to Minor",
+      "records": "12"
+    },
+    {
+      "complaint_type": "Traffic",
+      "descriptor": "Chronic Speeding",
+      "records": "5628"
+    },
+    {
+      "complaint_type": "Traffic",
+      "descriptor": "Chronic Stoplight Violation",
+      "records": "750"
+    },
+    {
+      "complaint_type": "Traffic",
+      "descriptor": "Congestion/Gridlock",
+      "records": "3162"
+    },
+    {
+      "complaint_type": "Traffic",
+      "descriptor": "Drag Racing",
+      "records": "1663"
+    },
+    {
+      "complaint_type": "Traffic",
+      "descriptor": "Truck Route Violation",
+      "records": "1556"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "APS",
+      "records": "2174"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Base Door",
+      "records": "594"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "BBS Failure",
+      "records": "8"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Bike Signal",
+      "records": "849"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Blank Out Matrix Sgn",
+      "records": "62"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Box Cover",
+      "records": "19"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Cable",
+      "records": "429"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "CMU Communication",
+      "records": "32"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Coax Cable",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Conduit",
+      "records": "42"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Condulet Cover",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Conflict Monitor",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Controller",
+      "records": "23570"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Controller Cabinet",
+      "records": "368"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Controller Flasher",
+      "records": "10"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Dead End Sign",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Dead End Signal",
+      "records": "13"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Detector Sensor",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Det-Sens Cabinet",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Door",
+      "records": "33"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Door Lock",
+      "records": "117"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Dust Cover",
+      "records": "16"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Enclosure Cap",
+      "records": "38"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "EZ PASS READER",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Fixture(S)",
+      "records": "17"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Flashing Hazard",
+      "records": "18"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Foundation",
+      "records": "35"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Hangers",
+      "records": "9"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "In Conduit",
+      "records": "12"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "In Post Base",
+      "records": "21"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Junction Box",
+      "records": "94"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Lane Control Signal",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "LED Lense",
+      "records": "622"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "LED Pedestrian Unit",
+      "records": "980"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Mast Arm",
+      "records": "37"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "On Messenger",
+      "records": "55"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "On Structure",
+      "records": "7"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Pedestrian Sign",
+      "records": "10"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Pedestrian Signal",
+      "records": "4842"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Ped Flasher",
+      "records": "174"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Ped Lamp",
+      "records": "883"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Ped Lens",
+      "records": "29"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Ped Multiple Lamps",
+      "records": "613"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Ped Visor",
+      "records": "22"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Post",
+      "records": "795"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Push Button",
+      "records": "48"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Red Lt Camera Feed",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Reflector/Louvre",
+      "records": "16"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Sidewalk Pull Box Co",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Sign",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Speed Board Sign",
+      "records": "41"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Street Light Feed",
+      "records": "225"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Support Bracket",
+      "records": "246"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Sway Bar",
+      "records": "25"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Telco Connection Blk",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Temporary",
+      "records": "26"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Time Switch",
+      "records": "380"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Traffic Camera",
+      "records": "10"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Turn Signal",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Underground",
+      "records": "435"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Vehicle Signal",
+      "records": "1216"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Veh Sgnl Mult Lamps",
+      "records": "717"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Veh Signal Head",
+      "records": "1422"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Veh Signal Lamp",
+      "records": "4091"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Veh Signal Lens",
+      "records": "239"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Veh Signal Sec Door",
+      "records": "50"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Veh Signal Visor",
+      "records": "401"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Ver Mesage Sign RTPI",
+      "records": "141"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Warning Buzzer",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Warning Signal",
+      "records": "20"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Warning Signal Lamp",
+      "records": "35"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Weather Head",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Wireless",
+      "records": "527"
+    },
+    {
+      "complaint_type": "Traffic Signal Condition",
+      "descriptor": "Wireless Antenna",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Transfer Station Complaint",
+      "descriptor": "Odor",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Transfer Station Complaint",
+      "descriptor": "Open Door or Gate",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Transfer Station Complaint",
+      "descriptor": "Water or Sewer Runoff",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Tunnel Condition",
+      "descriptor": "Fallen Debris from Tunnel",
+      "records": "3"
+    },
+    {
+      "complaint_type": "Tunnel Condition",
+      "descriptor": "Pothole - Tunnel",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Unleashed Dog",
+      "descriptor": "Unleashed Dog in Public",
+      "records": "1699"
+    },
+    {
+      "complaint_type": "Unsanitary Animal Facility",
+      "descriptor": "Animal Odor",
+      "records": "37"
+    },
+    {
+      "complaint_type": "Unsanitary Animal Facility",
+      "descriptor": "Animal Waste",
+      "records": "39"
+    },
+    {
+      "complaint_type": "Unsanitary Animal Pvt Property",
+      "descriptor": "Cat",
+      "records": "678"
+    },
+    {
+      "complaint_type": "Unsanitary Animal Pvt Property",
+      "descriptor": "Dog",
+      "records": "1610"
+    },
+    {
+      "complaint_type": "Unsanitary Animal Pvt Property",
+      "descriptor": "Other Animal",
+      "records": "338"
+    },
+    {
+      "complaint_type": "UNSANITARY CONDITION",
+      "descriptor": "GARBAGE/RECYCLING STORAGE",
+      "records": "19115"
+    },
+    {
+      "complaint_type": "UNSANITARY CONDITION",
+      "descriptor": "MOLD",
+      "records": "33424"
+    },
+    {
+      "complaint_type": "UNSANITARY CONDITION",
+      "descriptor": "PESTS",
+      "records": "61767"
+    },
+    {
+      "complaint_type": "UNSANITARY CONDITION",
+      "descriptor": "SEWAGE",
+      "records": "3443"
+    },
+    {
+      "complaint_type": "Unsanitary Pigeon Condition",
+      "descriptor": "Pigeon Odor",
+      "records": "116"
+    },
+    {
+      "complaint_type": "Unsanitary Pigeon Condition",
+      "descriptor": "Pigeon Waste",
+      "records": "1640"
+    },
+    {
+      "complaint_type": "Unspecified",
+      "descriptor": "Unspecified",
+      "records": "42"
+    },
+    {
+      "complaint_type": "Uprooted Stump",
+      "descriptor": "Remove Stump",
+      "records": "249"
+    },
+    {
+      "complaint_type": "Urinating in Public",
+      "descriptor": "N/A",
+      "records": "1419"
+    },
+    {
+      "complaint_type": "Vendor Enforcement",
+      "descriptor": "Food Vendor",
+      "records": "21201"
+    },
+    {
+      "complaint_type": "Vendor Enforcement",
+      "descriptor": "Non-Food Vendor",
+      "records": "7916"
+    },
+    {
+      "complaint_type": "Violation of Park Rules",
+      "descriptor": "BBQ Outside Authorized Area",
+      "records": "510"
+    },
+    {
+      "complaint_type": "Violation of Park Rules",
+      "descriptor": "Biking/Rollerblading off Path",
+      "records": "157"
+    },
+    {
+      "complaint_type": "Violation of Park Rules",
+      "descriptor": "Obstructing Public Use",
+      "records": "1280"
+    },
+    {
+      "complaint_type": "Violation of Park Rules",
+      "descriptor": "Removing Flowers/Plants",
+      "records": "9"
+    },
+    {
+      "complaint_type": "Violation of Park Rules",
+      "descriptor": "Smoking",
+      "records": "503"
+    },
+    {
+      "complaint_type": "Violation of Park Rules",
+      "descriptor": "Social Distancing",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Violation of Park Rules",
+      "descriptor": "Unauthorized Climbing",
+      "records": "25"
+    },
+    {
+      "complaint_type": "Violation of Park Rules",
+      "descriptor": "Unauthorized Film Shoot",
+      "records": "7"
+    },
+    {
+      "complaint_type": "Violation of Park Rules",
+      "descriptor": "Unauthorized Posting of Signs",
+      "records": "42"
+    },
+    {
+      "complaint_type": "Violation of Park Rules",
+      "descriptor": "Unlicensed Vendors",
+      "records": "988"
+    },
+    {
+      "complaint_type": "Violation of Park Rules",
+      "descriptor": "Unsafe Use of Playground",
+      "records": "431"
+    },
+    {
+      "complaint_type": "Violation of Park Rules",
+      "descriptor": "Use of Newly Seeded Lawn",
+      "records": "18"
+    },
+    {
+      "complaint_type": "Water Conservation",
+      "descriptor": "Illegal Use Of A Hydrant (CIN)",
+      "records": "1917"
+    },
+    {
+      "complaint_type": "Water Conservation",
+      "descriptor": "Illegal Use Of Hose - Other (CCO)",
+      "records": "48"
+    },
+    {
+      "complaint_type": "Water Conservation",
+      "descriptor": "Illegal Use Of Hose - Private Residence (CCR)",
+      "records": "48"
+    },
+    {
+      "complaint_type": "Water Conservation",
+      "descriptor": "Rooftank Leak Or Overflow (CKO)",
+      "records": "96"
+    },
+    {
+      "complaint_type": "Water Conservation",
+      "descriptor": "Wasting Faucets,Sinks,Flushometer,Urinal,Etc. - Other (CWO)",
+      "records": "100"
+    },
+    {
+      "complaint_type": "Water Conservation",
+      "descriptor": "Wasting Faucets,Sinks,Flushometer,Urinal,Etc. - Private Residence (CWR)",
+      "records": "185"
+    },
+    {
+      "complaint_type": "Water Conservation",
+      "descriptor": "Water Meter Broken/Leaking - Other (CMO)",
+      "records": "304"
+    },
+    {
+      "complaint_type": "Water Conservation",
+      "descriptor": "Water Meter Broken/Leaking - Private Residence (CMR)",
+      "records": "1133"
+    },
+    {
+      "complaint_type": "Water Conservation",
+      "descriptor": "Water Meter Stolen/Missing - Other (CLO)",
+      "records": "11"
+    },
+    {
+      "complaint_type": "Water Conservation",
+      "descriptor": "Water Meter Stolen/Missing - Private Residence (CLR)",
+      "records": "36"
+    },
+    {
+      "complaint_type": "WATER LEAK",
+      "descriptor": "DAMP SPOT",
+      "records": "5749"
+    },
+    {
+      "complaint_type": "WATER LEAK",
+      "descriptor": "HEAVY FLOW",
+      "records": "17347"
+    },
+    {
+      "complaint_type": "WATER LEAK",
+      "descriptor": "SLOW LEAK",
+      "records": "15301"
+    },
+    {
+      "complaint_type": "Water Maintenance",
+      "descriptor": "Dirty Water",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Water Maintenance",
+      "descriptor": "Fire Hydrant Defective",
+      "records": "10"
+    },
+    {
+      "complaint_type": "Water Maintenance",
+      "descriptor": "Fire Hydrant Fender Request",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Water Maintenance",
+      "descriptor": "Fire Hydrant Leaking",
+      "records": "18"
+    },
+    {
+      "complaint_type": "Water Maintenance",
+      "descriptor": "Fire Hydrant Leaning/Missing",
+      "records": "11"
+    },
+    {
+      "complaint_type": "Water Maintenance",
+      "descriptor": "Fire Hydrant Running",
+      "records": "22"
+    },
+    {
+      "complaint_type": "Water Maintenance",
+      "descriptor": "Fire Hydrant Running Full",
+      "records": "10"
+    },
+    {
+      "complaint_type": "Water Maintenance",
+      "descriptor": "Leak",
+      "records": "5"
+    },
+    {
+      "complaint_type": "Water Maintenance",
+      "descriptor": "Water in Basement",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "Clear Water With Organisms (Insects, Worms) (QE2)",
+      "records": "42"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "Clear Water With Other Particles (Use Comments) (QEZ)",
+      "records": "127"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "Cloudy Or Milky, Other (Use Comments) (QBZ)",
+      "records": "57"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "Cloudy Or Milky Water (QB1)",
+      "records": "79"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "Defective Water Sampling Station (QSS)",
+      "records": "23"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "No Sampling Required, Requested Information (QG2)",
+      "records": "105"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "Oil, Grease In Water (QD1)",
+      "records": "23"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "Other Water Problem (Use Comments) (QZZ)",
+      "records": "2"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "Taste/Odor, Bitter/Metallic (QA3)",
+      "records": "121"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "Taste/Odor, Chemical (QA2)",
+      "records": "138"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "Taste/Odor, Chlorine (QA1)",
+      "records": "125"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "Taste/Odor, Musty/Stale (QA4)",
+      "records": "196"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "Taste/Odor, Sewer (QA5)",
+      "records": "119"
+    },
+    {
+      "complaint_type": "Water Quality",
+      "descriptor": "unknown odor/taste in drinking water (QA6)",
+      "records": "167"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "Dirty Water (WE)",
+      "records": "11223"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "Excessive Water In Basement (WEFB)",
+      "records": "961"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "Fire Hydrant Emergency (FHE)",
+      "records": "11382"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "High Water Pressure (WHP)",
+      "records": "35"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "Hydrant Defective (WC2)",
+      "records": "2379"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "Hydrant Knocked Over/Missing (WC)",
+      "records": "1268"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "Hydrant Leaking (WC1)",
+      "records": "6562"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "Hydrant Running Full (WA4)",
+      "records": "12425"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "Hydrant Running (WC3)",
+      "records": "12490"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "Hyd Valve Box Cover Missing (WV2)",
+      "records": "343"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "installation of hydrant side post (WHFP)",
+      "records": "96"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "Leak (Use Comments) (WA2)",
+      "records": "8987"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "LOW WATER PRESSURE - WLWP",
+      "records": "1408"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "No Water (WNW)",
+      "records": "3173"
+    },
+    {
+      "complaint_type": "Water System",
+      "descriptor": "Possible Water Main Break (Use Comments) (WA1)",
+      "records": "4706"
+    },
+    {
+      "complaint_type": "Wayfinding",
+      "descriptor": "Broken/Cracked/Damaged Glass",
+      "records": "8"
+    },
+    {
+      "complaint_type": "Wayfinding",
+      "descriptor": "Dirty/Graffiti/Stickers",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Wayfinding",
+      "descriptor": "Electronic Screen Bad/Wrong Info",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Wayfinding",
+      "descriptor": "Electronic Screen No Power",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Wayfinding",
+      "descriptor": "Map Bad/Wrong Info",
+      "records": "1"
+    },
+    {
+      "complaint_type": "Wayfinding",
+      "descriptor": "Other Damage to Sign",
+      "records": "4"
+    },
+    {
+      "complaint_type": "Window Guard",
+      "descriptor": "Tenant Refusal",
+      "records": "20"
+    },
+    {
+      "complaint_type": "Wood Pile Remaining",
+      "descriptor": "Remove Debris",
+      "records": "896"
+    },
+    {
+      "complaint_type": "X-Ray Machine/Equipment",
+      "descriptor": "Exposure Unnecessary",
+      "records": "7"
+    },
+    {
+      "complaint_type": "X-Ray Machine/Equipment",
+      "descriptor": "Facility Unregistered",
+      "records": "1"
+    },
+    {
+      "complaint_type": "X-Ray Machine/Equipment",
+      "descriptor": "Technician Unlicensed",
+      "records": "1"
+    }
+  ]
+}

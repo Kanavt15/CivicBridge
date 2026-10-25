@@ -1,0 +1,351 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CITIZEN
+  RESEARCHER
+  INSTITUTION
+  INDUSTRY
+  ADMIN
+}
+
+enum ProblemStatus {
+  REPORTED
+  UNDER_REVIEW
+  OPEN
+  COLLABORATION
+  PILOT
+  RESOLVED
+  REJECTED
+}
+
+enum ProposalStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  SHORTLISTED
+  APPROVED
+  PILOT
+  COMPLETED
+  REJECTED
+}
+
+enum Urgency {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model User {
+  id                 String              @id @default(cuid()) @map("_id")
+  name               String
+  email              String              @unique
+  passwordHash       String
+  role               Role                @default(CITIZEN)
+  bio                String              @default("")
+  skills             String[]            @default([])
+  interests          String[]            @default([])
+  isDemo             Boolean             @default(false)
+  active             Boolean             @default(true)
+  organizationId     String?
+  organization       Organization?       @relation(fields: [organizationId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  createdAt          DateTime            @default(now())
+  problems           Problem[]
+  proposals          SolutionProposal[]
+  memberships        TeamMembership[]
+  comments           Comment[]
+  notifications      Notification[]
+  commitments        SupportCommitment[]
+  achievements       Achievement[]
+  auditLogs          AuditLog[]
+  images             ProblemImage[]
+  votes              Vote[]
+  assignedTasks      Task[]
+  messages           Discussion[]
+  impactMeasurements ImpactMeasurement[]
+
+  @@index([organizationId])
+}
+
+model Organization {
+  id          String  @id @default(cuid()) @map("_id")
+  name        String
+  type        String
+  description String  @default("")
+  city        String
+  website     String  @default("")
+  verified    Boolean @default(false)
+  isDemo      Boolean @default(false)
+  users       User[]
+  teams       Team[]
+}
+
+model Problem {
+  id          String             @id @default(cuid()) @map("_id")
+  title       String
+  description String
+  category    String
+  urgency     Urgency            @default(MEDIUM)
+  urgencyRank Int                @default(1)
+  state       String
+  city        String
+  area        String
+  latitude    Float
+  longitude   Float
+  population  Int                @default(100)
+  status      ProblemStatus      @default(REPORTED)
+  isDemo      Boolean            @default(false)
+  authorId    String
+  author      User               @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  images      ProblemImage[]
+  proposals   SolutionProposal[]
+  comments    Comment[]
+  votes       Vote[]
+
+  @@index([status, category, city])
+  @@index([status, urgencyRank, createdAt])
+  @@index([authorId])
+}
+
+model ProblemImage {
+  id         String            @id @default(cuid()) @map("_id")
+  name       String
+  mime       String
+  data       Bytes
+  ownerId    String
+  owner      User              @relation(fields: [ownerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  problemId  String?
+  problem    Problem?          @relation(fields: [problemId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  proposalId String?
+  proposal   SolutionProposal? @relation(fields: [proposalId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  createdAt  DateTime          @default(now())
+
+  @@index([ownerId])
+  @@index([problemId])
+  @@index([proposalId])
+}
+
+model SolutionProposal {
+  id            String         @id @default(cuid()) @map("_id")
+  title         String
+  approach      String
+  techStack     String
+  impact        String
+  feasibility   String
+  resources     String
+  status        ProposalStatus @default(SUBMITTED)
+  authorId      String
+  author        User           @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  problemId     String
+  problem       Problem        @relation(fields: [problemId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  teamId        String?
+  team          Team?          @relation(fields: [teamId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  isDemo        Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  attachments   ProblemImage[]
+  collaboration Collaboration?
+
+  @@index([authorId, status])
+  @@index([problemId])
+  @@index([teamId])
+}
+
+model Team {
+  id             String             @id @default(cuid()) @map("_id")
+  name           String
+  description    String
+  organizationId String?
+  organization   Organization?      @relation(fields: [organizationId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  verified       Boolean            @default(false)
+  isDemo         Boolean            @default(false)
+  createdAt      DateTime           @default(now())
+  members        TeamMembership[]
+  proposals      SolutionProposal[]
+
+  @@index([organizationId])
+}
+
+model TeamMembership {
+  id       String  @id @default(cuid()) @map("_id")
+  teamId   String
+  team     Team    @relation(fields: [teamId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  userId   String
+  user     User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  role     String  @default("MEMBER")
+  accepted Boolean @default(false)
+
+  @@unique([teamId, userId])
+  @@index([userId])
+}
+
+model Collaboration {
+  id                 String              @id @default(cuid()) @map("_id")
+  proposalId         String              @unique
+  proposal           SolutionProposal    @relation(fields: [proposalId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  createdAt          DateTime            @default(now())
+  milestones         Milestone[]
+  commitments        SupportCommitment[]
+  discussions        Discussion[]
+  tasks              Task[]
+  impactMeasurements ImpactMeasurement[]
+}
+
+model Milestone {
+  id              String        @id @default(cuid()) @map("_id")
+  title           String
+  description     String        @default("")
+  dueDate         DateTime
+  completedAt     DateTime?
+  verifiedAt      DateTime?
+  collaborationId String
+  collaboration   Collaboration @relation(fields: [collaborationId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([collaborationId])
+}
+
+model Task {
+  id              String        @id @default(cuid()) @map("_id")
+  title           String
+  done            Boolean       @default(false)
+  assigneeId      String
+  assignee        User          @relation(fields: [assigneeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  collaborationId String
+  collaboration   Collaboration @relation(fields: [collaborationId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([assigneeId])
+  @@index([collaborationId])
+}
+
+model Discussion {
+  id              String        @id @default(cuid()) @map("_id")
+  body            String
+  authorId        String
+  author          User          @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  collaborationId String
+  collaboration   Collaboration @relation(fields: [collaborationId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  createdAt       DateTime      @default(now())
+
+  @@index([authorId])
+  @@index([collaborationId])
+}
+
+model Comment {
+  id        String   @id @default(cuid()) @map("_id")
+  body      String
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  problemId String
+  problem   Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  createdAt DateTime @default(now())
+
+  @@index([authorId])
+  @@index([problemId])
+}
+
+model Vote {
+  id        String  @id @default(cuid()) @map("_id")
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  problemId String
+  problem   Problem @relation(fields: [problemId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([userId, problemId])
+  @@index([problemId])
+}
+
+model Notification {
+  id        String   @id @default(cuid()) @map("_id")
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  title     String
+  body      String
+  href      String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId, read])
+}
+
+model SupportCommitment {
+  id              String        @id @default(cuid()) @map("_id")
+  description     String
+  type            String
+  status          String        @default("PENDING")
+  userId          String
+  user            User          @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  collaborationId String
+  collaboration   Collaboration @relation(fields: [collaborationId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  createdAt       DateTime      @default(now())
+
+  @@unique([userId, collaborationId])
+  @@index([collaborationId])
+}
+
+model Achievement {
+  id        String   @id @default(cuid()) @map("_id")
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  key       String
+  label     String
+  points    Int
+  createdAt DateTime @default(now())
+
+  @@unique([userId, key])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid()) @map("_id")
+  actorId    String
+  actor      User     @relation(fields: [actorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  entityType String
+  entityId   String
+  action     String
+  fromStatus String?
+  toStatus   String?
+  note       String   @default("")
+  createdAt  DateTime @default(now())
+
+  @@index([entityType, entityId, createdAt])
+  @@index([actorId])
+}
+
+model RateLimit {
+  key       String   @id @map("_id")
+  count     Int      @default(1)
+  expiresAt DateTime
+
+  @@index([expiresAt])
+}
+
+model ImpactMeasurement {
+  id              String        @id @default(cuid()) @map("_id")
+  collaborationId String
+  collaboration   Collaboration @relation(fields: [collaborationId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  authorId        String
+  author          User          @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  metric          String
+  baseline        Float
+  observed        Float
+  sampleSize      Int
+  periodStart     DateTime
+  periodEnd       DateTime
+  methodology     String
+  evidenceUrl     String
+  status          String        @default("PENDING")
+  reviewNote      String        @default("")
+  reviewedAt      DateTime?
+  createdAt       DateTime      @default(now())
+
+  @@index([collaborationId, status])
+  @@index([status, createdAt])
+  @@index([authorId])
+}

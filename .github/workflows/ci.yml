@@ -1,0 +1,62 @@
+name: CivicBridge checks
+on: [push, pull_request]
+permissions:
+  contents: read
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATABASE_URL: mongodb://127.0.0.1:27018/civicbridge_ci?replicaSet=civicbridge-rs
+      AUTH_URL: http://127.0.0.1:3000
+      AUTH_SECRET: civicbridge-ci-only-ephemeral-secret-not-for-production
+      DEMO_PASSWORD: CivicBridge@Test2026
+      ALLOW_DEMO_ACCOUNTS: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci --include=dev
+      - run: npm audit --audit-level=high
+      - name: Start isolated transaction-capable MongoDB
+        run: |
+          docker run -d --name civicbridge-mongo -p 127.0.0.1:27018:27018 mongo:8.2 --replSet civicbridge-rs --bind_ip_all --port 27018
+          for attempt in $(seq 1 30); do
+            if docker exec civicbridge-mongo mongosh --port 27018 --quiet --eval 'db.adminCommand({ping:1})' >/dev/null 2>&1; then break; fi
+            sleep 1
+          done
+          docker exec civicbridge-mongo mongosh --port 27018 --quiet --eval 'rs.initiate({_id:"civicbridge-rs",members:[{_id:0,host:"127.0.0.1:27018"}]})'
+          for attempt in $(seq 1 30); do
+            if docker exec civicbridge-mongo mongosh --port 27018 --quiet --eval 'if(!db.hello().isWritablePrimary)quit(1)' >/dev/null 2>&1; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - run: npm run db:generate
+      - run: npm run db:push
+      - run: npm run db:seed
+      - run: npm run ai:prepare
+      - run: npm run ai:train
+      - run: npm run ai:train -- --dataset data/civic-demo.json --output src/lib/ai/generated/demo-model.json
+      - run: npm run etl:check
+      - run: git diff --exit-code -- data/nyc311-civic.json src/lib/ai/generated/
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run test:e2e
+      - run: npm run build
+      - name: Verify optimized production server
+        run: npm run test:e2e
+        env:
+          E2E_SERVER_MODE: production
+      - run: npm run format:check
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build deployment image without secrets
+        run: docker build --tag civicbridge:ci .
