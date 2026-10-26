@@ -21,32 +21,32 @@ function Neighbourhood() {
   return (
     <div className="neighbourhood" aria-hidden="true">
       <svg viewBox="0 0 500 370" fill="none">
-        <path d="M30 220 235 100l235 125-207 120L30 220Z" fill="#EDF0F6" />
+        <path d="M30 220 235 100l235 125-207 120L30 220Z" fill="#f0f0f0" />
         <path
           d="m50 222 205-119m-124 163 203-118m-124 159 201-118M118 168l235 126M196 123l235 125"
           stroke="white"
           strokeWidth="19"
         />
-        <path d="m90 173 45-26 45 24-45 27-45-25Z" fill="#DFE5F0" />
-        <path d="M90 173v39l45 25v-39m45-27v40l-45 26" fill="#D1D9E7" />
-        <path d="m270 161 49-28 48 25-48 29-49-26Z" fill="#fff" />
-        <path d="M270 161v55l49 26v-55m48-29v55l-48 29" fill="#D5DEF0" />
-        <path d="m193 243 51-30 50 27-51 30-50-27Z" fill="#fff" />
-        <path d="M193 243v39l50 27v-39m51-30v40l-51 29" fill="#D5DEF0" />
+        <path d="m90 173 45-26 45 24-45 27-45-25Z" fill="#e5e5e5" />
+        <path d="M90 173v39l45 25v-39m45-27v40l-45 26" fill="#d8d8d8" />
+        <path d="m270 161 49-28 48 25-48 29-49-26Z" fill="#ffffff" />
+        <path d="M270 161v55l49 26v-55m48-29v55l-48 29" fill="#dddddd" />
+        <path d="m193 243 51-30 50 27-51 30-50-27Z" fill="#ffffff" />
+        <path d="M193 243v39l50 27v-39m51-30v40l-51 29" fill="#dddddd" />
         <path
           d="M144 124c0-17 14-31 31-31s31 14 31 31c0 22-31 48-31 48s-31-26-31-48Z"
-          fill="#335CDE"
+          fill="#5d5d5d"
         />
         <circle cx="175" cy="124" r="10" fill="white" />
         <path
           d="M326 103c0-13 11-24 24-24s24 11 24 24c0 17-24 37-24 37s-24-20-24-37Z"
-          fill="#335CDE"
+          fill="#5d5d5d"
           opacity=".4"
         />
         <circle cx="350" cy="103" r="7" fill="white" />
         <path
           d="M234 212c0-14 11-25 25-25s25 11 25 25c0 18-25 38-25 38s-25-20-25-38Z"
-          fill="#335CDE"
+          fill="#5d5d5d"
         />
         <circle cx="259" cy="212" r="8" fill="white" />
       </svg>

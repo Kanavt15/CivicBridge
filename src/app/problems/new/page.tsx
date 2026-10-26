@@ -2,7 +2,7 @@
 import { Input, Textarea, Select } from "@/components/localized-fields";
 
 import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePlatformRouter as useRouter } from "@/components/app-context";
 import Link from "@/components/localized-fields";
 import { useSession } from "next-auth/react";
 import { LocateFixed, ShieldCheck, Sparkles } from "lucide-react";

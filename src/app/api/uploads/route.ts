@@ -5,7 +5,7 @@ import { AppError, checkOrigin, rateLimit } from "@/lib/security";
 import { limitedBody } from "@/lib/http";
 export async function POST(req: Request) {
   try {
-    checkOrigin(req);
+    await checkOrigin(req);
     const user = await requireUser();
     await rateLimit(user.id, "upload", 12, 3600000);
     if (Number(req.headers.get("content-length") ?? 0) > 5300000)

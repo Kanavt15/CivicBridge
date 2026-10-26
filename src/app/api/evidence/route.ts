@@ -51,7 +51,7 @@ export async function GET(req: NextRequest) {
 }
 export async function POST(req: Request) {
   try {
-    checkOrigin(req);
+    await checkOrigin(req);
     const user = await requireUser();
     await rateLimit(user.id, "evidence", 10, 3600000);
     const input = await parseJson(req, measurementSchema);
@@ -83,7 +83,7 @@ export async function POST(req: Request) {
 }
 export async function PATCH(req: Request) {
   try {
-    checkOrigin(req);
+    await checkOrigin(req);
     const user = await requireUser(["ADMIN"]);
     await rateLimit(user.id, "evidence-review", 30);
     const input = await parseJson(

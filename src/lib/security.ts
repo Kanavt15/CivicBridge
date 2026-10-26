@@ -1,5 +1,6 @@
 import { db } from "./db";
 import { createHash } from "node:crypto";
+import { mobileSessionUserId } from "./mobile-session";
 export class AppError extends Error {
   constructor(
     public status: number,
@@ -19,8 +20,10 @@ export async function rateLimit(identity: string, scope: string, limit = 30, win
   });
   if (row.count > limit) throw new AppError(429, "Too many requests. Please try again shortly.");
 }
-export function checkOrigin(req: Request) {
+export async function checkOrigin(req: Request) {
   const origin = req.headers.get("origin");
+  // Only a verified non-cookie credential can replace browser CSRF protection.
+  if (!origin && (await mobileSessionUserId(req.headers.get("authorization")))) return;
   const canonical = new URL(process.env.AUTH_URL || req.url).origin;
   const allowed = new Set([canonical]);
   if (

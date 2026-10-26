@@ -1,6 +1,6 @@
 /* Cache only the generic offline screen and public app icons. Never cache
    accounts, API responses, RSC payloads, documents, or submitted form data. */
-const CACHE = "civicbridge-public-shell-v3";
+const CACHE = "civicbridge-public-shell-v4";
 const PUBLIC_ASSETS = ["/offline.html", "/icons/app-192.png", "/icons/app-512.png"];
 self.addEventListener("install", (event) => {
   event.waitUntil(

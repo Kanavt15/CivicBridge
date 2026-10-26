@@ -48,8 +48,18 @@ test("shows an installable mobile feed, filters both post types, and fits small 
   await page.goto("/app");
   await expect(page.getByRole("heading", { name: "Community", exact: true })).toBeVisible();
   await expect(page.getByRole("navigation", { name: "App navigation" })).toBeVisible();
+  await expect(page.locator(".header, .footer")).toHaveCount(0);
+  await page
+    .getByRole("navigation", { name: "App navigation" })
+    .getByRole("link", { name: "Account", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/app\/account$/);
   await page.getByRole("button", { name: "How to install" }).click();
   await expect(page.getByText(/iPhone: open Safari/)).toBeVisible();
+  await page
+    .getByRole("navigation", { name: "App navigation" })
+    .getByRole("link", { name: "Home", exact: true })
+    .click();
   const manifest = await (await page.request.get("/manifest.webmanifest")).json();
   expect(manifest.start_url).toBe("/app");
   expect(manifest.display).toBe("standalone");
@@ -123,12 +133,10 @@ test("a citizen posts a real problem from a phone form using a mocked location",
     "capture",
     "environment",
   );
-  await expect(page).toHaveURL(/\/problems\/new$/);
+  await expect(page).toHaveURL(/\/app\/post$/);
   await expect(page.getByRole("button", { name: "Submit report", exact: true })).toBeEnabled();
   await page.getByRole("button", { name: "Submit report", exact: true }).click();
-  await page.waitForURL(
-    (url) => url.pathname !== "/problems/new" && /^\/problems\/[^/]+$/.test(url.pathname),
-  );
+  await page.waitForURL((url) => /^\/app\/problems\/[^/]+$/.test(url.pathname));
   const id = page.url().split("/").pop()!;
   problems.push(id);
   expect(await db.problem.findUniqueOrThrow({ where: { id } })).toMatchObject({
@@ -136,6 +144,20 @@ test("a citizen posts a real problem from a phone form using a mocked location",
     latitude: 18.5204,
     longitude: 73.8567,
   });
+  await page
+    .getByRole("navigation", { name: "App navigation" })
+    .getByRole("link", { name: "Account", exact: true })
+    .click();
+  await expect(page.getByRole("heading", { name: "Mobile CITIZEN" })).toBeVisible();
+  await page.getByRole("button", { name: "Sign out", exact: true }).click();
+  await page.waitForURL(/\/app$/);
+  await page.getByRole("link", { name: "Sign in", exact: true }).click();
+  await expect(page).toHaveURL(/\/app\/login$/);
+  await page.getByLabel("Email address", { exact: true }).fill(`${prefix}-citizen@example.test`);
+  await page.getByLabel("Password", { exact: true }).fill(password);
+  await page.getByRole("button", { name: "Sign in", exact: true }).click();
+  await page.waitForURL(/\/app\/activity$/);
+  await expect(page.locator(".header, .footer, .dashboard-sidebar:visible")).toHaveCount(0);
 });
 test("a researcher posts a real solution from the phone app", async ({ page, context }) => {
   await signInAs(context, "RESEARCHER");
@@ -143,7 +165,24 @@ test("a researcher posts a real solution from the phone app", async ({ page, con
     where: { status: "OPEN" },
     select: { id: true },
   });
-  await page.goto(`/solutions/new?problem=${open.id}`);
+  let releaseProblem!: () => void;
+  let intercepted = false;
+  const problemGate = new Promise<void>((resolve) => {
+    releaseProblem = resolve;
+  });
+  await page.route(`**/api/platform/problems/${open.id}`, async (route) => {
+    intercepted = true;
+    await problemGate;
+    await route.continue();
+  });
+  await page.goto(`/app/propose?problem=${open.id}`);
+  try {
+    await expect.poll(() => intercepted).toBe(true);
+    await expect(page.getByLabel("Solution title")).toHaveCount(0);
+  } finally {
+    releaseProblem();
+  }
+  await expect(page.getByLabel("Challenge to address")).toHaveValue(open.id);
   await page.getByLabel("Solution title").fill(`${prefix} practical community pilot`);
   await page
     .getByLabel("Your proposed approach")
@@ -165,13 +204,77 @@ test("a researcher posts a real solution from the phone app", async ({ page, con
       "Reduce the burden on local residents through a measurable improvement in reliable community services.",
     );
   await page.getByRole("button", { name: "Submit proposal", exact: true }).click();
-  await page.waitForURL(/\/innovations\/[a-z0-9]+$/);
+  await page.waitForURL(/\/app\/solutions\/[a-z0-9]+$/);
   const id = page.url().split("/").pop()!;
   proposals.push(id);
   expect(await db.solutionProposal.findUniqueOrThrow({ where: { id } })).toMatchObject({
     status: "SUBMITTED",
     problemId: open.id,
   });
+});
+test("app navigation, account preferences, and deep links stay in the monochrome app", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/app");
+  const nav = page.getByRole("navigation", { name: "App navigation", exact: true });
+  await nav.getByRole("link", { name: "Explore", exact: true }).click();
+  await expect(page).toHaveURL(/\/app\/explore$/);
+  await nav.getByRole("link", { name: "Create", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Make a contribution" })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Post a problem/ })).toHaveAttribute(
+    "href",
+    "/app/post",
+  );
+  await expect(page.getByRole("link", { name: /Propose a solution/ })).toHaveAttribute(
+    "href",
+    "/app/propose",
+  );
+  await nav.getByRole("link", { name: "Solutions", exact: true }).click();
+  await expect(page).toHaveURL(/\/app\/solutions$/);
+  await nav.getByRole("link", { name: "Account", exact: true }).click();
+  await page.getByRole("link", { name: "Create account", exact: true }).click();
+  await expect(page).toHaveURL(/\/app\/register$/);
+  await page.reload();
+  await expect(page.locator(".header, .footer")).toHaveCount(0);
+  await nav.getByRole("link", { name: "Account", exact: true }).click();
+  await page.getByRole("button", { name: "Dark", exact: true }).click();
+  await expect(page.locator("html")).toHaveClass(/dark/);
+  await page.screenshot({ path: "test-results/app-account-dark.png", fullPage: true });
+  await page.reload();
+  await expect(page.locator("html")).toHaveClass(/dark/);
+  await page.getByRole("button", { name: "Light", exact: true }).click();
+  await expect(page.locator("html")).not.toHaveClass(/dark/);
+  const colors = await page
+    .locator(".btn-primary, .app-create-tab .app-tab-icon")
+    .evaluateAll((nodes) => nodes.map((n) => getComputedStyle(n).backgroundColor));
+  for (const color of colors) {
+    const channels = color
+      .match(/\d+(?:\.\d+)?/g)!
+      .slice(0, 3)
+      .map(Number);
+    expect(new Set(channels).size).toBe(1);
+  }
+  for (const route of [
+    "/app/create",
+    "/app/account",
+    "/app/login",
+    "/app/register",
+    "/app/explore",
+    "/app/solutions",
+  ]) {
+    await page.goto(route);
+    for (const width of [320, 390, 768, 1280]) {
+      await page.setViewportSize({ width, height: 844 });
+      expect(
+        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+        route + " at " + width,
+      ).toBe(true);
+    }
+  }
+  await page.screenshot({ path: "test-results/app-solutions-desktop.png", fullPage: true });
+  expect(errors).toEqual([]);
 });
 test("the service worker provides a generic offline screen without caching private data", async ({
   page,

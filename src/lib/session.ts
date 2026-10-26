@@ -4,12 +4,17 @@ import { AppError } from "./security";
 import type { Role } from "@prisma/client";
 import { publicStatuses } from "./domain";
 import { demoAccountsAllowed } from "./production";
+import { headers } from "next/headers";
+import { mobileSessionUserId } from "./mobile-session";
 export async function currentUser() {
-  const session = await auth();
-  if (!session?.user?.id) return null;
+  const authorization = (await headers()).get("authorization");
+  const userId = authorization
+    ? await mobileSessionUserId(authorization)
+    : (await auth())?.user?.id;
+  if (!userId) return null;
   return db.user.findFirst({
     where: {
-      id: session.user.id,
+      id: userId,
       active: true,
       ...(!demoAccountsAllowed() ? { isDemo: false } : {}),
     },

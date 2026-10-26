@@ -17,7 +17,6 @@ import { useData } from "@/lib/client";
 import { categories } from "@/lib/domain";
 import { CategoryIcon, Status, DemoBadge, Loading, ErrorState, Empty } from "@/components/common";
 import { Button } from "@/components/ui/button";
-import { InstallApp } from "@/components/app-experience";
 import { Text } from "@/components/i18n";
 
 export default function CommunityApp() {
@@ -47,14 +46,11 @@ export default function CommunityApp() {
     <div className="container community-app">
       <section className="app-welcome">
         <div>
-          <p className="app-greeting">
-            <Text>Community app</Text>
-          </p>
           <h1>
             <Text>Community</Text>
           </h1>
           <p>
-            <Text>Choose what you want to do.</Text>
+            <Text>Small actions. Shared progress.</Text>
           </p>
         </div>
         <div className="app-post-actions">
@@ -104,7 +100,6 @@ export default function CommunityApp() {
           </p>
         </div>
       )}
-      <InstallApp />
       <section className="app-feed" aria-label="Community posts">
         <div className="app-feed-heading">
           <h2>

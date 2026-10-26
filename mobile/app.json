@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "CivicBridge",
+    "slug": "civicbridge-mobile",
+    "version": "1.0.0",
+    "web": {
+      "favicon": "./assets/icon.png"
+    }
+  }
+}

@@ -18,14 +18,14 @@ import {
   Bar,
 } from "recharts";
 const colors = [
-  "#335cde",
-  "#6b8ae8",
-  "#a4b7ed",
-  "#8797b2",
-  "#b0bacb",
-  "#697b99",
-  "#c6cfdf",
-  "#526fba",
+  "#5d5d5d",
+  "#8a8a8a",
+  "#b7b7b7",
+  "#969696",
+  "#b9b9b9",
+  "#797979",
+  "#cecece",
+  "#6e6e6e",
 ];
 export function ImpactCharts({ stats, admin = false }: { stats: any; admin?: boolean }) {
   const { t } = useI18n();
@@ -43,26 +43,26 @@ export function ImpactCharts({ stats, admin = false }: { stats: any; admin?: boo
             <AreaChart data={stats.months} margin={{ left: -25, right: 8, top: 8, bottom: 0 }}>
               <defs>
                 <linearGradient id="chart-green" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#335cde" stopOpacity={0.15} />
-                  <stop offset="100%" stopColor="#335cde" stopOpacity={0} />
+                  <stop offset="0%" stopColor="#5d5d5d" stopOpacity={0.15} />
+                  <stop offset="100%" stopColor="#5d5d5d" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 4" vertical={false} stroke="#acbfb22f" />
+              <CartesianGrid strokeDasharray="3 4" vertical={false} stroke="#bababa2f" />
               <XAxis dataKey="name" fontSize={10} axisLine={false} tickLine={false} />
               <YAxis allowDecimals={false} fontSize={10} axisLine={false} tickLine={false} />
               <Tooltip
                 contentStyle={{
                   borderRadius: 8,
-                  border: "1px solid #dde8e0",
+                  border: "1px solid #e5e5e5",
                   fontSize: 11,
-                  color: "#203945",
+                  color: "#353535",
                 }}
               />
               <Area
                 name={t("Reported")}
                 type="monotone"
                 dataKey="reported"
-                stroke="#335cde"
+                stroke="#5d5d5d"
                 fill="url(#chart-green)"
                 strokeWidth={2}
               />
@@ -70,7 +70,7 @@ export function ImpactCharts({ stats, admin = false }: { stats: any; admin?: boo
                 name={t("Resolved")}
                 type="monotone"
                 dataKey="resolved"
-                stroke="#8aa6ba"
+                stroke="#a1a1a1"
                 fill="transparent"
                 strokeWidth={2}
               />
@@ -101,7 +101,7 @@ export function ImpactCharts({ stats, admin = false }: { stats: any; admin?: boo
                   <Cell key={i} fill={colors[i % colors.length]} />
                 ))}
               </Pie>
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 11, color: "#203945" }} />
+              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 11, color: "#353535" }} />
               <Legend iconType="circle" iconSize={7} wrapperStyle={{ fontSize: 9 }} />
             </PieChart>
           </ResponsiveContainer>
@@ -118,14 +118,14 @@ export function ImpactCharts({ stats, admin = false }: { stats: any; admin?: boo
           <div className="chart-container">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={stats.regions} margin={{ left: -20, right: 10, bottom: 15 }}>
-                <CartesianGrid strokeDasharray="3 4" vertical={false} stroke="#acbfb22f" />
+                <CartesianGrid strokeDasharray="3 4" vertical={false} stroke="#bababa2f" />
                 <XAxis dataKey="name" fontSize={10} axisLine={false} tickLine={false} />
                 <YAxis allowDecimals={false} axisLine={false} tickLine={false} fontSize={10} />
-                <Tooltip contentStyle={{ borderRadius: 8, fontSize: 11, color: "#203945" }} />
+                <Tooltip contentStyle={{ borderRadius: 8, fontSize: 11, color: "#353535" }} />
                 <Bar
                   dataKey="value"
                   name={t("Public reports")}
-                  fill="#6b8ae8"
+                  fill="#8a8a8a"
                   radius={[5, 5, 0, 0]}
                 />
               </BarChart>

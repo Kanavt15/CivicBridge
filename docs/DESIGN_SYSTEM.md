@@ -1,10 +1,14 @@
 # CivicBridge interface and regional languages
 
-The website and installable app share one interface system. The redesign uses white surfaces, soft grey canvas, graphite text, and one blue accent. Green/red appear only for meaningful outcome/error states; unrelated category colours, decorative gradients, large slogans, and repeated promotional sections were removed from the main experience.
+The website and installable app use white surfaces, a grey canvas, and black primary actions. Borders, status labels, charts, maps, the bridge mark, and installation icons use shades of grey. Status text and icons convey meaning without relying on colour. Community photographs retain their original colours.
 
 ## Layout and components
 
-`src/app/redesign.css` defines the visual layer over the existing functional layout. Tokens are surface `#ffffff`, canvas `#f8f9fc`, primary text `#182230`, muted text `#667085`, borders `#e5e8ef`, and accent `#335cde`. Dark-mode tokens preserve hierarchy and readable controls. The font stack uses Aptos for Latin text and Nirmala UI/system script fallback for regional text, without a network font dependency.
+`src/app/redesign.css` defines shared components; `src/app/app-shell.css` defines the monochrome tokens and dedicated app layout. Tokens are surface `#ffffff`, canvas `#f7f7f7`, primary text/action `#171717`, secondary text `#333333`, muted text `#737373`, and borders `#e5e5e5`. Dark mode uses neutral grey surfaces and white actions. The font stack uses Aptos for Latin text and Nirmala UI/system script fallback for regional text, without a network font dependency.
+
+The app uses a compact header and five phone tabs: Home, Explore, Create, Solutions, and Account. A left navigation rail replaces those tabs on desktop. The posting action is the strongest visual element; browsing is a quiet list of real community posts. The app has its own account, appearance and installation screens, without the website's marketing header/footer. The website keeps its compact public navigation.
+
+The layout deliberately avoids a card dashboard filled with competing metrics: the home screen has two actions and a searchable feed. Account tools and installation instructions are available when needed. This follows the civic task—report, find help, follow progress—with short labels and limited initial choices.
 
 The desktop website has compact navigation, a short introductory section, current community posts, and a brief explanation of the process. The app foregrounds two posting actions and its searchable feed. Forms, workspace navigation, review tables, charts, cards, dialogs, and empty/loading/error states share spacing, typography, border, focus, and button treatments. The bridge mark and install icons match the accent.
 

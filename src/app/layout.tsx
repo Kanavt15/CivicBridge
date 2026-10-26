@@ -1,11 +1,9 @@
-import { Text } from "@/components/i18n";
 import type { Metadata, Viewport } from "next";
 import { Providers } from "@/components/providers";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
 import { AppExperience } from "@/components/app-experience";
 import "./globals.css";
 import "./redesign.css";
+import "./app-shell.css";
 import { cookies } from "next/headers";
 import { isLocale, localeTags } from "@/lib/i18n/messages";
 export const metadata: Metadata = {
@@ -20,7 +18,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#335cde",
+  themeColor: "#171717",
 };
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const savedLocale = (await cookies()).get("civicbridge_locale")?.value;
@@ -29,14 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={localeTags[locale]} suppressHydrationWarning>
       <body>
         <Providers initialLocale={locale}>
-          <AppExperience>
-            <a className="skip-link" href="#main">
-              <Text>{"Skip to content"}</Text>
-            </a>
-            <Header />
-            <main id="main">{children}</main>
-            <Footer />
-          </AppExperience>
+          <AppExperience>{children}</AppExperience>
         </Providers>
       </body>
     </html>

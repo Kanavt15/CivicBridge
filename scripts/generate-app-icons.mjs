@@ -1,6 +1,6 @@
 // A code-drawn bridge mark, matching the existing brand; no external assets.
 import { deflateSync } from "node:zlib";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 const table = Array.from({ length: 256 }, (_, i) => {
   let c = i;
   for (let j = 0; j < 8; j++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
@@ -16,14 +16,14 @@ function chunk(type, data) {
   tail.writeUInt32BE((crc ^ 0xffffffff) >>> 0);
   return Buffer.concat([head, bytes, tail]);
 }
-function image(size) {
+function image(size, transparent = false) {
   const width = size * 2,
     rgba = Buffer.alloc(width * width * 4);
   for (let i = 0; i < rgba.length; i += 4) {
-    rgba[i] = 51;
-    rgba[i + 1] = 92;
-    rgba[i + 2] = 222;
-    rgba[i + 3] = 255;
+    rgba[i] = 23;
+    rgba[i + 1] = 23;
+    rgba[i + 2] = 23;
+    rgba[i + 3] = transparent ? 0 : 255;
   }
   const point = (x, y, r, color) => {
     x = (x * width) / 512;
@@ -34,6 +34,7 @@ function image(size) {
         if ((px - x) ** 2 + (py - y) ** 2 > r * r) continue;
         const index = (py * width + px) * 4;
         for (let k = 0; k < 3; k++) rgba[index + k] = color[k];
+        rgba[index + 3] = 255;
       }
   };
   const stroke = (ax, ay, bx, by, color = [255, 255, 255], radius = 9) => {
@@ -52,7 +53,7 @@ function image(size) {
     last = now;
   }
   stroke(86, 368, 426, 368);
-  stroke(160, 404, 352, 404, [204, 216, 255], 5);
+  stroke(160, 404, 352, 404, [200, 200, 200], 5);
   // Supersample at 2x so the small installed icon keeps clean edges.
   const rows = Buffer.alloc(size * (1 + size * 4));
   for (let y = 0; y < size; y++)
@@ -77,4 +78,8 @@ function image(size) {
 }
 mkdirSync("public/icons", { recursive: true });
 for (const size of [180, 192, 512]) writeFileSync(`public/icons/app-${size}.png`, image(size));
+if (existsSync("mobile/assets")) {
+  writeFileSync("mobile/assets/icon.png", image(1024));
+  writeFileSync("mobile/assets/monochrome.png", image(432, true));
+}
 console.log("Generated 180px Apple and 192/512px install icons.");

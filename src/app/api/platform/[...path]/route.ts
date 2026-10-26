@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Prisma, ProblemStatus, ProposalStatus } from "@prisma/client";
-import { hash } from "bcryptjs";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { localAssistance } from "@/lib/ai/assistance";
@@ -8,7 +7,6 @@ import { currentUser, requireUser, canSeeProblem, workspaceAccess } from "@/lib/
 import { AppError, checkOrigin, rateLimit } from "@/lib/security";
 import { limitedBody } from "@/lib/http";
 import {
-  registerSchema,
   problemSchema,
   proposalSchema,
   commentSchema,
@@ -16,6 +14,7 @@ import {
   supportSchema,
   profileSchema,
 } from "@/lib/validation";
+import { registerUser } from "@/lib/registration";
 import {
   publicStatuses,
   problemTransitions,
@@ -107,37 +106,11 @@ async function dispatch(req: NextRequest, context: { params: Promise<{ path: str
   const user = await currentUser();
   const q = req.nextUrl.searchParams;
   if (method !== "GET") {
-    checkOrigin(req);
+    await checkOrigin(req);
     if (user) await rateLimit(user.id, "write", 60);
   }
   if (resource === "register" && method === "POST") {
-    const input = registerSchema.parse(await body(req));
-    await rateLimit(input.email, "register", 3, 3600000);
-    await rateLimit("global", "registration", 100, 3600000);
-    const passwordHash = await hash(input.password, 12);
-    const created = await db.$transaction(async (tx) => {
-      const org = input.organizationName
-        ? await tx.organization.create({
-            data: {
-              name: input.organizationName,
-              type: input.role,
-              city: input.city!,
-              verified: false,
-            },
-          })
-        : null;
-      return tx.user.create({
-        data: {
-          name: input.name,
-          email: input.email,
-          passwordHash,
-          role: input.role,
-          organizationId: org?.id,
-        },
-        select: authorSelect,
-      });
-    });
-    return json(created, 201);
+    return json(await registerUser(await body(req)), 201);
   }
   if (resource === "me" && method === "GET") return json(user);
   if (resource === "profile" && method === "PATCH") {

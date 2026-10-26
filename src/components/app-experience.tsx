@@ -2,10 +2,14 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import Link from "@/components/localized-fields";
-import { Compass, Download, Home, Lightbulb, UserRound, WifiOff } from "lucide-react";
+import { Download, WifiOff } from "lucide-react";
 import { Button } from "./ui/button";
 import { Text } from "./i18n";
+import { Header } from "./header";
+import { Footer } from "./footer";
+import { AppShell } from "./app-shell";
+import { AppModeContext } from "./app-context";
+import { isAppPath } from "@/lib/app-navigation";
 
 type InstallPrompt = Event & {
   prompt: () => Promise<void>;
@@ -68,34 +72,32 @@ export function AppExperience({ children }: { children: React.ReactNode }) {
     const choice = await prompt.userChoice;
     if (choice.outcome === "accepted") setInstalled(true);
   }
-  const links = [
-    ["/app", "Home", Home],
-    ["/explore", "Problems", Compass],
-    ["/innovations", "Solutions", Lightbulb],
-    ["/dashboard", "My activity", UserRound],
-  ] as const;
+  const app = isAppPath(path) || installed;
   return (
     <AppContext.Provider value={{ installed, canInstall: Boolean(prompt), install }}>
-      {offline && (
-        <div className="connection-notice" role="status">
-          <WifiOff size={17} />
-          <span>
-            <Text>You’re offline. Reconnect before posting.</Text>{" "}
-            <Text>No posts have been queued.</Text>
-          </span>
-        </div>
-      )}
-      {children}
-      <nav className="phone-navigation" aria-label="App navigation">
-        {links.map(([href, label, Icon]) => (
-          <Link key={href} href={href} aria-current={path === href ? "page" : undefined}>
-            <Icon size={21} />
+      <AppModeContext.Provider value={app}>
+        <a className="skip-link" href="#main">
+          <Text>Skip to content</Text>
+        </a>
+        {offline && (
+          <div className="connection-notice" role="status">
+            <WifiOff size={17} />
             <span>
-              <Text>{label}</Text>
+              <Text>You’re offline. Reconnect before posting.</Text>{" "}
+              <Text>No posts have been queued.</Text>
             </span>
-          </Link>
-        ))}
-      </nav>
+          </div>
+        )}
+        {app ? (
+          <AppShell>{children}</AppShell>
+        ) : (
+          <>
+            <Header />
+            <main id="main">{children}</main>
+            <Footer />
+          </>
+        )}
+      </AppModeContext.Provider>
     </AppContext.Provider>
   );
 }

@@ -15,7 +15,9 @@ Read the detailed [product, technology stack, and ETL guide](docs/PRODUCT_TECH_S
 
 The installable user app is at **`/app`**. It includes phone navigation, searchable problems/solutions, role-aware posting, photo capture, GPS pin selection, and home-screen installation. It uses the existing Atlas database. See [installation and posting](docs/USER_APP.md).
 
-The redesigned website/app use a restrained white, grey, and blue interface with shorter pages and three-step posting forms. The header offers English, Hindi, Marathi, Bengali, Tamil, and Telugu; the preference persists while original posts and API values remain unchanged. See [the interface and localization guide](docs/DESIGN_SYSTEM.md).
+The website and dedicated installable app use white, grey, and black shades with shorter pages and three-step posting forms. Open `/app` for phone tabs (Home, Explore, Create, Solutions, Account), a desktop navigation rail, and account/appearance/installation screens. App links and successful posting/sign-in redirects stay under `/app`. The header offers English, Hindi, Marathi, Bengali, Tamil, and Telugu; the preference persists while original posts and API values remain unchanged. See [the interface guide](docs/DESIGN_SYSTEM.md) and [app installation guide](docs/USER_APP.md).
+
+`mobile/` contains the **separate Android/iPhone React Native app** using the same backend, with native posting, camera/gallery, GPS, activity, notifications and revocable device sessions. Android APK, iOS simulator and store build profiles are included; signed binaries require a deployed HTTPS backend and your build/signing accounts. See [native app setup](docs/NATIVE_APP.md).
 
 Use the [Atlas setup guide](docs/ATLAS.md) to create/select a cluster, configure a database user and IP access, and obtain the driver URI. The app already supports Atlas through `DATABASE_URL`; no schema rewrite is needed.
 

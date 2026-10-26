@@ -9,3 +9,6 @@ test-results
 src/lib/ai/generated/
 data/sources/
 data/nyc311-civic.json
+mobile/.expo/
+mobile/dist/
+mobile/dist-native/

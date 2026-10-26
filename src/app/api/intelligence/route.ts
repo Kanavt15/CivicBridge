@@ -12,7 +12,7 @@ export function GET(req: Request) {
 }
 export async function POST(req: Request) {
   try {
-    checkOrigin(req);
+    await checkOrigin(req);
     const user = await requireUser();
     await rateLimit(user.id, "classifier", 30);
     const { text, dataset } = await parseJson(

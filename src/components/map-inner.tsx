@@ -1,5 +1,6 @@
 "use client";
 import { MapContainer, TileLayer, CircleMarker, Popup, useMapEvents, useMap } from "react-leaflet";
+import Link from "./localized-fields";
 import { useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 function Picker({ onChange }: { onChange: (value: [number, number]) => void }) {
@@ -41,7 +42,7 @@ export default function MapInner({
           <CircleMarker
             center={value}
             radius={9}
-            pathOptions={{ color: "#335cde", fillColor: "#6b8ae8", fillOpacity: 0.8 }}
+            pathOptions={{ color: "#5d5d5d", fillColor: "#8a8a8a", fillOpacity: 0.8 }}
           />
         )}
         {points.map((p) => (
@@ -49,10 +50,10 @@ export default function MapInner({
             key={p.id}
             center={[p.latitude, p.longitude]}
             radius={8}
-            pathOptions={{ color: "#335cde", fillColor: "#6b8ae8", fillOpacity: 0.7 }}
+            pathOptions={{ color: "#5d5d5d", fillColor: "#8a8a8a", fillOpacity: 0.7 }}
           >
             <Popup>
-              <a href={`/problems/${p.id}`}>{p.title}</a>
+              <Link href={`/problems/${p.id}`}>{p.title}</Link>
               <br />
               {p.city}
             </Popup>

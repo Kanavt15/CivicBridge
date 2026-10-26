@@ -5,7 +5,7 @@ import { Text } from "@/components/i18n";
 import Link from "@/components/localized-fields";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { usePlatformRouter as useRouter } from "@/components/app-context";
 import { ArrowUpRight, CheckCircle, LoaderCircle } from "lucide-react";
 import { Logo } from "./header";
 import { Button } from "./ui/button";

@@ -41,6 +41,16 @@ test("all six interface languages persist through navigation and reload without 
     await expect(
       page.getByRole("heading", { name: translate("Community", locale), exact: true }),
     ).toBeVisible();
+    for (const route of ["/app", "/app/create", "/app/account"]) {
+      await page.goto(route);
+      for (const width of [320, 390]) {
+        await page.setViewportSize({ width, height: 844 });
+        expect(
+          await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+          route + ": " + locale + " at " + width,
+        ).toBe(true);
+      }
+    }
     await page.reload();
     await expect(page.locator("html")).toHaveAttribute("lang", localeTags[locale]);
   }

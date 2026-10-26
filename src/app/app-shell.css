@@ -1,0 +1,684 @@
+/* White, grey and black. Shared tokens keep the website and app in one palette. */
+:root {
+  --navy: #171717;
+  --ink: #333333;
+  --muted: #737373;
+  --teal: #171717;
+  --teal-light: #f1f1f1;
+  --accent: #171717;
+  --bg: #f7f7f7;
+  --soft: #f5f5f5;
+  --border: #e5e5e5;
+  --card: #ffffff;
+  --focus: #73737380;
+  --shadow: none;
+}
+.dark {
+  --navy: #f5f5f5;
+  --ink: #e5e5e5;
+  --muted: #a3a3a3;
+  --teal: #f5f5f5;
+  --teal-light: #292929;
+  --accent: #f5f5f5;
+  --bg: #121212;
+  --soft: #202020;
+  --border: #363636;
+  --card: #191919;
+  --focus: #a3a3a380;
+}
+body {
+  padding-bottom: 0;
+}
+.btn-primary,
+.brand-mark {
+  background: var(--navy);
+  color: var(--card);
+}
+.btn-primary:hover {
+  background: var(--ink);
+}
+.dark .btn-primary {
+  color: #171717;
+  background: #f5f5f5;
+}
+.leaflet-tile-pane {
+  filter: grayscale(1);
+}
+.civic-app {
+  min-height: 100dvh;
+  background: var(--bg);
+}
+.app-rail {
+  width: 242px;
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 60;
+  background: var(--card);
+  border-right: 1px solid var(--border);
+  padding: 32px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.app-rail > .brand {
+  margin: 0 10px 40px;
+  font-size: 21px;
+}
+.app-rail nav {
+  display: grid;
+  gap: 5px;
+}
+.app-rail nav a {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 14px;
+  border-radius: 9px;
+  min-height: 46px;
+}
+.app-rail nav a:hover,
+.app-rail nav a[aria-current="page"] {
+  background: var(--soft);
+  color: var(--navy);
+}
+.app-rail nav a[aria-current="page"] {
+  font-weight: 650;
+}
+.app-rail nav svg {
+  flex-shrink: 0;
+}
+.app-rail-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 26px 14px;
+}
+.app-rail-caption {
+  margin: auto 14px 0;
+  padding-top: 34px;
+  font-size: 12px;
+  color: var(--muted);
+  max-width: 150px;
+}
+.app-stage {
+  margin-left: 242px;
+  min-width: 0;
+}
+.app-topbar {
+  height: 80px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 45;
+}
+.app-topbar-title {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 650;
+}
+.app-topbar-title > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.app-topbar-title .icon-btn {
+  flex-shrink: 0;
+}
+.app-topbar-actions {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.app-topbar .language-picker {
+  max-width: 145px;
+}
+.app-account-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--soft);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 650;
+}
+.app-mobile-brand,
+.app-tabbar {
+  display: none;
+}
+.app-main {
+  max-width: 1120px;
+  margin-inline: auto;
+  min-height: calc(100dvh - 80px);
+  padding: 36px 40px 60px;
+}
+.app-main > .container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+.app-main .page-wrap {
+  padding: 0;
+}
+.app-main .community-app {
+  padding: 0;
+}
+.app-main .app-welcome {
+  margin-bottom: 30px;
+}
+.app-main .app-welcome h1 {
+  font-size: 32px;
+  letter-spacing: -1px;
+  margin: 0 0 5px;
+}
+.app-main .app-welcome > div > p {
+  color: var(--muted);
+  font-size: 14px;
+}
+.app-main .app-post-actions {
+  margin-top: 24px;
+}
+.app-main .app-post-actions > a {
+  box-shadow: none;
+  border-radius: 12px;
+  background: var(--card);
+}
+.app-main .app-post-actions > a:first-child {
+  background: var(--navy);
+  color: var(--card);
+  border-color: var(--navy);
+}
+.app-main .app-post-actions > a:first-child strong {
+  color: inherit;
+}
+.app-main .app-post-actions > a:first-child > span {
+  color: inherit;
+}
+.app-main .app-post-actions > a:first-child .app-action-icon {
+  background: #ffffff20;
+  color: inherit;
+}
+.app-main .app-post-actions > a:first-child > svg {
+  color: inherit;
+}
+.app-main .app-feed {
+  margin-top: 30px;
+}
+.app-main .app-feed-heading h2 {
+  font-size: 20px;
+  letter-spacing: -0.4px;
+}
+.app-main .app-feed-grid {
+  grid-template-columns: 1fr;
+  gap: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.app-main .app-post {
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  padding: 24px;
+  box-shadow: none;
+}
+.app-main .app-post:last-child {
+  border-bottom: 0;
+}
+.app-main .app-post h3 {
+  font-size: 20px;
+}
+.app-main .app-post > p {
+  max-width: 72ch;
+}
+.app-main .breadcrumbs,
+.app-main .dashboard-sidebar {
+  display: none;
+}
+.app-main .dashboard-shell {
+  grid-template-columns: minmax(0, 1fr);
+}
+.app-main .auth-wrap {
+  min-height: auto;
+  padding: 18px 0;
+  display: block;
+  max-width: 440px;
+  margin: 0 auto;
+}
+.app-main .auth-form {
+  max-width: none;
+}
+.app-main .page-intro {
+  margin-bottom: 28px;
+}
+.app-main .form-layout {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 760px;
+  margin-inline: auto;
+}
+.app-page-heading {
+  margin-bottom: 24px;
+}
+.app-page-heading h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: -0.8px;
+}
+.app-page-heading p {
+  color: var(--muted);
+  margin: 8px 0 0;
+}
+.app-account-page {
+  max-width: 680px;
+  margin-inline: auto;
+}
+.app-identity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 17px;
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+.app-profile-avatar {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  font-size: 20px;
+  font-weight: 650;
+  border-radius: 50%;
+  background: var(--soft);
+}
+.app-identity > div:nth-child(2) {
+  flex: 1;
+  min-width: 160px;
+}
+.app-identity h2 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  overflow-wrap: anywhere;
+}
+.app-identity p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.app-auth-actions {
+  display: flex;
+  gap: 10px;
+  flex-basis: 100%;
+  padding-top: 8px;
+}
+.app-auth-actions > .btn {
+  flex: 1;
+}
+.app-settings-list {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  overflow: hidden;
+}
+.app-settings-list > a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 58px;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.app-settings-list > a:last-child {
+  border: 0;
+}
+.app-settings-list > a:hover {
+  background: var(--soft);
+}
+.app-settings-list > a > span {
+  flex: 1;
+}
+.app-settings-list svg {
+  flex-shrink: 0;
+  color: var(--muted);
+}
+.app-settings-list > a > svg:last-child {
+  width: 16px;
+}
+.app-preferences {
+  margin-top: 28px;
+}
+.app-preferences h2 {
+  font-size: 17px;
+  margin-bottom: 13px;
+}
+.app-theme-options {
+  display: flex;
+  gap: 10px;
+}
+.app-theme-options button[aria-pressed="true"] {
+  border-color: var(--navy);
+  background: var(--card);
+  color: var(--navy);
+  box-shadow: inset 0 0 0 1px var(--navy);
+}
+.app-account-page .app-install {
+  margin-top: 28px;
+}
+.app-account-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 22px;
+}
+.app-account-footer > a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.app-create-page {
+  max-width: 720px;
+  margin: 14px auto;
+}
+.app-compose-options {
+  display: grid;
+  gap: 16px;
+}
+.app-compose-options > a {
+  position: relative;
+  display: block;
+  padding: 30px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+}
+.app-compose-options > a:hover {
+  border-color: var(--muted);
+}
+.compose-icon {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  background: var(--soft);
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+.app-compose-options > a > svg {
+  position: absolute;
+  right: 27px;
+  top: 35px;
+  color: var(--muted);
+}
+.app-compose-options h2 {
+  font-size: 23px;
+  margin: 0 0 10px;
+}
+.app-compose-options p {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+  max-width: 44ch;
+}
+.app-create-note {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 24px;
+}
+.app-create-note a {
+  color: var(--navy);
+  text-decoration: underline;
+}
+@media (max-width: 1000px) {
+  .app-rail {
+    width: 208px;
+    padding-inline: 12px;
+  }
+  .app-rail > .brand {
+    font-size: 19px;
+  }
+  .app-stage {
+    margin-left: 208px;
+  }
+  .app-main {
+    padding: 28px;
+  }
+  .app-topbar {
+    padding-inline: 28px;
+  }
+  .app-main .app-post-actions {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 767px) {
+  .app-rail,
+  .app-desktop-title {
+    display: none;
+  }
+  .app-stage {
+    margin-left: 0;
+  }
+  .app-topbar {
+    height: auto;
+    min-height: 68px;
+    padding: max(12px, env(safe-area-inset-top)) 18px 12px;
+    gap: 8px;
+  }
+  .app-topbar-title {
+    gap: 7px;
+    font-size: 14px;
+    flex: 1;
+  }
+  .app-mobile-brand {
+    display: inline-flex;
+  }
+  .app-topbar .brand {
+    font-size: 18px;
+    gap: 8px;
+    letter-spacing: -0.5px;
+  }
+  .app-topbar .brand-mark {
+    width: 29px;
+    height: 31px;
+    border-radius: 7px;
+  }
+  .app-topbar-actions {
+    gap: 6px;
+  }
+  .app-topbar .language-picker {
+    padding: 0 7px;
+    gap: 5px;
+    height: 34px;
+  }
+  .app-topbar .language-picker select {
+    width: 62px;
+    min-width: 0;
+    font-size: 11px;
+  }
+  .app-topbar .language-picker > svg:last-child {
+    display: none;
+  }
+  .app-topbar-actions > .icon-btn {
+    width: 30px;
+    height: 34px;
+  }
+  .app-topbar-actions .app-account-avatar {
+    display: none;
+  }
+  .app-main {
+    padding: 25px 18px calc(100px + env(safe-area-inset-bottom));
+    min-height: calc(100dvh - 68px);
+  }
+  .app-main .app-welcome h1 {
+    font-size: 29px;
+  }
+  .app-main .app-welcome {
+    display: block;
+    margin-bottom: 20px;
+  }
+  .app-main .app-post-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 21px;
+  }
+  .app-main .app-post-actions > a {
+    min-height: 118px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+  }
+  .app-main .app-action-icon {
+    width: 30px;
+    height: 30px;
+    background: none;
+  }
+  .app-main .app-action-icon svg {
+    width: 23px;
+    height: 23px;
+  }
+  .app-main .app-post-actions strong {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .app-main .app-post-actions > a > span:not(.app-action-icon),
+  .app-main .app-post-actions > a > svg {
+    display: none;
+  }
+  .app-main .app-account-prompt {
+    margin-top: 20px;
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+  .app-main .app-feed {
+    margin-top: 27px;
+  }
+  .app-main .app-feed-filters {
+    gap: 9px;
+  }
+  .app-main .app-feed-filters > label {
+    min-width: 0;
+  }
+  .app-main .app-feed-filters input,
+  .app-main .app-feed-filters select {
+    min-height: 44px;
+  }
+  .app-main .app-feed-tabs {
+    margin-bottom: 15px;
+  }
+  .app-main .app-post {
+    padding: 20px 18px;
+  }
+  .app-main .app-post h3 {
+    font-size: 18px;
+  }
+  .app-main .app-post-meta {
+    font-size: 11px;
+  }
+  .app-main .page-intro h1,
+  .app-page-heading h1 {
+    font-size: 28px;
+  }
+  .app-tabbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 65;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    padding: 8px 7px max(10px, env(safe-area-inset-bottom));
+    background: var(--card);
+    border-top: 1px solid var(--border);
+  }
+  .app-tabbar > a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    color: var(--muted);
+    min-height: 48px;
+    min-width: 0;
+    padding: 0 2px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 1.4;
+  }
+  .app-tabbar > a > span:last-child {
+    overflow-wrap: anywhere;
+    max-width: 100%;
+  }
+  .app-tab-icon {
+    height: 29px;
+    display: grid;
+    place-items: center;
+  }
+  .app-tabbar > a[aria-current="page"] {
+    color: var(--navy);
+    font-weight: 650;
+  }
+  .app-tabbar .app-create-tab .app-tab-icon {
+    background: var(--navy);
+    color: var(--card);
+    width: 42px;
+    border-radius: 9px;
+  }
+  .app-identity {
+    padding: 20px;
+    gap: 14px;
+  }
+  .app-identity h2 {
+    font-size: 18px;
+  }
+  .app-compose-options > a {
+    padding: 25px;
+  }
+  .app-main .auth-form h1 {
+    font-size: 29px;
+  }
+}
+@media (max-width: 359px) {
+  .app-topbar {
+    padding-inline: 12px;
+  }
+  .app-topbar .brand {
+    font-size: 16px;
+    gap: 6px;
+  }
+  .app-topbar .language-picker {
+    padding-inline: 5px;
+  }
+  .app-topbar .language-picker > svg {
+    display: none;
+  }
+  .app-topbar .language-picker select {
+    width: 53px;
+  }
+  .app-main {
+    padding-inline: 14px;
+  }
+  .app-main .app-post-actions > a {
+    padding: 14px;
+  }
+}

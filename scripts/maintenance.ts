@@ -6,7 +6,7 @@ try {
 }
 const db = new PrismaClient();
 async function main() {
-  const [limits, files] = await db.$transaction([
+  const [limits, files, sessions] = await db.$transaction([
     db.rateLimit.deleteMany({ where: { expiresAt: { lt: new Date() } } }),
     db.problemImage.deleteMany({
       where: {
@@ -17,9 +17,10 @@ async function main() {
         createdAt: { lt: new Date(Date.now() - 86400000) },
       },
     }),
+    db.mobileSession.deleteMany({ where: { expiresAt: { lt: new Date() } } }),
   ]);
   console.log(
-    `Removed ${limits.count} expired rate-limit buckets and ${files.count} unattached uploads older than 24 hours.`,
+    `Removed ${limits.count} expired rate-limit buckets, ${sessions.count} expired mobile sessions, and ${files.count} unattached uploads older than 24 hours.`,
   );
 }
 main()

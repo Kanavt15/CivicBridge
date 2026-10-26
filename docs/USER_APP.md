@@ -1,12 +1,18 @@
 # Installable CivicBridge app
 
+The separate Android/iPhone React Native app is in `mobile/`; see [native app setup and builds](NATIVE_APP.md). This page describes the browser-installable app.
+
 Open `/app` on the CivicBridge deployment. This Progressive Web App uses the existing accounts, role permissions, APIs, and MongoDB Atlas database. It does not require a separate backend, APK, app-store submission, or native build.
+
+The app has a dedicated white/grey/black interface with **Home, Explore, Create, Solutions, Account** tabs on phones and a navigation rail on larger screens. It does not show the website header/footer. Account contains profile/activity/team links, appearance, installation help, and sign-out; additional tools follow account permissions.
+
+App journeys stay under `/app`: reports at `/app/post`, proposals at `/app/propose`, problem details at `/app/problems/[id]`, solutions at `/app/solutions/[id]`, and activity at `/app/activity`. The shared features use the same API validation and database records as the website. Notifications, map links, search links, and successful form redirects retain app navigation. Query strings (including selected problem IDs) are preserved. Website routes continue to work normally.
 
 ## Install
 
 - Android/desktop: choose **Install app** when offered, or use the browser menu's **Install app / Add to Home screen** action.
 - iPhone/iPad: open the site in Safari, tap **Share**, and choose **Add to Home Screen**.
-- Prompts depend on browser eligibility and prior choices; manual instructions are available. The manifest starts installed sessions at `/app` and supplies problem/solution shortcuts where supported. Use the deployed HTTPS site; plain HTTP LAN addresses are not secure installation origins. Localhost works for testing.
+- Prompts depend on browser eligibility and prior choices; manual instructions are available under **Account → How to install**. The manifest starts installed sessions at `/app` and supplies problem/solution shortcuts where supported. Use the deployed HTTPS site; plain HTTP LAN addresses are not secure installation origins. Localhost works for testing.
 
 ## Post and follow progress
 

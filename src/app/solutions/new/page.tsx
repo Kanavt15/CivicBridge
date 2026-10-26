@@ -2,14 +2,15 @@
 import { Select, Input, Textarea } from "@/components/localized-fields";
 
 import { Suspense, useRef, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { usePlatformRouter as useRouter } from "@/components/app-context";
 import { useSession } from "next-auth/react";
 import Link from "@/components/localized-fields";
 import { ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { api, useData } from "@/lib/client";
 import { Button } from "@/components/ui/button";
-import { Breadcrumbs, Loading, Empty } from "@/components/common";
+import { Breadcrumbs, Loading, Empty, ErrorState } from "@/components/common";
 import { UploadField } from "@/components/upload-field";
 import { StepProgress, WizardActions, stepValid } from "@/components/form-steps";
 import { Text, useI18n } from "@/components/i18n";
@@ -19,9 +20,12 @@ function SolutionForm() {
   const { data: session, status } = useSession();
   const { t } = useI18n();
   const requested = params.get("problem");
-  const { data: problemData } = useData(
-    requested ? "problems/" + encodeURIComponent(requested) : "problems?status=OPEN",
-  );
+  const {
+    data: problemData,
+    loading: problemsLoading,
+    error: problemsError,
+    reload: reloadProblems,
+  } = useData(requested ? "problems/" + encodeURIComponent(requested) : "problems?status=OPEN");
   const { data: teams } = useData("teams");
   const choices = requested
     ? problemData?.status === "OPEN"
@@ -78,6 +82,25 @@ function SolutionForm() {
           <Button asChild>
             <Link href="/login">
               <Text>Sign in</Text>
+            </Link>
+          </Button>
+        }
+      />
+    );
+  // A requested value has no matching <option> until the request completes.
+  // Wait before mounting editable fields so an early Continue never validates
+  // a temporary empty selection (or loses typed input when data arrives).
+  if (problemsLoading) return <Loading />;
+  if (problemsError) return <ErrorState error={problemsError} retry={reloadProblems} />;
+  if (!choices.length)
+    return (
+      <Empty
+        title="Choose an open challenge"
+        description="Find a problem you can help solve."
+        action={
+          <Button asChild>
+            <Link href="/explore">
+              <Text>Explore problems</Text>
             </Link>
           </Button>
         }
