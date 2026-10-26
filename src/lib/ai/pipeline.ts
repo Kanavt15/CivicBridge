@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { isDeepStrictEqual } from "node:util";
-import { evaluateClassifier, trainClassifier, type Sample, type CivicModel } from "./naive-bayes";
+import { evaluateClassifier, type Sample, type CivicModel } from "./naive-bayes";
+import { trainSelectedClassifier } from "./training";
 
 type Dataset = {
   sourceHash: string;
@@ -16,6 +17,7 @@ type Artifact = {
     provenance: string;
     trainingSamples: number;
     metrics: ReturnType<typeof evaluateClassifier>;
+    selection: ReturnType<typeof trainSelectedClassifier>["selection"];
   };
 };
 export const sha256 = (value: string) => createHash("sha256").update(value).digest("hex");
@@ -59,9 +61,11 @@ export function inspectPipeline(sourceRaw: string, datasetRaw: string, artifactR
       split: "test" as const,
     })),
   ]);
-  const expectedModel = trainClassifier(samples);
+  const { model: expectedModel, selection } = trainSelectedClassifier(samples);
   if (!isDeepStrictEqual(expectedModel, artifact.model))
     throw new Error("Model differs from deterministic training output.");
+  if (!isDeepStrictEqual(selection, artifact.card.selection))
+    throw new Error("Model selection differs from training-only cross-validation.");
   const metrics = evaluateClassifier(expectedModel, samples);
   if (
     !isDeepStrictEqual(metrics, artifact.card.metrics) ||

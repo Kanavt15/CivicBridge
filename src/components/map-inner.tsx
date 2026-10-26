@@ -1,5 +1,6 @@
 "use client";
-import { MapContainer, TileLayer, CircleMarker, Popup, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, CircleMarker, Popup, useMapEvents, useMap } from "react-leaflet";
+import { useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 function Picker({ onChange }: { onChange: (value: [number, number]) => void }) {
   useMapEvents({
@@ -7,6 +8,15 @@ function Picker({ onChange }: { onChange: (value: [number, number]) => void }) {
       onChange([Number(e.latlng.lat.toFixed(6)), Number(e.latlng.lng.toFixed(6))]);
     },
   });
+  return null;
+}
+function FollowLocation({ value }: { value: [number, number] }) {
+  const map = useMap();
+  const [latitude, longitude] = value;
+  useEffect(() => {
+    if (Number.isFinite(latitude) && Number.isFinite(longitude))
+      map.setView([latitude, longitude], map.getZoom(), { animate: false });
+  }, [map, latitude, longitude]);
   return null;
 }
 export default function MapInner({
@@ -25,6 +35,7 @@ export default function MapInner({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {onChange && <Picker onChange={onChange} />}
+      {value && <FollowLocation value={value} />}
       <>
         {value && (
           <CircleMarker

@@ -1,5 +1,5 @@
 "use client";
-import { UploadCloud, FileCheck, X } from "lucide-react";
+import { UploadCloud, FileCheck, X, Camera } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 export function UploadField({
@@ -13,9 +13,12 @@ export function UploadField({
 }) {
   const [busy, setBusy] = useState(false);
   async function upload(e: React.ChangeEvent<HTMLInputElement>) {
+    const input = e.currentTarget;
     const selected = Array.from(e.target.files ?? []);
+    if (!selected.length) return;
     if (files.length + selected.length > (documents ? 3 : 4)) {
       toast.error(`Attach at most ${documents ? 3 : 4} files.`);
+      input.value = "";
       return;
     }
     setBusy(true);
@@ -35,7 +38,7 @@ export function UploadField({
       toast.error((e as Error).message);
     } finally {
       setBusy(false);
-      e.target.value = "";
+      input.value = "";
     }
   }
   return (
@@ -63,6 +66,21 @@ export function UploadField({
           onChange={upload}
         />
       </div>
+      {!documents && (
+        <label className="camera-upload">
+          <Camera size={18} />
+          {busy ? "Uploading photo…" : "Take a photo"}
+          <input
+            type="file"
+            aria-label="Take a photo of the problem"
+            accept="image/jpeg,image/png,image/webp"
+            capture="environment"
+            disabled={busy || files.length >= 4}
+            onChange={upload}
+          />
+          <small>Or use the upload area to choose from your gallery.</small>
+        </label>
+      )}
       {files.map((f) => (
         <div className="upload-file" key={f.id}>
           <FileCheck size={15} />

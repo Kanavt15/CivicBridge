@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { z } from "zod";
 import { categories } from "../src/lib/domain";
 import { trainClassifier, evaluateClassifier, type Sample } from "../src/lib/ai/naive-bayes";
+import { trainSelectedClassifier } from "../src/lib/ai/training";
 const path = process.argv[process.argv.indexOf("--dataset") + 1];
 const inputPath = process.argv.includes("--dataset") ? path : "data/nyc311-civic.json";
 if (!inputPath) throw new Error("Provide a dataset path after --dataset.");
@@ -45,7 +46,9 @@ const samples: Sample[] = dataset.groups.flatMap((g, i) => [
     split: "test" as const,
   })),
 ]);
-const model = trainClassifier(samples),
+const selected =
+  dataset.provenance === "public-municipal-data" ? trainSelectedClassifier(samples) : null;
+const model = selected?.model ?? trainClassifier(samples),
   evaluation = evaluateClassifier(model, samples);
 const card = {
   name: dataset.name,
@@ -57,7 +60,10 @@ const card = {
   retrievedAt: dataset.retrievedAt ?? null,
   sourceHash: dataset.sourceHash ?? null,
   datasetHash: createHash("sha256").update(raw).digest("hex"),
-  algorithm: "Multinomial Naive Bayes · Unicode words and bigrams · Laplace smoothing",
+  algorithm: model.config
+    ? `${model.config.variant === "complement" ? "Complement" : "Multinomial"} Naive Bayes · ${model.config.features} · training-only cross-validation`
+    : "Multinomial Naive Bayes · Unicode words and bigrams · Laplace smoothing",
+  selection: selected?.selection ?? null,
   trainingSamples: model.trainingSamples,
   vocabularySize: model.vocabulary.length,
   labels: model.labels,

@@ -13,6 +13,8 @@ Read the detailed [product, technology stack, and ETL guide](docs/PRODUCT_TECH_S
 
 ## Run with MongoDB Atlas
 
+The installable user app is at **`/app`**. It includes phone navigation, searchable problems/solutions, role-aware posting, photo capture, GPS pin selection, and home-screen installation. It uses the existing Atlas database. See [installation and posting](docs/USER_APP.md).
+
 Use the [Atlas setup guide](docs/ATLAS.md) to create/select a cluster, configure a database user and IP access, and obtain the driver URI. The app already supports Atlas through `DATABASE_URL`; no schema rewrite is needed.
 
 ```powershell
@@ -91,7 +93,7 @@ The seed also includes active projects and a researcher team for a shorter demo.
 
 New standout workflows include:
 
-- `/intelligence`: a real public NYC311 classifier, a separate synthetic Hindi/English demo, source attribution, dataset fingerprints, held-out metrics, model/rule comparison, vocabulary cues, and abstention. The public baseline scores 59.8% on 112 held-out descriptors; this is not Indian field validation. See [the model card](docs/AI_MODEL_CARD.md).
+- `/intelligence`: a trained public NYC311 classifier, separate synthetic Hindi/English demo, source attribution, fingerprints, model/rule comparison, vocabulary cues, and abstention. Training-only five-fold selection improved held-out accuracy from 59.8% to 63.4% on 112 descriptors; this is not Indian field validation. See [the model card](docs/AI_MODEL_CARD.md).
 - `/evidence`: teams record baseline/observed outcomes, sample size, dates, method, and supporting links in private workspaces. A different administrator reviews each measurement; only verified entries appear publicly, with an audit trail and contributor notification.
 - `/operations`: administrator review priorities with visible score components, internal review targets, overdue and unserved reports, geographic hotspots, and formula-safe CSV export.
 - Render/Railway manifests, release preflight, liveness/readiness probes, safe errors, bounded streamed requests, production demo-account controls, and GitHub Actions checks.

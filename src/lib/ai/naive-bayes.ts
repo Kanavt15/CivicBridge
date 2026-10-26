@@ -7,6 +7,17 @@ export type CivicModel = {
   counts: Record<string, Record<string, number>>;
   totals: Record<string, number>;
   trainingSamples: number;
+  config?: ClassifierConfig;
+};
+export type ClassifierConfig = {
+  features: "words" | "words-and-characters";
+  variant: "multinomial" | "complement";
+  prior: "empirical" | "uniform";
+};
+const defaultConfig: ClassifierConfig = {
+  features: "words",
+  variant: "multinomial",
+  prior: "empirical",
 };
 const stop = new Set([
   "the",
@@ -44,6 +55,24 @@ export function tokens(text: string) {
   ).filter((w) => w.length > 1 && !stop.has(w));
   return [...words, ...words.slice(1).map((w, i) => `${words[i]}_${w}`)];
 }
+function features(text: string, config: ClassifierConfig) {
+  const result = tokens(text);
+  if (config.features === "words-and-characters") {
+    const words =
+      text
+        .normalize("NFKC")
+        .toLowerCase()
+        .match(/[\p{L}\p{M}]+/gu) ?? [];
+    for (const word of words) {
+      const padded = ` ${word} `;
+      for (const size of [3, 4, 5])
+        for (let i = 0; i <= padded.length - size; i++)
+          result.push(`_char:${padded.slice(i, i + size)}`);
+    }
+  }
+  return result;
+}
+const featureWeight = (token: string) => (token.startsWith("_char:") ? 0.2 : 1);
 export function validateSamples(samples: Sample[]) {
   const ids = new Set<string>(),
     texts = new Set<string>();
@@ -68,7 +97,7 @@ export function validateSamples(samples: Sample[]) {
     )
       throw new Error("Every category needs separate training and held-out test examples.");
 }
-export function trainClassifier(samples: Sample[]): CivicModel {
+export function trainClassifier(samples: Sample[], config?: ClassifierConfig): CivicModel {
   validateSamples(samples);
   const training = samples.filter((s) => s.split === "train"),
     labels = [...new Set(training.map((s) => s.label))].sort();
@@ -83,10 +112,10 @@ export function trainClassifier(samples: Sample[]): CivicModel {
   }
   for (const sample of training) {
     documents[sample.label]++;
-    for (const token of tokens(sample.text)) {
+    for (const token of features(sample.text, config ?? defaultConfig)) {
       vocabulary.add(token);
-      counts[sample.label][token] = (counts[sample.label][token] ?? 0) + 1;
-      totals[sample.label]++;
+      counts[sample.label][token] = (counts[sample.label][token] ?? 0) + featureWeight(token);
+      totals[sample.label] += featureWeight(token);
     }
   }
   return {
@@ -97,23 +126,35 @@ export function trainClassifier(samples: Sample[]): CivicModel {
     counts,
     totals,
     trainingSamples: training.length,
+    ...(config ? { config } : {}),
   };
 }
 export function predict(model: CivicModel, text: string) {
+  const config = model.config ?? defaultConfig;
   const vocabulary = new Set(model.vocabulary),
-    all = tokens(text),
+    all = features(text, config),
     known = all.filter((t) => vocabulary.has(t));
+  const totalTokens = Object.values(model.totals).reduce((sum, n) => sum + n, 0);
+  const likelihood = (label: string, token: string) => {
+    if (config.variant === "complement") {
+      const other = model.labels.reduce(
+        (sum, l) => sum + (l === label ? 0 : (model.counts[l][token] ?? 0)),
+        0,
+      );
+      return -Math.log((other + 1) / (totalTokens - model.totals[label] + vocabulary.size));
+    }
+    return Math.log(
+      ((model.counts[label][token] ?? 0) + 1) / (model.totals[label] + vocabulary.size),
+    );
+  };
   const ranked = model.labels
     .map((label) => ({
       label,
       logScore:
-        Math.log(model.documents[label] / model.trainingSamples) +
-        known.reduce(
-          (sum, t) =>
-            sum +
-            Math.log(((model.counts[label][t] ?? 0) + 1) / (model.totals[label] + vocabulary.size)),
-          0,
-        ),
+        (config.variant === "complement" || config.prior === "uniform"
+          ? -Math.log(model.labels.length)
+          : Math.log(model.documents[label] / model.trainingSamples)) +
+        known.reduce((sum, t) => sum + featureWeight(t) * likelihood(label, t), 0),
     }))
     .sort((a, b) => b.logScore - a.logScore);
   const max = ranked[0]?.logScore ?? 0,
@@ -128,15 +169,7 @@ export function predict(model: CivicModel, text: string) {
     .filter((t) => !t.includes("_"))
     .map((token) => ({
       token,
-      strength:
-        Math.log(
-          ((model.counts[scores[0]?.category]?.[token] ?? 0) + 1) /
-            (model.totals[scores[0]?.category] + vocabulary.size),
-        ) -
-        Math.log(
-          ((model.counts[scores[1]?.category]?.[token] ?? 0) + 1) /
-            (model.totals[scores[1]?.category] + vocabulary.size),
-        ),
+      strength: likelihood(scores[0]?.category, token) - likelihood(scores[1]?.category, token),
     }))
     .filter((t) => t.strength > 0)
     .sort((a, b) => b.strength - a.strength)

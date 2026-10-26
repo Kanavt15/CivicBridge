@@ -18,6 +18,8 @@ CivicBridge is a MongoDB-backed Next.js App Router application using Prisma 6.19
 
 ## Page structure
 
+`/app` is the installable community experience, backed by the same Auth.js sessions, role-authorized posting forms, and Atlas APIs. The root manifest, app icons, service worker, responsive navigation, camera input, and explicit GPS action support phone users. The worker caches only public icons and a generic offline screen; no authenticated/API/RSC data or submission queue is stored. See [user app behavior](USER_APP.md).
+
 Public pages: `/`, `/explore`, `/problems/[id]` (public lifecycle states), `/innovations`, `/innovations/[id]` (shortlisted onward), `/impact`, `/organizations`, `/leaderboard`, `/people/[id]`, `/login`, `/register`.
 
 Authenticated pages: `/dashboard`, `/problems/new` (citizen/admin), `/solutions/new` (researcher/institution/admin), `/teams`, `/collaborations`, `/collaborations/[id]`, `/notifications`, `/settings`, `/admin` (admin only). Client entry screens give sign-in or role guidance; every protected API re-checks the active database user and current role. Hiding UI is not used as an access-control boundary.

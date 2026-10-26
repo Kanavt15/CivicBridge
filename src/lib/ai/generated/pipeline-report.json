@@ -4,7 +4,7 @@
   "retrievedAt": "2026-10-23T20:27:38.009Z",
   "sourceHash": "e0af9a1ed315883a15180bc86e4243bcb2068be8a699d2465e4acb17d5597b5c",
   "datasetHash": "cf5a16b1dbe78f2b446caf6b801e083839d7dcd614c4078267f8751aff2fc0e8",
-  "artifactHash": "aaf10d753cc5a3b68a61888bbb6d08c55da417da363bd6e0f38df781eca4f84b",
+  "artifactHash": "543a2c41479fabb180a53d9c4ae9152a2f106a67a7331db6ff904b2f17a795e8",
   "sourceRows": 1121,
   "trainingSamples": 391,
   "testSamples": 112,
@@ -17,9 +17,9 @@
     "Water Conservation"
   ],
   "metrics": {
-    "accuracy": 0.5982142857142857,
-    "macroF1": 0.5033641672792616,
-    "coverage": 0.6607142857142857,
+    "accuracy": 0.6339285714285714,
+    "macroF1": 0.5223465792104703,
+    "coverage": 0.8125,
     "majorityBaseline": 0.4017857142857143
   },
   "gates": {

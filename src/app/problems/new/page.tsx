@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Sparkles, Send, ShieldCheck, MapPin } from "lucide-react";
+import { Sparkles, Send, ShieldCheck, LocateFixed } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { api } from "@/lib/client";
@@ -14,6 +14,45 @@ import { UploadField } from "@/components/upload-field";
 export default function Report() {
   const router = useRouter();
   const { data: session, status } = useSession();
+  const [locating, setLocating] = useState(false);
+  const [locationNote, setLocationNote] = useState("");
+  function locate() {
+    if (!navigator.geolocation) {
+      setLocationNote(
+        "Location is unavailable in this browser. Set the pin or enter coordinates instead.",
+      );
+      return;
+    }
+    setLocating(true);
+    setLocationNote("");
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        setLocating(false);
+        if (
+          coords.latitude < 6 ||
+          coords.latitude > 38 ||
+          coords.longitude < 68 ||
+          coords.longitude > 98
+        ) {
+          setLocationNote(
+            "Your current location is outside the supported India reporting area. Set the problem’s location manually.",
+          );
+          return;
+        }
+        setPosition([coords.latitude, coords.longitude]);
+        setLocationNote(
+          `Location updated (estimated accuracy ${Math.round(coords.accuracy)} metres). Check the pin and complete the city and locality fields.`,
+        );
+      },
+      () => {
+        setLocating(false);
+        setLocationNote(
+          "Could not get your location. Check browser permission or set the pin manually.",
+        );
+      },
+      { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 },
+    );
+  }
   const [category, setCategory] = useState(""),
     [urgency, setUrgency] = useState("MEDIUM"),
     [description, setDescription] = useState(""),
@@ -190,7 +229,12 @@ export default function Report() {
             </label>
             <label className="field">
               Category
-              <select value={category} onChange={(e) => setCategory(e.target.value)} required>
+              <select
+                aria-label="Category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+              >
                 <option value="">Choose a category</option>
                 {categories.map((c) => (
                   <option key={c}>{c}</option>
@@ -238,6 +282,21 @@ export default function Report() {
             </label>
             <div className="field full">
               <span>Pin the location</span>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                disabled={locating}
+                onClick={locate}
+              >
+                <LocateFixed size={16} />
+                {locating ? "Finding your location…" : "Use my current location"}
+              </Button>
+              {locationNote && (
+                <p className="map-hint" role="status">
+                  {locationNote}
+                </p>
+              )}
               <MapView value={position} onChange={setPosition} />
               <p className="map-hint">
                 Click the map to set your location, or enter coordinates below. The initial pin is

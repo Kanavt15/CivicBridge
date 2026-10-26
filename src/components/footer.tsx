@@ -23,6 +23,7 @@ export function Footer() {
         </div>
         <div>
           <h4>Get involved</h4>
+          <Link href="/app">Get the community app</Link>
           <Link href="/problems/new">Report a problem</Link>
           <Link href="/teams">Build a team</Link>
           <Link href="/organizations">Our ecosystem</Link>

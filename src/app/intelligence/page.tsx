@@ -223,6 +223,44 @@ export default function Intelligence() {
           </div>
         </aside>
       </div>
+      {card.selection && (
+        <section className="dashboard-panel space-top">
+          <div className="panel-heading">
+            <h2>How the model was selected</h2>
+            <small className="muted">Training data only · {card.selection.folds} folds</small>
+          </div>
+          <p className="map-hint">
+            Six candidates were compared using stratified cross-validation within the training
+            descriptors. The model with the best mean macro F1 was fitted on all 391 training
+            examples, then evaluated on the separate 112-example test set. These validation scores
+            are distinct from the held-out scores above.
+          </p>
+          <div className="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Features</th>
+                  <th>Classifier</th>
+                  <th>Prior</th>
+                  <th>Validation accuracy</th>
+                  <th>Validation macro F1</th>
+                </tr>
+              </thead>
+              <tbody>
+                {card.selection.comparisons.map((m: any) => (
+                  <tr key={`${m.config.features}-${m.config.variant}-${m.config.prior}`}>
+                    <td>{m.config.features}</td>
+                    <td>{m.config.variant}</td>
+                    <td>{m.config.prior}</td>
+                    <td>{(m.accuracy * 100).toFixed(1)}%</td>
+                    <td>{m.macroF1.toFixed(3)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
       <section className="dashboard-panel space-top">
         <div className="panel-heading">
           <h2>Held-out performance by category</h2>

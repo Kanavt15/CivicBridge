@@ -2377,6 +2377,7 @@
     "sourceHash": null,
     "datasetHash": "dbc8246ffbda24b2325a1449383e2440e1f2457cfd0afd53057e7082ca275e4f",
     "algorithm": "Multinomial Naive Bayes · Unicode words and bigrams · Laplace smoothing",
+    "selection": null,
     "trainingSamples": 80,
     "vocabularySize": 1085,
     "labels": [

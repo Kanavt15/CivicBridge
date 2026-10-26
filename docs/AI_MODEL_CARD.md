@@ -2,7 +2,25 @@
 
 The AI lab at `/intelligence` offers two explicitly separate models: a public NYC311 municipal descriptor baseline and an authored English/Hindi demonstration. Both run locally in the Node server, without paid inference APIs or a GPU. Authenticated, rate-limited inference compares the learned model with the existing keyword-rule baseline and displays matched vocabulary, relative scores, and abstention.
 
-## Public-data model
+## Retrained public-data model — 26 October 2026
+
+Five-fold stratified cross-validation within the 391 training descriptors compared six predefined candidates: multinomial Naive Bayes with empirical/uniform priors and Complement Naive Bayes, each with word/bigram or word/character features. Character n-grams have lengths 3–5 within word boundaries and weight 0.2; word features have weight 1. Laplace smoothing is 1. Vocabulary/counts are fitted separately within each fold. Selection uses mean macro F1, with accuracy as tie-breaker. Reserved test examples never participate in selection or feature fitting.
+
+The selected **Complement Naive Bayes with word and character features** achieved mean validation macro F1 **0.580** and validation accuracy **64.6%**. It was refitted on all training examples, then evaluated on the unchanged reserved test set:
+
+| Metric                                   | Original baseline | Retrained model |
+| ---------------------------------------- | ----------------- | --------------- |
+| Held-out accuracy, including abstentions | 59.8%             | 63.4%           |
+| Macro F1                                 | 0.503             | 0.522           |
+| Abstentions                              | 38                | 21              |
+| Coverage                                 | 66.1%             | 81.3%           |
+| Accuracy among accepted predictions      | 75.7%             | 73.6%           |
+
+The new model offers suggestions more often; accuracy among accepted predictions is lower than the original model. Character features also change the meaning of feature coverage. Scores remain uncalibrated, and thresholds are not field-calibrated. The artifact records all six validation comparisons, configuration, source/dataset hashes, retrieval timestamp, per-category metrics, and confusion matrix. Build checks reconstruct the selected model, validation comparisons, and held-out evaluation to detect stale/tampered artifacts. The lab shows validation comparisons separately from held-out metrics.
+
+Run `npm.cmd run etl` to prepare, select/train, evaluate, and update the report; `npm.cmd run etl:check` verifies the artifacts. The following section retains the original baseline benchmark for comparison.
+
+## Original public-data baseline — 24 October 2026
 
 Multinomial Naive Bayes with Unicode word/bigram counts, Laplace smoothing, and empirical training priors. Vocabulary and counts are learned only from the training partition. The generated artifact includes the dataset SHA-256, upstream snapshot hash, retrieval timestamp, terms link, category coverage, and actual held-out evaluation. Training is deterministic; CI retrains and checks the artifact diff.
 

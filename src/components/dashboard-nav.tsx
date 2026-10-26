@@ -23,6 +23,7 @@ export function DashboardNav({ user }: { user: { name: string; role: string } })
       </div>
       <nav className="dashboard-nav" aria-label="Workspace navigation">
         {[
+          ["/app", "Community app", Compass],
           ["/dashboard", "Overview", LayoutDashboard],
           ["/explore", "Discover", Compass],
           ["/teams", "My teams", Users],

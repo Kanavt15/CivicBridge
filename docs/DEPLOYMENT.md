@@ -67,6 +67,8 @@ Set `LLM_API_KEY`, `LLM_BASE_URL`, and `LLM_MODEL` to a compatible server-side e
 
 ## Troubleshooting
 
+The [installable app](USER_APP.md) uses the same deployment at `/app`. Keep HTTPS enabled; serve `/manifest.webmanifest`, `/sw.js`, `/offline.html`, and `/icons/*` without authentication redirects, preserving the worker's no-store headers. Offline mode provides a generic reconnect screen; posting requires connectivity. Test installation/camera/GPS on actual target phones before launch.
+
 - **Prisma EPERM on Windows:** stop the running Next.js process before `prisma generate` or `npm run build`; the active process may hold its native engine DLL open.
 - **`&&` is not a valid statement separator:** Windows PowerShell 5.1 cannot run the Linux-style combined command directly. Use `npm.cmd run build:deploy` to clean-install and build, or `npm.cmd run build` to build with already installed dependencies.
 - **Build dependency missing:** the deployment command includes dev dependencies explicitly; do not replace it with a production-only installation before compilation. Prisma, TypeScript, and Tailwind's PostCSS tooling are build dependencies.

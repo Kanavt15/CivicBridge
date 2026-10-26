@@ -32,7 +32,7 @@ export function Header() {
   const { resolvedTheme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const links = [
-    ["/", "Home"],
+    ["/app", "Community app"],
     ["/explore", "Explore challenges"],
     ["/intelligence", "AI lab"],
     ["/innovations", "Innovations"],
