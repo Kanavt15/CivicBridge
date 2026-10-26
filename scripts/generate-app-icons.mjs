@@ -20,9 +20,9 @@ function image(size) {
   const width = size * 2,
     rgba = Buffer.alloc(width * width * 4);
   for (let i = 0; i < rgba.length; i += 4) {
-    rgba[i] = 20;
-    rgba[i + 1] = 45;
-    rgba[i + 2] = 58;
+    rgba[i] = 51;
+    rgba[i + 1] = 92;
+    rgba[i + 2] = 222;
     rgba[i + 3] = 255;
   }
   const point = (x, y, r, color) => {
@@ -52,7 +52,7 @@ function image(size) {
     last = now;
   }
   stroke(86, 368, 426, 368);
-  stroke(160, 404, 352, 404, [101, 206, 177], 5);
+  stroke(160, 404, 352, 404, [204, 216, 255], 5);
   // Supersample at 2x so the small installed icon keeps clean edges.
   const rows = Buffer.alloc(size * (1 + size * 4));
   for (let y = 0; y < size; y++)

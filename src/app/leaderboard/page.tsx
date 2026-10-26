@@ -1,5 +1,7 @@
 "use client";
-import Link from "next/link";
+import { Text } from "@/components/i18n";
+
+import Link from "@/components/localized-fields";
 import { Trophy, Award, ArrowUpRight } from "lucide-react";
 import { useData } from "@/lib/client";
 import { initials } from "@/lib/utils";
@@ -20,11 +22,15 @@ export default function Leaderboard() {
         description="Points celebrate verified outcomes: approved ideas, completed pilots, and resolved community challenges."
       />
       <div className="info-box" style={{ marginBottom: 25 }}>
-        <strong>Contribution over repetition.</strong>
+        <strong>
+          <Text>{"Contribution over repetition."}</Text>
+        </strong>
         <p>
-          Admin-verified milestone: 20 points. Approved solution: 50 points. Completed pilot: 150
-          points. A reported challenge resolved: 100 points. Each reward is issued once per verified
-          action. Repeated submissions and votes earn no points. Demo accounts are labeled.
+          <Text>
+            {
+              "Admin-verified milestone: 20 points. Approved solution: 50 points. Completed pilot: 150 points. A reported challenge resolved: 100 points. Each reward is issued once per verified action. Repeated submissions and votes earn no points. Demo accounts are labeled."
+            }
+          </Text>
         </p>
       </div>
       {loading ? (
@@ -60,7 +66,9 @@ export default function Leaderboard() {
               </div>
               <div className="points">
                 {u.points}
-                <small>contribution points</small>
+                <small>
+                  <Text>{"contribution points"}</Text>
+                </small>
               </div>
             </Link>
           ))}

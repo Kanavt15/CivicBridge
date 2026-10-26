@@ -1,4 +1,7 @@
 "use client";
+import { Select, Textarea } from "@/components/localized-fields";
+import { Text } from "@/components/i18n";
+
 import { useState } from "react";
 import { toast } from "sonner";
 import { api } from "@/lib/client";
@@ -40,23 +43,30 @@ export function StatusControl({
       setBusy(false);
     }
   }
-  if (!options.length) return <p className="muted">This workflow has no further review actions.</p>;
+  if (!options.length)
+    return (
+      <p className="muted">
+        <Text>{"This workflow has no further review actions."}</Text>
+      </p>
+    );
   return (
     <form className="form-stack" onSubmit={change}>
       <label className="field">
-        Move to
-        <select value={next} onChange={(e) => setNext(e.target.value)} required>
-          <option value="">Select next status</option>
+        <Text>{"Move to"}</Text>
+        <Select value={next} onChange={(e) => setNext(e.target.value)} required>
+          <option value="">
+            <Text>{"Select next status"}</Text>
+          </option>
           {options.map((v) => (
             <option key={v} value={v}>
-              {label(v)}
+              <Text>{label(v)}</Text>
             </option>
           ))}
-        </select>
+        </Select>
       </label>
       <label className="field">
-        Review note
-        <textarea
+        <Text>{"Review note"}</Text>
+        <Textarea
           value={note}
           maxLength={2000}
           onChange={(e) => setNote(e.target.value)}
@@ -65,7 +75,7 @@ export function StatusControl({
         />
       </label>
       <Button type="submit" disabled={!next || busy}>
-        {busy ? "Updating…" : "Update status"}
+        <Text>{busy ? "Updating…" : "Update status"}</Text>
       </Button>
     </form>
   );

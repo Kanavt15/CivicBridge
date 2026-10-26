@@ -1,6 +1,8 @@
 "use client";
+import { Control, Input, Select } from "@/components/localized-fields";
+
 import { useDeferredValue, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/localized-fields";
 import { useSession } from "next-auth/react";
 import {
   ArrowUpRight,
@@ -16,6 +18,7 @@ import { categories } from "@/lib/domain";
 import { CategoryIcon, Status, DemoBadge, Loading, ErrorState, Empty } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { InstallApp } from "@/components/app-experience";
+import { Text } from "@/components/i18n";
 
 export default function CommunityApp() {
   const { data: session } = useSession();
@@ -45,27 +48,29 @@ export default function CommunityApp() {
       <section className="app-welcome">
         <div>
           <p className="app-greeting">
-            {session
-              ? `Welcome, ${session.user.name?.split(" ")[0] ?? "neighbour"}`
-              : "Your community, in your hands"}
+            <Text>Community app</Text>
           </p>
           <h1>
-            Notice a problem.
-            <br />
-            Start something better.
+            <Text>Community</Text>
           </h1>
-          <p>Share what needs attention, or bring an idea that helps.</p>
+          <p>
+            <Text>Choose what you want to do.</Text>
+          </p>
         </div>
         <div className="app-post-actions">
           <Link href={session && !canReport ? "/explore" : "/problems/new"}>
             <span className="app-action-icon">
               <Plus size={25} />
             </span>
-            <strong>{session && !canReport ? "Find a problem" : "Post a problem"}</strong>
+            <strong>
+              <Text>{session && !canReport ? "Find a problem" : "Post a problem"}</Text>
+            </strong>
             <span>
-              {session && !canReport
-                ? "Find where your expertise can help"
-                : "A photo, a location, and your voice"}
+              <Text>
+                {session && !canReport
+                  ? "Find a problem you can help solve."
+                  : "A photo. A location. A better starting point."}
+              </Text>
             </span>
             <ArrowUpRight size={21} />
           </Link>
@@ -73,11 +78,13 @@ export default function CommunityApp() {
             <span className="app-action-icon">
               <Lightbulb size={25} />
             </span>
-            <strong>{session && !canPropose ? "Explore solutions" : "Propose a solution"}</strong>
+            <strong>
+              <Text>{session && !canPropose ? "Explore solutions" : "Propose a solution"}</Text>
+            </strong>
             <span>
-              {session && !canPropose
-                ? "See how teams are making progress"
-                : "Turn an open challenge into a practical plan"}
+              <Text>
+                {session && !canPropose ? "See what changes." : "Bring an idea to an open problem."}
+              </Text>
             </span>
             <ArrowUpRight size={21} />
           </Link>
@@ -87,27 +94,33 @@ export default function CommunityApp() {
         <div className="app-account-prompt">
           <ShieldCheck size={19} />
           <p>
-            <Link href="/register">Create an account</Link> or <Link href="/login">sign in</Link> to
-            post and track progress. Citizen accounts report problems; researchers and institutions
-            propose solutions.
+            <Link href="/register">
+              <Text>Create an account</Text>
+            </Link>{" "}
+            ·{" "}
+            <Link href="/login">
+              <Text>Sign in</Text>
+            </Link>
           </p>
         </div>
       )}
       <InstallApp />
       <section className="app-feed" aria-label="Community posts">
         <div className="app-feed-heading">
-          <h2>What’s happening nearby</h2>
-          <button
+          <h2>
+            <Text>Latest updates</Text>
+          </h2>
+          <Control
             type="button"
             className="icon-btn"
             onClick={reload}
             aria-label="Refresh community posts"
           >
             <RefreshCw size={18} />
-          </button>
+          </Control>
         </div>
         <div className="app-feed-tabs" role="group" aria-label="Choose post type">
-          <button
+          <Control
             type="button"
             aria-pressed={tab === "problems"}
             onClick={() => {
@@ -115,9 +128,9 @@ export default function CommunityApp() {
               setPage(1);
             }}
           >
-            Problems
-          </button>
-          <button
+            <Text>{"Problems"}</Text>
+          </Control>
+          <Control
             type="button"
             aria-pressed={tab === "solutions"}
             onClick={() => {
@@ -125,14 +138,16 @@ export default function CommunityApp() {
               setPage(1);
             }}
           >
-            Solutions
-          </button>
+            <Text>{"Solutions"}</Text>
+          </Control>
         </div>
         <div className="app-feed-filters">
           <label>
             <Search size={18} />
-            <span className="sr-only">Search community posts</span>
-            <input
+            <span className="sr-only">
+              <Text>{"Search community posts"}</Text>
+            </span>
+            <Input
               type="search"
               placeholder="Search a problem, idea, or city"
               value={search}
@@ -144,19 +159,25 @@ export default function CommunityApp() {
             />
           </label>
           <label>
-            <span className="sr-only">Filter by category</span>
-            <select
+            <span className="sr-only">
+              <Text>{"Filter by category"}</Text>
+            </span>
+            <Select
               value={category}
               onChange={(e) => {
                 setCategory(e.target.value);
                 setPage(1);
               }}
             >
-              <option value="">Every category</option>
+              <option value="">
+                <Text>{"Every category"}</Text>
+              </option>
               {categories.map((c) => (
-                <option key={c}>{c}</option>
+                <option key={c} value={c}>
+                  <Text>{c}</Text>
+                </option>
               ))}
-            </select>
+            </Select>
           </label>
         </div>
         {loading ? (
@@ -174,7 +195,9 @@ export default function CommunityApp() {
               <article className="app-post" key={p.id}>
                 <div className="app-post-meta">
                   <CategoryIcon category={p.category ?? p.problem.category} />
-                  <span>{p.category ?? p.problem.category}</span>
+                  <span>
+                    <Text>{p.category ?? p.problem.category}</Text>
+                  </span>
                   {p.isDemo && <DemoBadge />}
                 </div>
                 <h3>
@@ -195,7 +218,8 @@ export default function CommunityApp() {
                     className="text-link app-propose-link"
                     href={`/solutions/new?problem=${encodeURIComponent(p.id)}`}
                   >
-                    Propose a solution <ArrowUpRight size={15} />
+                    <Text>{"Propose a solution"}</Text>
+                    <ArrowUpRight size={15} />
                   </Link>
                 )}
               </article>
@@ -209,24 +233,29 @@ export default function CommunityApp() {
               disabled={page <= 1 || loading}
               onClick={() => setPage((p) => p - 1)}
             >
-              Previous
+              <Text>{"Previous"}</Text>
             </Button>
             <span>
-              Page {page} of {data.pages}
+              <Text>{"Page"}</Text>
+              {page} <Text>{" of "}</Text>
+              {data.pages}
             </span>
             <Button
               variant="outline"
               disabled={page >= data.pages || loading}
               onClick={() => setPage((p) => p + 1)}
             >
-              Next
+              <Text>{"Next"}</Text>
             </Button>
           </div>
         )}
         {tab === "solutions" && (
           <p className="map-hint">
-            Showing up to 100 recently reviewed public solutions. Your pending submissions are in My
-            activity.
+            <Text>
+              {
+                "Showing up to 100 recently reviewed public solutions. Your pending submissions are in My activity."
+              }
+            </Text>
           </p>
         )}
       </section>

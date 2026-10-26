@@ -1,5 +1,7 @@
 "use client";
-import Link from "next/link";
+import { Text } from "@/components/i18n";
+
+import Link from "@/components/localized-fields";
 import { ArrowUpRight, ShieldCheck } from "lucide-react";
 import { useData } from "@/lib/client";
 import { PageIntro, Loading, ErrorState, Empty, Breadcrumbs } from "@/components/common";
@@ -18,7 +20,7 @@ export default function Evidence() {
         action={
           <Button asChild variant="outline">
             <Link href="/collaborations">
-              Record an outcome
+              <Text>{"Record an outcome"}</Text>
               <ArrowUpRight size={15} />
             </Link>
           </Button>
@@ -28,12 +30,15 @@ export default function Evidence() {
         <ShieldCheck size={25} />
         <div>
           <strong>
-            {data?.length ?? 0} reviewed measurements across {projects} projects
+            {data?.length ?? 0} <Text>{" reviewed measurements across "}</Text>
+            {projects} <Text>{"projects"}</Text>
           </strong>
           <p>
-            Administrator verification records a review of submitted evidence; it is not an
-            independent scientific audit. Demo entries are labeled. Values are not summed across
-            potentially overlapping populations or time periods.
+            <Text>
+              {
+                "Administrator verification records a review of submitted evidence; it is not an independent scientific audit. Demo entries are labeled. Values are not summed across potentially overlapping populations or time periods."
+              }
+            </Text>
           </p>
         </div>
       </div>

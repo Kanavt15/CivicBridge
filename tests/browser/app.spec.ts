@@ -46,10 +46,10 @@ test("shows an installable mobile feed, filters both post types, and fits small 
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/app");
-  await expect(page.getByRole("heading", { name: /Notice a problem/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Community", exact: true })).toBeVisible();
   await expect(page.getByRole("navigation", { name: "App navigation" })).toBeVisible();
   await page.getByRole("button", { name: "How to install" }).click();
-  await expect(page.getByText(/On iPhone, open the site in Safari/)).toBeVisible();
+  await expect(page.getByText(/iPhone: open Safari/)).toBeVisible();
   const manifest = await (await page.request.get("/manifest.webmanifest")).json();
   expect(manifest.start_url).toBe("/app");
   expect(manifest.display).toBe("standalone");
@@ -101,7 +101,7 @@ test("a citizen posts a real problem from a phone form using a mocked location",
     });
   });
   await page.goto("/app");
-  await page.getByRole("link", { name: /Post a problem A photo/ }).click();
+  await page.getByRole("link", { name: "Post a problem", exact: true }).click();
   await page
     .getByLabel("Problem title", { exact: true })
     .fill(`${prefix} unsafe pavement near the school`);
@@ -111,16 +111,20 @@ test("a citizen posts a real problem from a phone form using a mocked location",
       "The pavement outside the community school has broken slabs and unsafe gaps that affect children and older residents every day.",
     );
   await page.getByLabel("Category", { exact: true }).selectOption("Infrastructure");
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByLabel("State / union territory").fill("Maharashtra");
   await page.getByLabel("City / village").fill("Pune");
   await page.getByLabel("Area / locality").fill("School lane");
   await page.getByRole("button", { name: "Use my current location" }).click();
   await expect(page.getByLabel("Latitude", { exact: true })).toHaveValue("18.5204");
   await expect(page.getByLabel("Longitude", { exact: true })).toHaveValue("73.8567");
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
   await expect(page.getByLabel("Take a photo of the problem")).toHaveAttribute(
     "capture",
     "environment",
   );
+  await expect(page).toHaveURL(/\/problems\/new$/);
+  await expect(page.getByRole("button", { name: "Submit report", exact: true })).toBeEnabled();
   await page.getByRole("button", { name: "Submit report", exact: true }).click();
   await page.waitForURL(
     (url) => url.pathname !== "/problems/new" && /^\/problems\/[^/]+$/.test(url.pathname),
@@ -146,18 +150,20 @@ test("a researcher posts a real solution from the phone app", async ({ page, con
     .fill(
       "Build and evaluate a small community pilot with local volunteers, collect baseline readings, and review the results before expanding.",
     );
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByLabel("Technology and methods").fill("Low-cost sensors and field surveys");
-  await page
-    .getByLabel("Expected impact")
-    .fill(
-      "Reduce the burden on local residents through a measurable improvement in reliable community services.",
-    );
   await page
     .getByLabel("Feasibility and implementation")
     .fill("Run a six-week volunteer pilot with weekly maintenance and review meetings.");
   await page
     .getByLabel("Resources needed")
     .fill("Volunteer time, sensor kits, and permission for a pilot site.");
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page
+    .getByLabel("Expected impact")
+    .fill(
+      "Reduce the burden on local residents through a measurable improvement in reliable community services.",
+    );
   await page.getByRole("button", { name: "Submit proposal", exact: true }).click();
   await page.waitForURL(/\/innovations\/[a-z0-9]+$/);
   const id = page.url().split("/").pop()!;

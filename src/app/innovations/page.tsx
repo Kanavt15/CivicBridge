@@ -1,5 +1,7 @@
 "use client";
-import Link from "next/link";
+import { Text } from "@/components/i18n";
+
+import Link from "@/components/localized-fields";
 import { ArrowUpRight, Lightbulb, MapPin } from "lucide-react";
 import { useData } from "@/lib/client";
 import {
@@ -20,13 +22,13 @@ export default function Innovations() {
       <Breadcrumbs items={[{ label: "Innovations" }]} />
       <PageIntro
         eyebrow="Ideas that move us forward"
-        title="Made for the world around us."
-        description="Discover community-centered innovations, from promising proposals to real-world pilots."
+        title="Explore solutions"
+        description="Practical ideas from your community."
         action={
           <Button asChild>
             <Link href="/solutions/new">
               <Lightbulb size={16} />
-              Propose a solution
+              <Text>{"Propose a solution"}</Text>
             </Link>
           </Button>
         }
@@ -41,7 +43,9 @@ export default function Innovations() {
           description="Explore an open challenge and share an idea."
           action={
             <Button asChild>
-              <Link href="/explore">Explore challenges</Link>
+              <Link href="/explore">
+                <Text>{"Explore challenges"}</Text>
+              </Link>
             </Button>
           }
         />
@@ -65,7 +69,7 @@ export default function Innovations() {
                 <ArrowUpRight size={18} />
               </div>
               <small className="muted">
-                {s.team?.name || s.author.name} · {s.problem.category}
+                {s.team?.name || s.author.name} · <Text>{s.problem.category}</Text>
               </small>
             </Link>
           ))}

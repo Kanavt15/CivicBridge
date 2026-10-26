@@ -1,3 +1,4 @@
+import { Text } from "@/components/i18n";
 import { ArrowUpRight, Check, Droplets, GraduationCap, MapPin, Sprout, Users } from "lucide-react";
 export function IndiaNetwork({ open, resolved }: { open: number; resolved: number }) {
   return (
@@ -9,7 +10,7 @@ export function IndiaNetwork({ open, resolved }: { open: number; resolved: numbe
       <div className="orbit orbit-one" />
       <div className="orbit orbit-two" />
       <div className="map-heading">
-        <span className="live-dot" /> A nation of possibilities
+        <span className="live-dot" /> <Text>{"A nation of possibilities"}</Text>
       </div>
       <svg
         className="india-map"
@@ -59,16 +60,16 @@ export function IndiaNetwork({ open, resolved }: { open: number; resolved: numbe
         </g>
         <g fill="#1e6959" fontSize="10" fontFamily="Arial,sans-serif">
           <text x="168" y="119">
-            NEW DELHI
+            <Text>{"NEW DELHI"}</Text>
           </text>
           <text x="69" y="281">
-            MUMBAI
+            <Text>{"MUMBAI"}</Text>
           </text>
           <text x="190" y="363">
-            BENGALURU
+            <Text>{"BENGALURU"}</Text>
           </text>
           <text x="252" y="223">
-            KOLKATA
+            <Text>{"KOLKATA"}</Text>
           </text>
         </g>
       </svg>
@@ -77,8 +78,12 @@ export function IndiaNetwork({ open, resolved }: { open: number; resolved: numbe
           <GraduationCap size={19} />
         </span>
         <div>
-          <strong>Bright minds. Shared purpose.</strong>
-          <small>Connecting campuses to communities</small>
+          <strong>
+            <Text>{"Bright minds. Shared purpose."}</Text>
+          </strong>
+          <small>
+            <Text>{"Connecting campuses to communities"}</Text>
+          </small>
         </div>
         <span className="floating-check">
           <Check size={12} />
@@ -89,10 +94,14 @@ export function IndiaNetwork({ open, resolved }: { open: number; resolved: numbe
           <Droplets size={18} />
         </span>
         <div>
-          <small>From a local challenge</small>
-          <strong>Water for every village</strong>
+          <small>
+            <Text>{"From a local challenge"}</Text>
+          </small>
+          <strong>
+            <Text>{"Water for every village"}</Text>
+          </strong>
           <span className="mini-status">
-            <span /> Open for innovation
+            <span /> <Text>{"Open for innovation"}</Text>
           </span>
         </div>
       </div>
@@ -101,29 +110,45 @@ export function IndiaNetwork({ open, resolved }: { open: number; resolved: numbe
           <Sprout size={19} />
         </span>
         <div>
-          <small>To a real-world solution</small>
-          <strong>Smarter farming. Better lives.</strong>
+          <small>
+            <Text>{"To a real-world solution"}</Text>
+          </small>
+          <strong>
+            <Text>{"Smarter farming. Better lives."}</Text>
+          </strong>
           <span className="mini-status">
-            <Check size={12} /> Community powered
+            <Check size={12} /> <Text>{"Community powered"}</Text>
           </span>
         </div>
       </div>
       <div className="network-bottom">
         <span className="network-avatars">
-          <i>AS</i>
-          <i>PK</i>
-          <i>RM</i>
+          <i>
+            <Text>{"AS"}</Text>
+          </i>
+          <i>
+            <Text>{"PK"}</Text>
+          </i>
+          <i>
+            <Text>{"RM"}</Text>
+          </i>
           <i>
             <Users size={12} />
           </i>
         </span>
         <div>
-          <strong>{open} challenges. Endless possibilities.</strong>
-          <small>{resolved} resolved through collective action</small>
+          <strong>
+            {open} <Text>{" challenges. Endless possibilities."}</Text>
+          </strong>
+          <small>
+            {resolved} <Text>{" resolved through collective action"}</Text>
+          </small>
         </div>
         <ArrowUpRight size={18} />
       </div>
-      <span className="map-disclaimer">Illustration · not a geographic boundary reference</span>
+      <span className="map-disclaimer">
+        <Text>{"Illustration · not a geographic boundary reference"}</Text>
+      </span>
     </div>
   );
 }

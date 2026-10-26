@@ -1,5 +1,7 @@
 "use client";
-import Link from "next/link";
+import { Text } from "@/components/i18n";
+
+import Link from "@/components/localized-fields";
 import { ArrowUpRight, Handshake, CheckCircle2 } from "lucide-react";
 import { useData } from "@/lib/client";
 import { PageIntro, Loading, ErrorState, Empty, Status } from "@/components/common";
@@ -15,7 +17,8 @@ export default function Collaborations() {
         action={
           <Button asChild variant="outline">
             <Link href="/innovations">
-              Find a project to support <ArrowUpRight size={16} />
+              <Text>{"Find a project to support"}</Text>
+              <ArrowUpRight size={16} />
             </Link>
           </Button>
         }
@@ -56,7 +59,8 @@ export default function Collaborations() {
                 <div className="side-row">
                   <span>
                     <CheckCircle2 size={12} style={{ display: "inline" }} /> {done}/
-                    {c._count.milestones} milestones · {c._count.tasks} tasks
+                    {c._count.milestones} <Text>{" milestones · "}</Text>
+                    {c._count.tasks} <Text>{"tasks"}</Text>
                   </span>
                   <ArrowUpRight size={17} />
                 </div>

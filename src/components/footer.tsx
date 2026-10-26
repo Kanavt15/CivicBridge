@@ -1,49 +1,35 @@
-import Link from "next/link";
+import Link from "@/components/localized-fields";
 import { Logo } from "./header";
-import { ArrowUpRight, Heart } from "lucide-react";
+import { Text } from "./i18n";
 export function Footer() {
   return (
     <footer className="footer">
-      <div className="container footer-top">
+      <div className="container footer-main">
         <div>
           <Logo />
           <p>
-            A better tomorrow starts with
-            <br />a conversation today.
+            <Text>Independent community platform</Text>
           </p>
         </div>
-        <div>
-          <h4>Discover</h4>
-          <Link href="/explore">Societal challenges</Link>
-          <Link href="/innovations">Innovations</Link>
-          <Link href="/impact">Community impact</Link>
-          <Link href="/evidence">Impact evidence</Link>
-          <Link href="/intelligence">AI lab</Link>
-          <Link href="/#how-it-works">How it works</Link>
-        </div>
-        <div>
-          <h4>Get involved</h4>
-          <Link href="/app">Get the community app</Link>
-          <Link href="/problems/new">Report a problem</Link>
-          <Link href="/teams">Build a team</Link>
-          <Link href="/organizations">Our ecosystem</Link>
-        </div>
-        <div className="footer-note">
-          <span className="small-label">Built for collective progress</span>
-          <p>
-            Citizens. Campuses. Communities.
-            <br />
-            One bridge to a better India.
-          </p>
-          <Link href="/register">
-            Find your place <ArrowUpRight size={15} />
+        <nav aria-label="Footer navigation">
+          <Link href="/explore">
+            <Text>Problems</Text>
           </Link>
-        </div>
-      </div>
-      <div className="container footer-bottom">
-        <span>© {new Date().getFullYear()} CivicBridge. An independent SIH demonstration.</span>
-        <span>
-          Made with purpose. Built for people. <Heart size={12} />
+          <Link href="/innovations">
+            <Text>Solutions</Text>
+          </Link>
+          <Link href="/evidence">
+            <Text>Impact evidence</Text>
+          </Link>
+          <Link href="/intelligence">
+            <Text>AI lab</Text>
+          </Link>
+          <Link href="/app">
+            <Text>Community app</Text>
+          </Link>
+        </nav>
+        <span className="footer-copyright">
+          © {new Date().getFullYear()} <Text>{" CivicBridge"}</Text>
         </span>
       </div>
     </footer>

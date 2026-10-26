@@ -1,6 +1,11 @@
 "use client";
+import { LocalDate } from "@/components/i18n";
+
+import { Control } from "@/components/localized-fields";
+import { Text } from "@/components/i18n";
+
 import { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/localized-fields";
 import { toast } from "sonner";
 import { ArrowUpRight } from "lucide-react";
 import { api, useData } from "@/lib/client";
@@ -40,7 +45,7 @@ export default function Admin() {
         action={
           <Button asChild variant="outline">
             <Link href="/operations">
-              Open review queue
+              <Text>{"Open review queue"}</Text>
               <ArrowUpRight size={15} />
             </Link>
           </Button>
@@ -64,13 +69,15 @@ export default function Admin() {
           <div className="metric-card" key={t}>
             <span>{t}</span>
             <strong>{v}</strong>
-            <small>Latest 200 records per table</small>
+            <small>
+              <Text>{"Latest 200 records per table"}</Text>
+            </small>
           </div>
         ))}
       </div>
       <div className="tabs" role="tablist">
         {["problems", "proposals", "organizations", "users", "logs", "evidence"].map((t) => (
-          <button
+          <Control
             key={t}
             role="tab"
             aria-selected={tab === t}
@@ -78,7 +85,7 @@ export default function Admin() {
             onClick={() => setTab(t)}
           >
             {t === "logs" ? "Audit history" : label(t)}
-          </button>
+          </Control>
         ))}
       </div>
       {tab === "evidence" ? (
@@ -90,11 +97,21 @@ export default function Admin() {
               <>
                 <thead>
                   <tr>
-                    <th>Report</th>
-                    <th>Contributor</th>
-                    <th>Status</th>
-                    <th>Submitted</th>
-                    <th>Review</th>
+                    <th>
+                      <Text>{"Report"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Contributor"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Status"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Submitted"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Review"}</Text>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -109,17 +126,21 @@ export default function Admin() {
                           </>
                         )}
                         <small>
-                          {p.city} · {p.category}
+                          {p.city} · <Text>{p.category}</Text>
                         </small>
                       </td>
                       <td>{p.author.name}</td>
                       <td>
                         <Status value={p.status} />
                       </td>
-                      <td>{date(p.createdAt)}</td>
+                      <td>
+                        <LocalDate value={p.createdAt} />
+                      </td>
                       <td>
                         <Button asChild variant="outline" size="sm">
-                          <Link href={`/problems/${p.id}`}>Review</Link>
+                          <Link href={`/problems/${p.id}`}>
+                            <Text>{"Review"}</Text>
+                          </Link>
                         </Button>
                       </td>
                     </tr>
@@ -130,11 +151,21 @@ export default function Admin() {
               <>
                 <thead>
                   <tr>
-                    <th>Proposal</th>
-                    <th>Researcher</th>
-                    <th>Status</th>
-                    <th>Submitted</th>
-                    <th>Review</th>
+                    <th>
+                      <Text>{"Proposal"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Researcher"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Status"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Submitted"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Review"}</Text>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -148,10 +179,14 @@ export default function Admin() {
                       <td>
                         <Status value={p.status} />
                       </td>
-                      <td>{date(p.createdAt)}</td>
+                      <td>
+                        <LocalDate value={p.createdAt} />
+                      </td>
                       <td>
                         <Button asChild variant="outline" size="sm">
-                          <Link href={`/innovations/${p.id}`}>Review</Link>
+                          <Link href={`/innovations/${p.id}`}>
+                            <Text>{"Review"}</Text>
+                          </Link>
                         </Button>
                       </td>
                     </tr>
@@ -162,11 +197,21 @@ export default function Admin() {
               <>
                 <thead>
                   <tr>
-                    <th>Organization</th>
-                    <th>Type</th>
-                    <th>City</th>
-                    <th>Verification</th>
-                    <th>Action</th>
+                    <th>
+                      <Text>{"Organization"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Type"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"City"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Verification"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Action"}</Text>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -195,7 +240,7 @@ export default function Admin() {
                             update("organizations", { id: o.id, verified: !o.verified })
                           }
                         >
-                          {o.verified ? "Revoke verification" : "Verify"}
+                          <Text>{o.verified ? "Revoke verification" : "Verify"}</Text>
                         </Button>
                       </td>
                     </tr>
@@ -206,11 +251,21 @@ export default function Admin() {
               <>
                 <thead>
                   <tr>
-                    <th>User</th>
-                    <th>Role</th>
-                    <th>Organization</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>
+                      <Text>{"User"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Role"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Organization"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Status"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Action"}</Text>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -222,7 +277,9 @@ export default function Admin() {
                       </td>
                       <td>{label(u.role)}</td>
                       <td>{u.organization?.name || "Independent"}</td>
-                      <td>{u.active ? "Active" : "Deactivated"}</td>
+                      <td>
+                        <Text>{u.active ? "Active" : "Deactivated"}</Text>
+                      </td>
                       <td>
                         {u.role !== "ADMIN" && (
                           <Button
@@ -231,7 +288,7 @@ export default function Admin() {
                             disabled={busy}
                             onClick={() => update("users", { id: u.id, active: !u.active })}
                           >
-                            {u.active ? "Deactivate" : "Reactivate"}
+                            <Text>{u.active ? "Deactivate" : "Reactivate"}</Text>
                           </Button>
                         )}
                       </td>
@@ -243,11 +300,21 @@ export default function Admin() {
               <>
                 <thead>
                   <tr>
-                    <th>Action</th>
-                    <th>Actor</th>
-                    <th>Entity</th>
-                    <th>Change</th>
-                    <th>When</th>
+                    <th>
+                      <Text>{"Action"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Actor"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Entity"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"Change"}</Text>
+                    </th>
+                    <th>
+                      <Text>{"When"}</Text>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -266,7 +333,9 @@ export default function Admin() {
                         {l.fromStatus ? `${label(l.fromStatus)} → ` : ""}
                         {l.toStatus && label(l.toStatus)}
                       </td>
-                      <td>{date(l.createdAt)}</td>
+                      <td>
+                        <LocalDate value={l.createdAt} />
+                      </td>
                     </tr>
                   ))}
                 </tbody>

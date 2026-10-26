@@ -1,4 +1,8 @@
 "use client";
+import { Input, Control } from "@/components/localized-fields";
+import { Text } from "@/components/i18n";
+import { useI18n } from "@/components/i18n";
+
 import { UploadCloud, FileCheck, X, Camera } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -6,22 +10,26 @@ export function UploadField({
   files,
   onChange,
   documents = false,
+  onBusyChange,
 }: {
   files: { id: string; name: string }[];
   onChange: (files: { id: string; name: string }[]) => void;
   documents?: boolean;
+  onBusyChange?: (busy: boolean) => void;
 }) {
   const [busy, setBusy] = useState(false);
+  const { t } = useI18n();
   async function upload(e: React.ChangeEvent<HTMLInputElement>) {
     const input = e.currentTarget;
     const selected = Array.from(e.target.files ?? []);
     if (!selected.length) return;
     if (files.length + selected.length > (documents ? 3 : 4)) {
-      toast.error(`Attach at most ${documents ? 3 : 4} files.`);
+      toast.error(t("Attach at most {count} files.", { count: documents ? 3 : 4 }));
       input.value = "";
       return;
     }
     setBusy(true);
+    onBusyChange?.(true);
     const created = [...files];
     try {
       for (const file of selected) {
@@ -35,9 +43,10 @@ export function UploadField({
         onChange([...created]);
       }
     } catch (e) {
-      toast.error((e as Error).message);
+      toast.error(t((e as Error).message));
     } finally {
       setBusy(false);
+      onBusyChange?.(false);
       input.value = "";
     }
   }
@@ -46,14 +55,19 @@ export function UploadField({
       <div className="upload-zone">
         <UploadCloud size={24} />
         <p>
-          {busy
-            ? "Uploading your files…"
-            : documents
-              ? "Add supporting documentation"
-              : "Help others see the challenge"}
+          <Text>
+            {busy
+              ? "Uploading your files…"
+              : documents
+                ? "Add supporting documentation"
+                : "Help others see the challenge"}
+          </Text>
         </p>
-        <small className="muted">JPEG, PNG, WebP{documents ? ", PDF" : ""} · up to 5 MB each</small>
-        <input
+        <small className="muted">
+          <Text>{"JPEG, PNG, WebP"}</Text>
+          <Text>{documents ? ", PDF" : ""}</Text> <Text>{" · up to 5 MB each"}</Text>
+        </small>
+        <Input
           type="file"
           aria-label={documents ? "Upload supporting documentation" : "Upload problem images"}
           accept={
@@ -69,8 +83,8 @@ export function UploadField({
       {!documents && (
         <label className="camera-upload">
           <Camera size={18} />
-          {busy ? "Uploading photo…" : "Take a photo"}
-          <input
+          <Text>{busy ? "Uploading photo…" : "Take a photo"}</Text>
+          <Input
             type="file"
             aria-label="Take a photo of the problem"
             accept="image/jpeg,image/png,image/webp"
@@ -78,21 +92,23 @@ export function UploadField({
             disabled={busy || files.length >= 4}
             onChange={upload}
           />
-          <small>Or use the upload area to choose from your gallery.</small>
+          <small>
+            <Text>{"Or use the upload area to choose from your gallery."}</Text>
+          </small>
         </label>
       )}
       {files.map((f) => (
         <div className="upload-file" key={f.id}>
           <FileCheck size={15} />
           {f.name}
-          <button
+          <Control
             type="button"
             className="icon-btn"
             aria-label={`Remove ${f.name}`}
             onClick={() => onChange(files.filter((x) => x.id !== f.id))}
           >
             <X size={14} />
-          </button>
+          </Control>
         </div>
       ))}
     </div>

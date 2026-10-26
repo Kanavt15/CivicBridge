@@ -1,9 +1,13 @@
+import { Text } from "@/components/i18n";
 import type { Metadata, Viewport } from "next";
 import { Providers } from "@/components/providers";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { AppExperience } from "@/components/app-experience";
 import "./globals.css";
+import "./redesign.css";
+import { cookies } from "next/headers";
+import { isLocale, localeTags } from "@/lib/i18n/messages";
 export const metadata: Metadata = {
   applicationName: "CivicBridge",
   appleWebApp: { capable: true, statusBarStyle: "default", title: "CivicBridge" },
@@ -16,16 +20,18 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#142d3a",
+  themeColor: "#335cde",
 };
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const savedLocale = (await cookies()).get("civicbridge_locale")?.value;
+  const locale = isLocale(savedLocale) ? savedLocale : "en";
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={localeTags[locale]} suppressHydrationWarning>
       <body>
-        <Providers>
+        <Providers initialLocale={locale}>
           <AppExperience>
             <a className="skip-link" href="#main">
-              Skip to content
+              <Text>{"Skip to content"}</Text>
             </a>
             <Header />
             <main id="main">{children}</main>

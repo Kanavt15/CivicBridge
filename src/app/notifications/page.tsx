@@ -1,5 +1,10 @@
 "use client";
-import Link from "next/link";
+import { LocalDate } from "@/components/i18n";
+
+import { Control } from "@/components/localized-fields";
+import { Text } from "@/components/i18n";
+
+import Link from "@/components/localized-fields";
 import { Bell, Check, CheckCheck } from "lucide-react";
 import { toast } from "sonner";
 import { api, useData } from "@/lib/client";
@@ -31,7 +36,7 @@ export default function Notifications() {
             disabled={!data?.some((n: any) => !n.read)}
           >
             <CheckCheck size={16} />
-            Mark all as read
+            <Text>{"Mark all as read"}</Text>
           </Button>
         }
       />
@@ -58,16 +63,18 @@ export default function Notifications() {
             >
               <h3>{n.title}</h3>
               <p>{n.body}</p>
-              <small>{date(n.createdAt)}</small>
+              <small>
+                <LocalDate value={n.createdAt} />
+              </small>
             </Link>
             {!n.read && (
-              <button
+              <Control
                 className="icon-btn"
                 onClick={() => mark(n.id)}
                 aria-label={`Mark ${n.title} as read`}
               >
                 <Check size={17} />
-              </button>
+              </Control>
             )}
           </div>
         ))

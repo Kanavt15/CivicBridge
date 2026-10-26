@@ -10,6 +10,10 @@ Open `/app` on the CivicBridge deployment. This Progressive Web App uses the exi
 
 ## Post and follow progress
 
+The app and website now use the shared [minimal interface system](DESIGN_SYSTEM.md). Choose English, Hindi, Marathi, Bengali, Tamil, or Telugu from the header. The preference persists through navigation and relaunch. Interface labels are translated; community posts retain their original language.
+
+Problem posting is split into **Problem → Location → Review**. Solution posting is split into **Your idea → The plan → Review**. Continue validates the current step, and Back retains your entries. Switching language also retains entries and attached files. Submission remains online-only.
+
 Citizens can post problems with description, category, urgency, locality, coordinates, and up to four JPEG/PNG/WebP images (5 MB each). **Take a photo** requests the environment camera where supported; gallery selection remains available. Unsupported formats such as HEIC must be exported to a supported format. Camera behavior varies by device/browser.
 
 **Use my current location** requests permission only when tapped. It fills coordinates and recenters the map. Check the estimated accuracy/pin and enter city/locality yourself. No reverse-geocoding provider is called. Permission failures and out-of-India coordinates lead to manual entry. Hosted geolocation requires HTTPS. The initial pin is explicitly labeled Mumbai until changed.

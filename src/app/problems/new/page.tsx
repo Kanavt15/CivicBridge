@@ -1,26 +1,61 @@
 "use client";
-import { useState } from "react";
+import { Input, Textarea, Select } from "@/components/localized-fields";
+
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { Sparkles, Send, ShieldCheck, LocateFixed } from "lucide-react";
+import Link from "@/components/localized-fields";
 import { useSession } from "next-auth/react";
+import { LocateFixed, ShieldCheck, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "@/lib/client";
 import { categories } from "@/lib/domain";
-import { Breadcrumbs, PageIntro, Empty, Loading } from "@/components/common";
+import { Breadcrumbs, Empty, Loading } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { MapView } from "@/components/map";
 import { UploadField } from "@/components/upload-field";
+import { StepProgress, WizardActions, stepValid } from "@/components/form-steps";
+import { Text, useI18n } from "@/components/i18n";
 export default function Report() {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [locating, setLocating] = useState(false);
-  const [locationNote, setLocationNote] = useState("");
+  const { t } = useI18n();
+  const form = useRef<HTMLFormElement>(null);
+  const [step, setStep] = useState(0),
+    [uploading, setUploading] = useState(false),
+    [title, setTitle] = useState(""),
+    [description, setDescription] = useState(""),
+    [category, setCategory] = useState(""),
+    [urgency, setUrgency] = useState("MEDIUM"),
+    [position, setPosition] = useState<[number, number]>([19.076, 72.8777]),
+    [files, setFiles] = useState<{ id: string; name: string }[]>([]),
+    [busy, setBusy] = useState(false),
+    [error, setError] = useState(""),
+    [assist, setAssist] = useState<any>(null),
+    [helping, setHelping] = useState(false),
+    [locating, setLocating] = useState(false),
+    [locationNote, setLocationNote] = useState("");
+  function next() {
+    if (stepValid(form.current, step)) setStep((s) => Math.min(2, s + 1));
+  }
+  async function help() {
+    setHelping(true);
+    try {
+      setAssist(
+        await api("assist", "POST", {
+          text: title + " " + description,
+          latitude: position[0],
+          longitude: position[1],
+        }),
+      );
+    } catch (e) {
+      toast.error(t((e as Error).message));
+    } finally {
+      setHelping(false);
+    }
+  }
   function locate() {
     if (!navigator.geolocation) {
-      setLocationNote(
-        "Location is unavailable in this browser. Set the pin or enter coordinates instead.",
-      );
+      setLocationNote("Location unavailable. Set the pin manually.");
       return;
     }
     setLocating(true);
@@ -34,53 +69,26 @@ export default function Report() {
           coords.longitude < 68 ||
           coords.longitude > 98
         ) {
-          setLocationNote(
-            "Your current location is outside the supported India reporting area. Set the problem’s location manually.",
-          );
+          setLocationNote("Choose a location within India.");
           return;
         }
         setPosition([coords.latitude, coords.longitude]);
-        setLocationNote(
-          `Location updated (estimated accuracy ${Math.round(coords.accuracy)} metres). Check the pin and complete the city and locality fields.`,
-        );
+        setLocationNote("Location updated. Check the pin and locality.");
       },
       () => {
         setLocating(false);
-        setLocationNote(
-          "Could not get your location. Check browser permission or set the pin manually.",
-        );
+        setLocationNote("Location unavailable. Set the pin manually.");
       },
       { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 },
     );
   }
-  const [category, setCategory] = useState(""),
-    [urgency, setUrgency] = useState("MEDIUM"),
-    [description, setDescription] = useState(""),
-    [title, setTitle] = useState(""),
-    [position, setPosition] = useState<[number, number]>([19.076, 72.8777]),
-    [files, setFiles] = useState<{ id: string; name: string }[]>([]),
-    [busy, setBusy] = useState(false),
-    [error, setError] = useState(""),
-    [assist, setAssist] = useState<any>(null),
-    [helping, setHelping] = useState(false);
-  async function help() {
-    setHelping(true);
-    try {
-      setAssist(
-        await api("assist", "POST", {
-          text: title + " " + description,
-          latitude: position[0],
-          longitude: position[1],
-        }),
-      );
-    } catch (e) {
-      toast.error((e as Error).message);
-    } finally {
-      setHelping(false);
-    }
-  }
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (step < 2) {
+      next();
+      return;
+    }
+    if (![0, 1, 2].every((s) => stepValid(form.current, s))) return;
     setBusy(true);
     setError("");
     const f = new FormData(e.currentTarget);
@@ -98,8 +106,8 @@ export default function Report() {
         population: Number(f.get("population")),
         imageIds: files.map((f) => f.id),
       });
-      toast.success(`Report submitted. Your reference is ${p.id}.`);
-      router.push(`/problems/${p.id}`);
+      toast.success(t("Report submitted."));
+      router.push("/problems/" + p.id);
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -110,11 +118,13 @@ export default function Report() {
   if (!session)
     return (
       <Empty
-        title="Your community’s voice starts with you"
-        description="Sign in or create a citizen account to report a local problem."
+        title="Sign in to your community."
+        description="Create a citizen account to report a local problem."
         action={
           <Button asChild>
-            <Link href="/login">Sign in to report</Link>
+            <Link href="/login">
+              <Text>Sign in</Text>
+            </Link>
           </Button>
         }
       />
@@ -122,158 +132,175 @@ export default function Report() {
   if (!["CITIZEN", "ADMIN"].includes(session.user.role))
     return (
       <Empty
-        title="Bring your expertise to a challenge"
-        description="Reporting is available to citizen accounts. Your account can explore challenges and contribute through solutions or collaboration."
+        title="Find a problem"
+        description="Citizen accounts report problems. Use your expertise to propose a solution."
         action={
           <Button asChild>
-            <Link href="/explore">Explore challenges</Link>
+            <Link href="/explore">
+              <Text>Explore problems</Text>
+            </Link>
           </Button>
         }
       />
     );
   return (
-    <div className="container page-wrap">
-      <Breadcrumbs
-        items={[{ label: "Challenges", href: "/explore" }, { label: "Report a problem" }]}
-      />
-      <PageIntro
-        eyebrow="A local voice. A collective opportunity."
-        title="What needs to change?"
-        description="Tell us what’s happening in your community. Help the right people understand the problem and start working on a solution."
-      />
-      <div className="two-col">
-        <form className="form-card" onSubmit={submit}>
-          <h2>Make the challenge clear</h2>
-          <p>The more context you share, the better we can work together.</p>
-          {error && (
-            <div className="form-message" role="alert">
-              {error}
-            </div>
-          )}
+    <div className="container page-wrap wizard-wrap">
+      <Breadcrumbs items={[{ label: "Problems", href: "/explore" }, { label: "Post a problem" }]} />
+      <div className="wizard-heading">
+        <div>
+          <h1>
+            <Text>Describe the problem</Text>
+          </h1>
+          <p>
+            <Text>A few clear details help the right people respond.</Text>
+          </p>
+        </div>
+      </div>
+      <form className="form-card" noValidate onSubmit={submit} ref={form}>
+        <StepProgress step={step} labels={["Problem", "Location", "Review"]} />
+        {error && (
+          <div className="form-message" role="alert">
+            <Text>{error}</Text>
+          </div>
+        )}
+        <fieldset className="wizard-fieldset" data-step="0" hidden={step !== 0}>
           <div className="form-grid">
             <label className="field full">
-              Problem title
-              <input
+              <Text>Problem title</Text>
+              <Input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 minLength={12}
                 maxLength={160}
                 required
-                placeholder="For example, unreliable drinking water in our village"
+                placeholder="A short, specific title"
               />
             </label>
             <label className="field full">
-              What’s happening?
-              <textarea
+              <Text>What’s happening?</Text>
+              <Textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 minLength={40}
                 maxLength={12000}
                 rows={5}
                 required
-                placeholder="Describe the issue, who it affects, and what has been tried so far."
+                placeholder="Explain the issue and who it affects."
               />
               <small>
-                At least 40 characters. Keep personal contact information out of your report.
+                <Text>Keep personal contact details out of your report.</Text>
               </small>
-              <small>
-                Assistance uses local rules by default. If an AI provider is configured, clicking
-                below sends this title and description to that provider for editable suggestions.
-              </small>
-              <Button
-                type="button"
-                variant="secondary"
-                size="sm"
-                disabled={description.length < 20 || helping}
-                onClick={help}
-              >
-                <Sparkles size={14} />
-                {helping ? "Analyzing…" : "Suggest category & find similar reports"}
-              </Button>
-              {assist && (
-                <div className="ai-box">
-                  <h4>
-                    <Sparkles size={15} />
-                    {assist.suggestion.source}
-                  </h4>
-                  <p>{assist.suggestion.explanation}</p>
-                  <p>
-                    Suggested: <strong>{assist.suggestion.category}</strong> ·{" "}
-                    <strong>{assist.suggestion.urgency.toLowerCase()}</strong> urgency
-                  </p>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      setCategory(assist.suggestion.category);
-                      setUrgency(assist.suggestion.urgency);
-                    }}
-                  >
-                    Apply suggestion
-                  </Button>
-                  <p>
-                    Potential duplicates:{" "}
-                    {assist.duplicates.length === 0
-                      ? "No similar nearby public reports found."
-                      : "Review these before reporting:"}
-                  </p>
-                  {assist.duplicates.map((p: any) => (
-                    <Link key={p.id} href={`/problems/${p.id}`} target="_blank">
-                      {p.title} · {p.city}
-                      {p.distance !== null ? ` · ${Math.round(p.distance)} km away` : ""}
-                    </Link>
-                  ))}
-                </div>
-              )}
             </label>
             <label className="field">
-              Category
-              <select
+              <Text>Category</Text>
+              <Select
                 aria-label="Category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 required
               >
-                <option value="">Choose a category</option>
+                <option value="">
+                  <Text>Choose a category</Text>
+                </option>
                 {categories.map((c) => (
-                  <option key={c}>{c}</option>
-                ))}
-              </select>
-            </label>
-            <label className="field">
-              Urgency
-              <select value={urgency} onChange={(e) => setUrgency(e.target.value)}>
-                {["LOW", "MEDIUM", "HIGH", "CRITICAL"].map((v) => (
-                  <option key={v} value={v}>
-                    {v.toLowerCase()}
+                  <option key={c} value={c}>
+                    <Text>{c}</Text>
                   </option>
                 ))}
-              </select>
+              </Select>
             </label>
             <label className="field">
-              State / union territory
-              <input name="state" required minLength={2} maxLength={80} placeholder="Maharashtra" />
+              <Text>Urgency</Text>
+              <Select value={urgency} onChange={(e) => setUrgency(e.target.value)}>
+                {["LOW", "MEDIUM", "HIGH", "CRITICAL"].map((v) => (
+                  <option key={v} value={v}>
+                    <Text>{v[0] + v.slice(1).toLowerCase()}</Text>
+                  </option>
+                ))}
+              </Select>
+            </label>
+          </div>
+          <details className="compact-details">
+            <summary>
+              <Text>Suggest category & find similar reports</Text>
+            </summary>
+            <p>
+              <Text>
+                Suggestions need your review. A configured AI provider may receive this text.
+              </Text>
+            </p>
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              disabled={description.length < 20 || helping}
+              onClick={help}
+            >
+              <Sparkles size={14} />
+              <Text>{helping ? "Analyzing…" : "Suggest category & find similar reports"}</Text>
+            </Button>
+            {assist && (
+              <div className="assist-box">
+                <h4>
+                  <Text>{assist.suggestion.source}</Text>
+                </h4>
+                <p>
+                  <Text>{assist.suggestion.explanation}</Text>
+                </p>
+                <p>
+                  <Text>{assist.suggestion.category}</Text>
+                </p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setCategory(assist.suggestion.category);
+                    setUrgency(assist.suggestion.urgency);
+                  }}
+                >
+                  <Text>Apply suggestion</Text>
+                </Button>
+                {assist.duplicates.length > 0 && (
+                  <>
+                    <p>
+                      <Text>Similar reports</Text>
+                    </p>
+                    {assist.duplicates.map((p: any) => (
+                      <p key={p.id}>
+                        <Link href={"/problems/" + p.id} target="_blank">
+                          {p.title}
+                        </Link>
+                      </p>
+                    ))}
+                  </>
+                )}
+              </div>
+            )}
+          </details>
+        </fieldset>
+        <fieldset className="wizard-fieldset" data-step="1" hidden={step !== 1}>
+          <h2>
+            <Text>Where is the problem?</Text>
+          </h2>
+          <div className="form-grid">
+            <label className="field">
+              <Text>State / union territory</Text>
+              <Input name="state" minLength={2} maxLength={80} required />
             </label>
             <label className="field">
-              City / village
-              <input name="city" required minLength={2} maxLength={80} placeholder="Mumbai" />
+              <Text>City / village</Text>
+              <Input name="city" minLength={2} maxLength={80} required />
             </label>
             <label className="field">
-              Area / locality
-              <input
-                name="area"
-                required
-                minLength={2}
-                maxLength={150}
-                placeholder="Locality or nearest landmark"
-              />
+              <Text>Area / locality</Text>
+              <Input name="area" minLength={2} maxLength={150} required />
             </label>
             <label className="field">
-              Estimated people affected
-              <input
-                type="number"
+              <Text>Estimated people affected</Text>
+              <Input
                 name="population"
+                type="number"
                 min={1}
                 max={100000000}
                 defaultValue={100}
@@ -281,7 +308,6 @@ export default function Report() {
               />
             </label>
             <div className="field full">
-              <span>Pin the location</span>
               <Button
                 type="button"
                 variant="outline"
@@ -290,88 +316,77 @@ export default function Report() {
                 onClick={locate}
               >
                 <LocateFixed size={16} />
-                {locating ? "Finding your location…" : "Use my current location"}
+                <Text>{locating ? "Finding your location…" : "Use my current location"}</Text>
               </Button>
               {locationNote && (
                 <p className="map-hint" role="status">
-                  {locationNote}
+                  <Text>{locationNote}</Text>
                 </p>
               )}
-              <MapView value={position} onChange={setPosition} />
+              {step === 1 && <MapView value={position} onChange={setPosition} />}
               <p className="map-hint">
-                Click the map to set your location, or enter coordinates below. The initial pin is
-                Mumbai; adjust it to your report.
+                <Text>Check the pin. The starting location is Mumbai.</Text>
               </p>
-              <div className="form-grid">
-                <label className="field">
-                  Latitude
-                  <input
-                    type="number"
-                    step="any"
-                    min={6}
-                    max={38}
-                    value={position[0]}
-                    onChange={(e) => setPosition([Number(e.target.value), position[1]])}
-                    required
-                  />
-                </label>
-                <label className="field">
-                  Longitude
-                  <input
-                    type="number"
-                    step="any"
-                    min={68}
-                    max={98}
-                    value={position[1]}
-                    onChange={(e) => setPosition([position[0], Number(e.target.value)])}
-                    required
-                  />
-                </label>
-              </div>
             </div>
-            <div className="field full">
-              <span>Images (optional)</span>
-              <UploadField files={files} onChange={setFiles} />
-            </div>
+            <label className="field">
+              <Text>Latitude</Text>
+              <Input
+                type="number"
+                step="any"
+                min={6}
+                max={38}
+                required
+                value={position[0]}
+                onChange={(e) => setPosition([Number(e.target.value), position[1]])}
+              />
+            </label>
+            <label className="field">
+              <Text>Longitude</Text>
+              <Input
+                type="number"
+                step="any"
+                min={68}
+                max={98}
+                required
+                value={position[1]}
+                onChange={(e) => setPosition([position[0], Number(e.target.value)])}
+              />
+            </label>
           </div>
-          <div className="form-actions">
-            <Button asChild variant="ghost">
-              <Link href="/explore">Cancel</Link>
-            </Button>
-            <Button type="submit" disabled={busy}>
-              <Send size={16} />
-              {busy ? "Submitting…" : "Submit report"}
-            </Button>
+        </fieldset>
+        <fieldset className="wizard-fieldset" data-step="2" hidden={step !== 2}>
+          <h2>
+            <Text>Review your report</Text>
+          </h2>
+          <div className="wizard-summary">
+            <small>
+              <Text>{category}</Text>
+            </small>
+            <h3>{title}</h3>
+            <p>{description}</p>
+            <small>
+              {position[0]}, {position[1]}
+            </small>
           </div>
-        </form>
-        <aside className="side-stack">
-          <div className="side-card">
-            <ShieldCheck size={26} className="muted" />
-            <h3 className="space-top">Every voice deserves care.</h3>
-            <p>
-              Your report will be reviewed before it becomes public. Your email and private account
-              details stay private.
-            </p>
+          <div className="field">
+            <span>
+              <Text>Images (optional)</Text>
+            </span>
+            <UploadField files={files} onChange={setFiles} onBusyChange={setUploading} />
           </div>
-          <div className="info-box">
-            <h4>A helpful report includes</h4>
-            <ul>
-              <li>A specific, descriptive title</li>
-              <li>Who is affected and how</li>
-              <li>A precise location</li>
-              <li>Clear images if available</li>
-              <li>Context, without personal details</li>
-            </ul>
+          <div className="wizard-notice">
+            <ShieldCheck size={17} />
+            <Text>Your report is reviewed before it becomes public.</Text>
           </div>
-          <div className="side-card">
-            <h3>What happens next?</h3>
-            <p>Report → Review → Open for solutions → Collaboration → Pilot → Resolved</p>
-            <p className="space-top">
-              You’ll receive an in-app notification when your report moves forward.
-            </p>
-          </div>
-        </aside>
-      </div>
+        </fieldset>
+        <WizardActions
+          step={step}
+          onNext={next}
+          onBack={() => setStep((s) => Math.max(0, s - 1))}
+          busy={busy || uploading}
+          submitLabel="Submit report"
+        />
+      </form>
     </div>
   );
 }

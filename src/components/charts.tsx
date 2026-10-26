@@ -1,4 +1,7 @@
 "use client";
+import { Text } from "@/components/i18n";
+import { useI18n } from "@/components/i18n";
+
 import {
   AreaChart,
   Area,
@@ -15,28 +18,33 @@ import {
   Bar,
 } from "recharts";
 const colors = [
-  "#268a72",
-  "#72af99",
-  "#b3c9a3",
-  "#7a9db6",
-  "#d0b675",
-  "#a38cb4",
-  "#a3b4ad",
-  "#639c92",
+  "#335cde",
+  "#6b8ae8",
+  "#a4b7ed",
+  "#8797b2",
+  "#b0bacb",
+  "#697b99",
+  "#c6cfdf",
+  "#526fba",
 ];
 export function ImpactCharts({ stats, admin = false }: { stats: any; admin?: boolean }) {
+  const { t } = useI18n();
   return (
     <div className="chart-grid">
       <div className="chart-panel">
-        <h3>Community progress</h3>
-        <small>Public reports by submission month · includes demo records</small>
+        <h3>
+          <Text>{"Community progress"}</Text>
+        </h3>
+        <small>
+          <Text>{"Public reports by submission month · includes demo records"}</Text>
+        </small>
         <div className="chart-container">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={stats.months} margin={{ left: -25, right: 8, top: 8, bottom: 0 }}>
               <defs>
                 <linearGradient id="chart-green" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#329b80" stopOpacity={0.25} />
-                  <stop offset="100%" stopColor="#329b80" stopOpacity={0} />
+                  <stop offset="0%" stopColor="#335cde" stopOpacity={0.15} />
+                  <stop offset="100%" stopColor="#335cde" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 4" vertical={false} stroke="#acbfb22f" />
@@ -51,15 +59,15 @@ export function ImpactCharts({ stats, admin = false }: { stats: any; admin?: boo
                 }}
               />
               <Area
-                name="Reports submitted"
+                name={t("Reported")}
                 type="monotone"
                 dataKey="reported"
-                stroke="#268a72"
+                stroke="#335cde"
                 fill="url(#chart-green)"
                 strokeWidth={2}
               />
               <Area
-                name="Currently resolved"
+                name={t("Resolved")}
                 type="monotone"
                 dataKey="resolved"
                 stroke="#8aa6ba"
@@ -71,13 +79,17 @@ export function ImpactCharts({ stats, admin = false }: { stats: any; admin?: boo
         </div>
       </div>
       <div className="chart-panel">
-        <h3>Challenges by category</h3>
-        <small>Public challenges · includes demo records</small>
+        <h3>
+          <Text>{"Challenges by category"}</Text>
+        </h3>
+        <small>
+          <Text>{"Public challenges · includes demo records"}</Text>
+        </small>
         <div className="chart-container">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
-                data={stats.categories}
+                data={stats.categories.map((c: any) => ({ ...c, name: t(c.name) }))}
                 dataKey="value"
                 nameKey="name"
                 innerRadius={53}
@@ -97,8 +109,12 @@ export function ImpactCharts({ stats, admin = false }: { stats: any; admin?: boo
       </div>
       {admin && (
         <div className="chart-panel" style={{ gridColumn: "1 / -1" }}>
-          <h3>Where change begins</h3>
-          <small>Public reports by state</small>
+          <h3>
+            <Text>{"Where change begins"}</Text>
+          </h3>
+          <small>
+            <Text>{"Public reports by state"}</Text>
+          </small>
           <div className="chart-container">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={stats.regions} margin={{ left: -20, right: 10, bottom: 15 }}>
@@ -106,7 +122,12 @@ export function ImpactCharts({ stats, admin = false }: { stats: any; admin?: boo
                 <XAxis dataKey="name" fontSize={10} axisLine={false} tickLine={false} />
                 <YAxis allowDecimals={false} axisLine={false} tickLine={false} fontSize={10} />
                 <Tooltip contentStyle={{ borderRadius: 8, fontSize: 11, color: "#203945" }} />
-                <Bar dataKey="value" name="Public reports" fill="#72af99" radius={[5, 5, 0, 0]} />
+                <Bar
+                  dataKey="value"
+                  name={t("Public reports")}
+                  fill="#6b8ae8"
+                  radius={[5, 5, 0, 0]}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>

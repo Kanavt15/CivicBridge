@@ -1,6 +1,11 @@
 "use client";
+import { LocalDate } from "@/components/i18n";
+
+import { Select, Textarea, Input } from "@/components/localized-fields";
+import { Text } from "@/components/i18n";
+
 import { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/localized-fields";
 import { toast } from "sonner";
 import { ArrowUpRight, ClipboardCheck, Plus, ShieldCheck } from "lucide-react";
 import { api, useData } from "@/lib/client";
@@ -47,12 +52,13 @@ export function MeasurementCard({
             m.status === "VERIFIED" ? "approved" : m.status === "REJECTED" ? "rejected" : "pending"
           }
         >
-          {m.status === "VERIFIED" ? <ShieldCheck size={12} /> : <ClipboardCheck size={12} />}{" "}
+          {m.status === "VERIFIED" ? <ShieldCheck size={12} /> : <ClipboardCheck size={12} />}
+          <Text> </Text>
           {m.status.toLowerCase()}
         </Badge>
         {p.isDemo && <DemoBadge />}
         <small className="muted">
-          {p.problem.city} · {p.problem.category}
+          {p.problem.city} · <Text>{p.problem.category}</Text>
         </small>
       </div>
       <h3>{metric.name}</h3>
@@ -64,55 +70,75 @@ export function MeasurementCard({
       </p>
       <div className="measurement-values">
         <div>
-          <small>Baseline</small>
+          <small>
+            <Text>{"Baseline"}</Text>
+          </small>
           <strong>{m.baseline.toLocaleString("en-IN")}</strong>
         </div>
         <span>→</span>
         <div>
-          <small>Observed</small>
+          <small>
+            <Text>{"Observed"}</Text>
+          </small>
           <strong>{m.observed.toLocaleString("en-IN")}</strong>
         </div>
         <div className={`evidence-change ${change.delta < 0 ? "decline" : ""}`}>
           <strong>
-            {change.delta > 0 ? "+" : ""}
+            <Text>{change.delta > 0 ? "+" : ""}</Text>
             {change.delta.toLocaleString("en-IN")}
           </strong>
-          <small>{change.unit} improvement</small>
+          <small>
+            {change.unit} <Text>{" improvement"}</Text>
+          </small>
         </div>
       </div>
       <p className="measurement-context">
-        {date(m.periodStart)} – {date(m.periodEnd)} · sample size{" "}
+        <LocalDate value={m.periodStart} /> – <LocalDate value={m.periodEnd} />{" "}
+        <Text>{" · sample size"}</Text>
+        <Text> </Text>
         {m.sampleSize.toLocaleString("en-IN")}
         {change.percent !== null
           ? ` · ${change.percent}% change`
           : " · percentage unavailable for zero baseline"}
       </p>
       <details className="evidence-details">
-        <summary>Method and supporting evidence</summary>
+        <summary>
+          <Text>{"Method and supporting evidence"}</Text>
+        </summary>
         <p>{m.methodology}</p>
         <a className="text-link" href={m.evidenceUrl} target="_blank" rel="noopener noreferrer">
-          Open supporting evidence <ArrowUpRight size={13} />
+          <Text>{"Open supporting evidence"}</Text>
+          <ArrowUpRight size={13} />
         </a>
-        <small>Evidence is supplied by the team; external links open on their host.</small>
+        <small>
+          <Text>{"Evidence is supplied by the team; external links open on their host."}</Text>
+        </small>
       </details>
       {m.reviewedAt && (
         <div className="review-note">
-          <strong>Administrator review · {date(m.reviewedAt)}</strong>
+          <strong>
+            <Text>{"Administrator review · "}</Text>
+            <LocalDate value={m.reviewedAt} />
+          </strong>
           <p>{m.reviewNote}</p>
         </div>
       )}
       {review && m.status === "PENDING" && (
         <form className="form-stack space-top" onSubmit={decide}>
           <label className="field">
-            Review decision
-            <select name="status">
-              <option value="VERIFIED">Verify and publish evidence</option>
-              <option value="REJECTED">Reject evidence</option>
-            </select>
+            <Text>{"Review decision"}</Text>
+            <Select name="status">
+              <option value="VERIFIED">
+                <Text>{"Verify and publish evidence"}</Text>
+              </option>
+              <option value="REJECTED">
+                <Text>{"Reject evidence"}</Text>
+              </option>
+            </Select>
           </label>
           <label className="field">
-            Reason for this decision
-            <textarea
+            <Text>{"Reason for this decision"}</Text>
+            <Textarea
               name="reviewNote"
               minLength={10}
               maxLength={2000}
@@ -121,7 +147,7 @@ export function MeasurementCard({
             />
           </label>
           <Button type="submit" disabled={busy}>
-            {busy ? "Recording…" : "Record review"}
+            <Text>{busy ? "Recording…" : "Record review"}</Text>
           </Button>
         </form>
       )}
@@ -167,16 +193,21 @@ export function WorkspaceEvidence({
     <section className="dashboard-panel space-top">
       <div className="panel-heading">
         <div>
-          <h2>Prove the difference.</h2>
+          <h2>
+            <Text>{"Prove the difference."}</Text>
+          </h2>
           <p style={{ fontSize: 12, marginTop: 7 }}>
-            Record comparable before-and-after measurements. Approved evidence appears in the public
-            impact ledger.
+            <Text>
+              {
+                "Record comparable before-and-after measurements. Approved evidence appears in the public impact ledger."
+              }
+            </Text>
           </p>
         </div>
         {canSubmit && (
           <Button variant="outline" size="sm" onClick={() => setOpen(!open)}>
             <Plus size={14} />
-            {open ? "Close form" : "Record an outcome"}
+            <Text>{open ? "Close form" : "Record an outcome"}</Text>
           </Button>
         )}
       </div>
@@ -189,30 +220,30 @@ export function WorkspaceEvidence({
           )}
           <div className="form-grid">
             <label className="field full">
-              Outcome metric
-              <select name="metric">
+              <Text>{"Outcome metric"}</Text>
+              <Select name="metric">
                 {Object.entries(impactMetrics).map(([key, m]) => (
                   <option key={key} value={key}>
                     {m.name} ({m.unit})
                   </option>
                 ))}
-              </select>
+              </Select>
             </label>
             <label className="field">
-              Baseline value
-              <input type="number" step="any" min={0} max={1e12} name="baseline" required />
+              <Text>{"Baseline value"}</Text>
+              <Input type="number" step="any" min={0} max={1e12} name="baseline" required />
             </label>
             <label className="field">
-              Observed value
-              <input type="number" step="any" min={0} max={1e12} name="observed" required />
+              <Text>{"Observed value"}</Text>
+              <Input type="number" step="any" min={0} max={1e12} name="observed" required />
             </label>
             <label className="field">
-              Measurement period start
-              <input type="date" name="periodStart" required />
+              <Text>{"Measurement period start"}</Text>
+              <Input type="date" name="periodStart" required />
             </label>
             <label className="field">
-              Measurement period end
-              <input
+              <Text>{"Measurement period end"}</Text>
+              <Input
                 type="date"
                 name="periodEnd"
                 required
@@ -220,12 +251,12 @@ export function WorkspaceEvidence({
               />
             </label>
             <label className="field">
-              Sample size
-              <input type="number" min={1} max={100000000} name="sampleSize" required />
+              <Text>{"Sample size"}</Text>
+              <Input type="number" min={1} max={100000000} name="sampleSize" required />
             </label>
             <label className="field">
-              Public supporting evidence URL
-              <input
+              <Text>{"Public supporting evidence URL"}</Text>
+              <Input
                 type="url"
                 name="evidenceUrl"
                 required
@@ -234,8 +265,8 @@ export function WorkspaceEvidence({
               />
             </label>
             <label className="field full">
-              How did you measure it?
-              <textarea
+              <Text>{"How did you measure it?"}</Text>
+              <Textarea
                 name="methodology"
                 minLength={40}
                 maxLength={5000}
@@ -243,13 +274,16 @@ export function WorkspaceEvidence({
                 placeholder="Explain the baseline period, sample, comparable time windows, collection method, and limitations. Keep personal details out of public evidence."
               />
               <small>
-                Baseline and observed values must use comparable time windows and populations. An
-                administrator reviews the claim before publication.
+                <Text>
+                  {
+                    "Baseline and observed values must use comparable time windows and populations. An administrator reviews the claim before publication."
+                  }
+                </Text>
               </small>
             </label>
           </div>
           <Button type="submit" disabled={busy}>
-            {busy ? "Submitting…" : "Submit measurement for review"}
+            <Text>{busy ? "Submitting…" : "Submit measurement for review"}</Text>
           </Button>
         </form>
       )}
@@ -259,7 +293,9 @@ export function WorkspaceEvidence({
         <ErrorState error={error} retry={reload} />
       ) : !data?.length ? (
         <p className="muted">
-          No outcomes recorded yet. Start with a baseline and a repeatable measurement method.
+          <Text>
+            {"No outcomes recorded yet. Start with a baseline and a repeatable measurement method."}
+          </Text>
         </p>
       ) : (
         <div className="measurement-grid">

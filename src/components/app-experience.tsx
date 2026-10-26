@@ -1,9 +1,11 @@
 "use client";
+
 import { createContext, useContext, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
+import Link from "@/components/localized-fields";
 import { Compass, Download, Home, Lightbulb, UserRound, WifiOff } from "lucide-react";
 import { Button } from "./ui/button";
+import { Text } from "./i18n";
 
 type InstallPrompt = Event & {
   prompt: () => Promise<void>;
@@ -76,8 +78,11 @@ export function AppExperience({ children }: { children: React.ReactNode }) {
     <AppContext.Provider value={{ installed, canInstall: Boolean(prompt), install }}>
       {offline && (
         <div className="connection-notice" role="status">
-          <WifiOff size={17} /> You’re offline. Keep this page open and reconnect before posting.
-          Nothing has been queued or submitted.
+          <WifiOff size={17} />
+          <span>
+            <Text>You’re offline. Reconnect before posting.</Text>{" "}
+            <Text>No posts have been queued.</Text>
+          </span>
         </div>
       )}
       {children}
@@ -85,7 +90,9 @@ export function AppExperience({ children }: { children: React.ReactNode }) {
         {links.map(([href, label, Icon]) => (
           <Link key={href} href={href} aria-current={path === href ? "page" : undefined}>
             <Icon size={21} />
-            <span>{label}</span>
+            <span>
+              <Text>{label}</Text>
+            </span>
           </Link>
         ))}
       </nav>
@@ -100,14 +107,18 @@ export function InstallApp() {
   if (installed)
     return (
       <p className="app-install-note">
-        You’re using the CivicBridge app. Your posts sync with your account when connected.
+        <Text>Available on your phone</Text>
       </p>
     );
   return (
     <section className="app-install">
       <div>
-        <strong>Keep your community close.</strong>
-        <p>Add CivicBridge to your home screen. Use the same account on every device.</p>
+        <strong>
+          <Text>Available on your phone</Text>
+        </strong>
+        <p>
+          <Text>Add CivicBridge to your home screen.</Text>
+        </p>
       </div>
       <Button
         variant="outline"
@@ -125,18 +136,14 @@ export function InstallApp() {
         }}
       >
         <Download size={17} />
-        {canInstall ? "Install app" : "How to install"}
+        <Text>{canInstall ? "Install app" : "How to install"}</Text>
       </Button>
       {(showHelp || error) && (
         <div className="app-install-help" role="status">
-          {error || (
-            <>
-              On Android or desktop, open the browser menu and choose <strong>Install app</strong>{" "}
-              or <strong>Add to Home screen</strong>. On iPhone, open the site in Safari, tap{" "}
-              <strong>Share</strong>, then <strong>Add to Home Screen</strong>. Installation
-              requires the deployed HTTPS site (or localhost for testing).
-            </>
-          )}
+          <Text>
+            {error ||
+              "Android: choose Install app in your browser. iPhone: open Safari, tap Share, then Add to Home Screen. Use the HTTPS website."}
+          </Text>
         </div>
       )}
     </section>

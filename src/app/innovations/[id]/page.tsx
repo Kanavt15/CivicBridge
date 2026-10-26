@@ -1,6 +1,11 @@
 "use client";
+import { LocalDate } from "@/components/i18n";
+
+import { Select, Textarea } from "@/components/localized-fields";
+import { Text } from "@/components/i18n";
+
 import { use, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/localized-fields";
 import { useSession } from "next-auth/react";
 import { ArrowUpRight, FileText, Users, Calendar } from "lucide-react";
 import { toast } from "sonner";
@@ -42,7 +47,9 @@ export default function Innovation({ params }: { params: Promise<{ id: string }>
       <Breadcrumbs items={[{ label: "Innovations", href: "/innovations" }, { label: s.title }]} />
       <div className="detail-header">
         <div className="detail-badges">
-          <Badge>{s.problem.category}</Badge>
+          <Badge>
+            <Text>{s.problem.category}</Text>
+          </Badge>
           <Status value={s.status} />
           {s.isDemo && <DemoBadge />}
         </div>
@@ -55,13 +62,15 @@ export default function Innovation({ params }: { params: Promise<{ id: string }>
           </span>
           <span>
             <Calendar size={14} />
-            {date(s.createdAt)}
+            <LocalDate value={s.createdAt} />
           </span>
         </div>
       </div>
       <div className="two-col">
         <article className="detail-content">
-          <h2>The challenge behind the idea</h2>
+          <h2>
+            <Text>{"The challenge behind the idea"}</Text>
+          </h2>
           <Link className="text-link" href={`/problems/${s.problem.id}`}>
             {s.problem.title}
             <ArrowUpRight size={16} />
@@ -80,7 +89,9 @@ export default function Innovation({ params }: { params: Promise<{ id: string }>
           ))}
           {s.attachments.length > 0 && (
             <section className="detail-section">
-              <h2>Supporting documents</h2>
+              <h2>
+                <Text>{"Supporting documents"}</Text>
+              </h2>
               {s.attachments.map((a: any) => (
                 <a
                   key={a.id}
@@ -100,14 +111,19 @@ export default function Innovation({ params }: { params: Promise<{ id: string }>
         <aside className="side-stack">
           {s.collaboration && (
             <div className="side-card">
-              <h3>Build it together.</h3>
+              <h3>
+                <Text>{"Build it together."}</Text>
+              </h3>
               <p>
-                This innovation has an active collaboration workspace. Access is available to the
-                team and accepted partners.
+                <Text>
+                  {
+                    "This innovation has an active collaboration workspace. Access is available to the team and accepted partners."
+                  }
+                </Text>
               </p>
               <Button asChild>
                 <Link href={`/collaborations/${s.collaboration.id}`}>
-                  Open workspace
+                  <Text>{"Open workspace"}</Text>
                   <ArrowUpRight size={16} />
                 </Link>
               </Button>
@@ -117,23 +133,35 @@ export default function Innovation({ params }: { params: Promise<{ id: string }>
             session &&
             ["INDUSTRY", "INSTITUTION", "ADMIN"].includes(session.user.role) && (
               <div className="side-card">
-                <h3>Offer your support</h3>
+                <h3>
+                  <Text>{"Offer your support"}</Text>
+                </h3>
                 <p className="space-top">
-                  Share resources, expertise, or funding interest. No payments are collected.
+                  <Text>
+                    {"Share resources, expertise, or funding interest. No payments are collected."}
+                  </Text>
                 </p>
                 <form className="form-stack space-top" onSubmit={support}>
                   <label className="field">
-                    Type of support
-                    <select name="type">
-                      <option value="MENTORSHIP">Mentorship</option>
-                      <option value="RESOURCES">Equipment / resources</option>
-                      <option value="EXPERTISE">Technical expertise</option>
-                      <option value="FUNDING_INTEREST">Funding interest</option>
-                    </select>
+                    <Text>{"Type of support"}</Text>
+                    <Select name="type">
+                      <option value="MENTORSHIP">
+                        <Text>{"Mentorship"}</Text>
+                      </option>
+                      <option value="RESOURCES">
+                        <Text>{"Equipment / resources"}</Text>
+                      </option>
+                      <option value="EXPERTISE">
+                        <Text>{"Technical expertise"}</Text>
+                      </option>
+                      <option value="FUNDING_INTEREST">
+                        <Text>{"Funding interest"}</Text>
+                      </option>
+                    </Select>
                   </label>
                   <label className="field">
-                    What can you contribute?
-                    <textarea
+                    <Text>{"What can you contribute?"}</Text>
+                    <Textarea
                       name="description"
                       minLength={20}
                       maxLength={3000}
@@ -142,14 +170,16 @@ export default function Innovation({ params }: { params: Promise<{ id: string }>
                     />
                   </label>
                   <Button type="submit" disabled={busy}>
-                    {busy ? "Sending…" : "Send collaboration request"}
+                    <Text>{busy ? "Sending…" : "Send collaboration request"}</Text>
                   </Button>
                 </form>
               </div>
             )}
           {s.canReview && (
             <div className="side-card">
-              <h3>Review proposal</h3>
+              <h3>
+                <Text>{"Review proposal"}</Text>
+              </h3>
               <StatusControl
                 type="proposals"
                 id={id}
@@ -160,11 +190,16 @@ export default function Innovation({ params }: { params: Promise<{ id: string }>
             </div>
           )}
           <div className="side-card">
-            <h3>Proposal timeline</h3>
+            <h3>
+              <Text>{"Proposal timeline"}</Text>
+            </h3>
             {s.timeline.length ? (
               <Timeline items={s.timeline} />
             ) : (
-              <p>Demonstration proposal. Current status: {s.status.toLowerCase()}.</p>
+              <p>
+                <Text>{"Demonstration proposal. Current status: "}</Text>
+                {s.status.toLowerCase()}.
+              </p>
             )}
           </div>
         </aside>

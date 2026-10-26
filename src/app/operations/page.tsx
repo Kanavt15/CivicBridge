@@ -1,6 +1,9 @@
 "use client";
+import { Input, Select } from "@/components/localized-fields";
+import { Text } from "@/components/i18n";
+
 import { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/localized-fields";
 import { Download, ArrowUpRight, Clock, MapPin } from "lucide-react";
 import { useData } from "@/lib/client";
 import { PageIntro, Loading, ErrorState, Status, DemoBadge } from "@/components/common";
@@ -40,7 +43,7 @@ export default function Operations() {
           <Button asChild variant="outline">
             <a href={`/api/operations?${exportQuery}`}>
               <Download size={15} />
-              Export filtered queue
+              <Text>{"Export filtered queue"}</Text>
             </a>
           </Button>
         }
@@ -55,71 +58,89 @@ export default function Operations() {
           <div className="metric-card" key={title}>
             <span>{title}</span>
             <strong>{value}</strong>
-            <small>Queue sample includes demo records</small>
+            <small>
+              <Text>{"Queue sample includes demo records"}</Text>
+            </small>
           </div>
         ))}
       </div>
       <div className="info-box" style={{ marginBottom: 25 }}>
-        <strong>A visible policy, not a black box.</strong>
+        <strong>
+          <Text>{"A visible policy, not a black box."}</Text>
+        </strong>
         <p>
-          Priority = urgency (45) + estimated population reach (25) + waiting time (20) + community
-          support (10). Review targets are internal planning defaults: critical 24h, high 72h,
-          medium 7 days, low 14 days. These are not government response guarantees. Ranking
-          considers up to {d.limit} active reports, selected by urgency and age.
+          <Text>
+            {
+              "Priority = urgency (45) + estimated population reach (25) + waiting time (20) + community support (10). Review targets are internal planning defaults: critical 24h, high 72h, medium 7 days, low 14 days. These are not government response guarantees. Ranking considers up to"
+            }
+          </Text>
+          {d.limit} <Text>{"active reports, selected by urgency and age."}</Text>
         </p>
       </div>
       <div className="operations-layout">
         <section className="dashboard-panel">
           <div className="filter-row" style={{ marginBottom: 20 }}>
-            <input
+            <Input
               aria-label="Filter review queue"
               placeholder="Filter challenges, cities, or categories…"
               value={query}
               maxLength={200}
               onChange={(e) => setQuery(e.target.value)}
             />
-            <select
+            <Select
               aria-label="Filter by urgency"
               value={urgency}
               onChange={(e) => setUrgency(e.target.value)}
             >
-              <option value="">All urgencies</option>
+              <option value="">
+                <Text>{"All urgencies"}</Text>
+              </option>
               {["CRITICAL", "HIGH", "MEDIUM", "LOW"].map((value) => (
                 <option key={value} value={value}>
-                  {value.toLowerCase()}
+                  <Text>{value.toLowerCase()}</Text>
                 </option>
               ))}
-            </select>
-            <select
+            </Select>
+            <Select
               aria-label="Filter by review status"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
-              <option value="">All review stages</option>
-              <option value="REPORTED">Reported</option>
-              <option value="UNDER_REVIEW">Under review</option>
-              <option value="OPEN">Open</option>
-            </select>
+              <option value="">
+                <Text>{"All review stages"}</Text>
+              </option>
+              <option value="REPORTED">
+                <Text>{"Reported"}</Text>
+              </option>
+              <option value="UNDER_REVIEW">
+                <Text>{"Under review"}</Text>
+              </option>
+              <option value="OPEN">
+                <Text>{"Open"}</Text>
+              </option>
+            </Select>
             <label className="queue-checkbox">
-              <input
+              <Input
                 type="checkbox"
                 checked={onlyOverdue}
                 onChange={(e) => setOnlyOverdue(e.target.checked)}
               />
-              Past target only
+              <Text>{"Past target only"}</Text>
             </label>
             <label className="queue-checkbox">
-              <input
+              <Input
                 type="checkbox"
                 checked={hideDemo}
                 onChange={(e) => setHideDemo(e.target.checked)}
               />
-              Hide demo reports
+              <Text>{"Hide demo reports"}</Text>
             </label>
           </div>
           <p className="muted" role="status">
-            Showing {items.length} of {d.items.length} ranked reports. Export uses these filters and
-            the latest queue.
+            <Text>{"Showing"}</Text>
+            {items.length} <Text>{" of "}</Text>
+            {d.items.length}{" "}
+            <Text>{"ranked reports. Export uses these filters and the latest queue."}</Text>
           </p>
           <div className="review-queue">
             {items.map((p: any) => (
@@ -135,7 +156,7 @@ export default function Operations() {
                     {p.priority.overdue && (
                       <span className="queue-overdue">
                         <Clock size={11} />
-                        Past target
+                        <Text>{"Past target"}</Text>
                       </span>
                     )}
                   </div>
@@ -143,11 +164,16 @@ export default function Operations() {
                     <Link href={`/problems/${p.id}`}>{p.title}</Link>
                   </h3>
                   <p>
-                    {p.city}, {p.state} · {p.population.toLocaleString("en-IN")} people ·{" "}
-                    {p.priority.ageHours}h waiting
+                    {p.city}, {p.state} · {p.population.toLocaleString("en-IN")}{" "}
+                    <Text>{" people ·"}</Text>
+                    <Text> </Text>
+                    {p.priority.ageHours}
+                    <Text>{"h waiting"}</Text>
                   </p>
                   <details>
-                    <summary>Why this priority?</summary>
+                    <summary>
+                      <Text>{"Why this priority?"}</Text>
+                    </summary>
                     <div className="priority-breakdown">
                       {Object.entries(p.priority.parts).map(([key, value]: any) => (
                         <span key={key}>
@@ -167,19 +193,25 @@ export default function Operations() {
                 </Link>
               </article>
             ))}
-            {!items.length && <p className="muted">No reports match these filters.</p>}
+            {!items.length && (
+              <p className="muted">
+                <Text>{"No reports match these filters."}</Text>
+              </p>
+            )}
           </div>
         </section>
         <aside className="side-stack">
           <div className="side-card">
-            <h3>Where attention is needed</h3>
+            <h3>
+              <Text>{"Where attention is needed"}</Text>
+            </h3>
             {d.hotspots.slice(0, 8).map((h: any) => (
               <div className="hotspot-row" key={`${h.city}-${h.state}`}>
                 <MapPin size={15} />
                 <div>
                   <strong>{h.city}</strong>
                   <small>
-                    {h.state} · {h.critical} critical
+                    {h.state} · {h.critical} <Text>{"critical"}</Text>
                   </small>
                 </div>
                 <span>{h.reports}</span>
@@ -187,24 +219,38 @@ export default function Operations() {
             ))}
           </div>
           <div className="side-card">
-            <h3>Platform health and data</h3>
+            <h3>
+              <Text>{"Platform health and data"}</Text>
+            </h3>
             <p>
-              Check database transactions, release settings, and the bundled model's provenance.
+              <Text>
+                {
+                  "Check database transactions, release settings, and the bundled model's provenance."
+                }
+              </Text>
             </p>
             <Button asChild variant="outline">
               <Link href="/system">
-                System overview <ArrowUpRight size={14} />
+                <Text>{"System overview"}</Text>
+                <ArrowUpRight size={14} />
               </Link>
             </Button>
           </div>
           <div className="side-card">
-            <h3>Close the accountability loop</h3>
+            <h3>
+              <Text>{"Close the accountability loop"}</Text>
+            </h3>
             <p>
-              Review the outcomes that teams report before they enter the public evidence ledger.
+              <Text>
+                {
+                  "Review the outcomes that teams report before they enter the public evidence ledger."
+                }
+              </Text>
             </p>
             <Button asChild variant="outline">
               <Link href="/admin?tab=evidence">
-                Review impact evidence <ArrowUpRight size={14} />
+                <Text>{"Review impact evidence"}</Text>
+                <ArrowUpRight size={14} />
               </Link>
             </Button>
           </div>

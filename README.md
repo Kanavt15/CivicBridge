@@ -15,6 +15,8 @@ Read the detailed [product, technology stack, and ETL guide](docs/PRODUCT_TECH_S
 
 The installable user app is at **`/app`**. It includes phone navigation, searchable problems/solutions, role-aware posting, photo capture, GPS pin selection, and home-screen installation. It uses the existing Atlas database. See [installation and posting](docs/USER_APP.md).
 
+The redesigned website/app use a restrained white, grey, and blue interface with shorter pages and three-step posting forms. The header offers English, Hindi, Marathi, Bengali, Tamil, and Telugu; the preference persists while original posts and API values remain unchanged. See [the interface and localization guide](docs/DESIGN_SYSTEM.md).
+
 Use the [Atlas setup guide](docs/ATLAS.md) to create/select a cluster, configure a database user and IP access, and obtain the driver URI. The app already supports Atlas through `DATABASE_URL`; no schema rewrite is needed.
 
 ```powershell

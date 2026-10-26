@@ -1,5 +1,7 @@
 "use client";
-import Link from "next/link";
+import { LocalDate } from "@/components/i18n";
+
+import Link from "@/components/localized-fields";
 import { ArrowUpRight, Plus, Bell, Lightbulb } from "lucide-react";
 import { useData } from "@/lib/client";
 import { date } from "@/lib/utils";
@@ -15,7 +17,9 @@ import {
 } from "@/components/common";
 import { DashboardNav } from "@/components/dashboard-nav";
 import { ImpactCharts } from "@/components/charts";
+import { Text, useI18n } from "@/components/i18n";
 export default function Dashboard() {
+  const { t } = useI18n();
   const { data: d, error, loading, reload } = useData("/api/dashboard");
   if (loading) return <Loading />;
   if (error || !d) return <ErrorState error={error} retry={reload} />;
@@ -66,8 +70,8 @@ export default function Dashboard() {
         <div>
           <PageIntro
             eyebrow={`${role.toLowerCase()} workspace`}
-            title={`Welcome back, ${d.user.name.split(" ")[0]}.`}
-            description="A little progress today. A better community tomorrow."
+            title={t("Welcome back.") + " " + d.user.name.split(" ")[0]}
+            description="Track your reports, solutions, and collaborations."
             action={
               <Button asChild>
                 <Link
@@ -75,29 +79,35 @@ export default function Dashboard() {
                     role === "CITIZEN" ? "/problems/new" : role === "ADMIN" ? "/admin" : "/explore"
                   }
                 >
-                  {role === "CITIZEN" ? <Plus size={16} /> : <ArrowUpRight size={16} />}{" "}
-                  {role === "CITIZEN"
-                    ? "Report a problem"
-                    : role === "ADMIN"
-                      ? "Review submissions"
-                      : "Find a challenge"}
+                  {role === "CITIZEN" ? <Plus size={16} /> : <ArrowUpRight size={16} />}
+                  <Text> </Text>
+                  <Text>
+                    {role === "CITIZEN"
+                      ? "Report a problem"
+                      : role === "ADMIN"
+                        ? "Review submissions"
+                        : "Find a challenge"}
+                  </Text>
                 </Link>
               </Button>
             }
           />
           {d.user.isDemo && (
             <div className="info-box" style={{ marginBottom: 20 }}>
-              You’re using a seeded demo account. Sample records are labeled “Demo”; new submissions
-              are stored as user-created records.
+              <Text>{"Demo account. Sample posts are labelled."}</Text>
             </div>
           )}
           <div className="metric-grid">
             {metrics.map(([value, title]: any) => (
               <div className="metric-card" key={title}>
-                <span>{title}</span>
+                <span>
+                  <Text>{title}</Text>
+                </span>
                 <strong>{value}</strong>
                 <small>
-                  {role === "ADMIN" ? "Platform-wide · includes demos" : "Your workspace"}
+                  <Text>
+                    {role === "ADMIN" ? "Platform-wide · includes demos" : "Your workspace"}
+                  </Text>
                 </small>
               </div>
             ))}
@@ -110,9 +120,12 @@ export default function Dashboard() {
           {role === "CITIZEN" && (
             <div className="dashboard-panel">
               <div className="panel-heading">
-                <h2>Your reported challenges</h2>
+                <h2>
+                  <Text>{"Your reported challenges"}</Text>
+                </h2>
                 <Link href="/problems/new">
-                  New report <ArrowUpRight size={13} />
+                  <Text>{"New report"}</Text>
+                  <ArrowUpRight size={13} />
                 </Link>
               </div>
               {d.problems.length ? (
@@ -120,10 +133,18 @@ export default function Dashboard() {
                   <table>
                     <thead>
                       <tr>
-                        <th>Challenge</th>
-                        <th>Status</th>
-                        <th>Solutions</th>
-                        <th>Submitted</th>
+                        <th>
+                          <Text>{"Challenge"}</Text>
+                        </th>
+                        <th>
+                          <Text>{"Status"}</Text>
+                        </th>
+                        <th>
+                          <Text>{"Solutions"}</Text>
+                        </th>
+                        <th>
+                          <Text>{"Submitted"}</Text>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -132,14 +153,16 @@ export default function Dashboard() {
                           <td>
                             <Link href={`/problems/${p.id}`}>{p.title}</Link>
                             <small>
-                              {p.city} · {p.category} {p.isDemo && "· Demo"}
+                              {p.city} · <Text>{p.category}</Text> {p.isDemo && "· Demo"}
                             </small>
                           </td>
                           <td>
                             <Status value={p.status} />
                           </td>
                           <td>{p._count.proposals}</td>
-                          <td>{date(p.createdAt)}</td>
+                          <td>
+                            <LocalDate value={p.createdAt} />
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -157,10 +180,13 @@ export default function Dashboard() {
             <div className="dashboard-panel">
               <div className="panel-heading">
                 <h2>
-                  {role === "INSTITUTION" ? "Institution proposals" : "Your innovation portfolio"}
+                  <Text>
+                    {role === "INSTITUTION" ? "Institution proposals" : "Your innovation portfolio"}
+                  </Text>
                 </h2>
                 <Link href="/solutions/new">
-                  Propose an idea <ArrowUpRight size={13} />
+                  <Text>{"Propose an idea"}</Text>
+                  <ArrowUpRight size={13} />
                 </Link>
               </div>
               {d.proposals.length ? (
@@ -168,10 +194,18 @@ export default function Dashboard() {
                   <table>
                     <thead>
                       <tr>
-                        <th>Innovation</th>
-                        <th>Status</th>
-                        <th>Submitted</th>
-                        <th>Workspace</th>
+                        <th>
+                          <Text>{"Innovation"}</Text>
+                        </th>
+                        <th>
+                          <Text>{"Status"}</Text>
+                        </th>
+                        <th>
+                          <Text>{"Submitted"}</Text>
+                        </th>
+                        <th>
+                          <Text>{"Workspace"}</Text>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -180,20 +214,23 @@ export default function Dashboard() {
                           <td>
                             <Link href={`/innovations/${s.id}`}>{s.title}</Link>
                             <small>
-                              {s.problem.city} · {s.problem.category}
+                              {s.problem.city} · <Text>{s.problem.category}</Text>
                             </small>
                           </td>
                           <td>
                             <Status value={s.status} />
                           </td>
-                          <td>{date(s.createdAt)}</td>
+                          <td>
+                            <LocalDate value={s.createdAt} />
+                          </td>
                           <td>
                             {s.collaboration ? (
                               <Link
                                 className="text-link"
                                 href={`/collaborations/${s.collaboration.id}`}
                               >
-                                Open <ArrowUpRight size={12} />
+                                <Text>{"Open"}</Text>
+                                <ArrowUpRight size={12} />
                               </Link>
                             ) : (
                               "In review"
@@ -215,9 +252,12 @@ export default function Dashboard() {
           {role === "INDUSTRY" && (
             <div className="dashboard-panel">
               <div className="panel-heading">
-                <h2>Your support commitments</h2>
+                <h2>
+                  <Text>{"Your support commitments"}</Text>
+                </h2>
                 <Link href="/innovations">
-                  Explore innovations <ArrowUpRight size={13} />
+                  <Text>{"Explore innovations"}</Text>
+                  <ArrowUpRight size={13} />
                 </Link>
               </div>
               {d.support.length ? (
@@ -232,7 +272,7 @@ export default function Dashboard() {
                     </div>
                     {s.status === "ACCEPTED" && (
                       <Link className="text-link" href={`/collaborations/${s.collaborationId}`}>
-                        Workspace
+                        <Text>{"Workspace"}</Text>
                         <ArrowUpRight size={14} />
                       </Link>
                     )}
@@ -250,9 +290,11 @@ export default function Dashboard() {
             <div className="panel-heading">
               <h2>
                 <Bell size={16} style={{ display: "inline", marginRight: 8 }} />
-                Your recent activity
+                <Text>{"Your recent activity"}</Text>
               </h2>
-              <Link href="/notifications">All notifications</Link>
+              <Link href="/notifications">
+                <Text>{"All notifications"}</Text>
+              </Link>
             </div>
             {d.notifications.length ? (
               d.notifications.slice(0, 4).map((n: any) => (
@@ -260,26 +302,34 @@ export default function Dashboard() {
                   <div>
                     <h3>{n.title}</h3>
                     <p>{n.body}</p>
-                    <small className="muted">{date(n.createdAt)}</small>
+                    <small className="muted">
+                      <LocalDate value={n.createdAt} />
+                    </small>
                   </div>
                   <ArrowUpRight size={16} />
                 </Link>
               ))
             ) : (
-              <p className="muted">Updates to your reports and collaborations will appear here.</p>
+              <p className="muted">
+                <Text>{"Updates to your reports and collaborations will appear here."}</Text>
+              </p>
             )}
           </div>
           {d.achievements.length > 0 && (
             <div className="dashboard-panel">
               <div className="panel-heading">
-                <h2>Your recognized contributions</h2>
-                <Link href="/leaderboard">Leaderboard</Link>
+                <h2>
+                  <Text>{"Your recognized contributions"}</Text>
+                </h2>
+                <Link href="/leaderboard">
+                  <Text>{"Leaderboard"}</Text>
+                </Link>
               </div>
               <div className="achievement-list">
                 {d.achievements.map((a: any) => (
                   <div className="achievement" key={a.id}>
                     <Lightbulb size={17} />
-                    {a.label} · {a.points} points
+                    {a.label} · {a.points} <Text>{"points"}</Text>
                   </div>
                 ))}
               </div>
@@ -288,18 +338,23 @@ export default function Dashboard() {
           <div className="section-heading space-top">
             <div>
               <h2 style={{ fontSize: 23 }}>
-                {role === "RESEARCHER"
-                  ? "Matched to your interests"
-                  : "Where you can make a difference"}
+                <Text>
+                  {role === "RESEARCHER"
+                    ? "Matched to your interests"
+                    : "Where you can make a difference"}
+                </Text>
               </h2>
               <p>
-                {role === "RESEARCHER"
-                  ? "Rule-based matching using your profile skills and category interests."
-                  : "Explore opportunities across the community."}
+                <Text>
+                  {role === "RESEARCHER"
+                    ? "Rule-based matching using your profile skills and category interests."
+                    : "Explore opportunities across the community."}
+                </Text>
               </p>
             </div>
             <Link className="text-link" href="/explore">
-              Explore all <ArrowUpRight size={14} />
+              <Text>{"Explore all"}</Text>
+              <ArrowUpRight size={14} />
             </Link>
           </div>
           <div

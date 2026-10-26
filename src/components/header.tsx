@@ -1,11 +1,14 @@
 "use client";
-import Link from "next/link";
+import { Control } from "@/components/localized-fields";
+
+import Link from "@/components/localized-fields";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "next-themes";
-import { useState } from "react";
-import { ArrowUpRight, Bell, Menu, Moon, Sun, X, LogOut, LayoutDashboard } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowUpRight, Bell, Menu, Moon, Sun, X, UserRound, LogOut } from "lucide-react";
 import { Button } from "./ui/button";
+import { LanguagePicker, Text, useI18n } from "./i18n";
 export function Logo() {
   return (
     <Link href="/" className="brand" aria-label="CivicBridge home">
@@ -14,14 +17,13 @@ export function Logo() {
           <path
             d="M5 24V13m22 11V13M5 18c6 0 5-11 11-11s5 11 11 11M3 24h26M16 7v17"
             stroke="currentColor"
-            strokeWidth="2.5"
+            strokeWidth="2.3"
             strokeLinecap="round"
           />
         </svg>
       </span>
       <span>
-        Civic<span className="brand-light">Bridge</span>
-        <small>Ideas into impact.</small>
+        <Text>{"CivicBridge"}</Text>
       </span>
     </Link>
   );
@@ -30,91 +32,124 @@ export function Header() {
   const path = usePathname();
   const { data: session } = useSession();
   const { resolvedTheme, setTheme } = useTheme();
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
+  useEffect(() => setOpen(false), [path]);
+  useEffect(() => {
+    if (!open) return;
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [open]);
   const links = [
-    ["/app", "Community app"],
-    ["/explore", "Explore challenges"],
-    ["/intelligence", "AI lab"],
-    ["/innovations", "Innovations"],
+    ["/explore", "Problems"],
+    ["/innovations", "Solutions"],
     ["/impact", "Impact"],
+    ["/app", "Community app"],
   ];
   return (
-    <>
-      <div className="gov-strip">
-        <div className="container gov-inner">
-          <span>
-            <span className="india-flag" /> A shared vision. A stronger India.
-          </span>
-          <span>
-            Built for societal innovation <span className="strip-dot">•</span> SIH 2026
-          </span>
+    <header className="header">
+      <div className="container nav-row">
+        <Logo />
+        <nav
+          id="primary-navigation"
+          className={"nav-links" + (open ? " open" : "")}
+          aria-label={t("Main navigation")}
+        >
+          {links.map(([href, name]) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setOpen(false)}
+              className={path.startsWith(href) ? "active" : ""}
+              aria-current={path.startsWith(href) ? "page" : undefined}
+            >
+              <Text>{name}</Text>
+            </Link>
+          ))}
+          <div className="mobile-account-links">
+            <Link href={session ? "/dashboard" : "/login"}>
+              <Text>{session ? "My activity" : "Sign in"}</Text>
+            </Link>
+            <Link href="/intelligence">
+              <Text>AI lab</Text>
+            </Link>
+            <Control
+              type="button"
+              className="icon-btn"
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              aria-label={t("Toggle color theme")}
+            >
+              <Moon size={17} />
+            </Control>
+          </div>
+        </nav>
+        <div className="nav-actions">
+          <LanguagePicker />
+          <Control
+            className="icon-btn theme-toggle"
+            type="button"
+            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+            aria-label={t("Toggle color theme")}
+          >
+            {resolvedTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </Control>
+          {session ? (
+            <>
+              <Link
+                className="icon-btn notification-link"
+                href="/notifications"
+                aria-label={t("Notifications")}
+              >
+                <Bell size={19} />
+              </Link>
+              <details className="account-menu">
+                <summary aria-label={t("Account")}>
+                  <span className="avatar avatar-sm">{session.user.name?.slice(0, 1)}</span>
+                </summary>
+                <div>
+                  <strong>{session.user.name}</strong>
+                  <Link href="/dashboard">
+                    <UserRound size={15} />
+                    <Text>My activity</Text>
+                  </Link>
+                  <Link href="/settings">
+                    <Text>My profile</Text>
+                  </Link>
+                  <Control type="button" onClick={() => signOut({ callbackUrl: "/" })}>
+                    <LogOut size={15} />
+                    <Text>Sign out</Text>
+                  </Control>
+                </div>
+              </details>
+            </>
+          ) : (
+            <>
+              <Link className="login-link" href="/login">
+                <Text>Sign in</Text>
+              </Link>
+              <Button asChild size="sm" className="header-start">
+                <Link href="/register">
+                  <Text>Get started</Text>
+                  <ArrowUpRight size={15} />
+                </Link>
+              </Button>
+            </>
+          )}
+          <Control
+            className="icon-btn mobile-menu"
+            type="button"
+            aria-expanded={open}
+            aria-controls="primary-navigation"
+            aria-label={t("Toggle navigation")}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X size={21} /> : <Menu size={21} />}
+          </Control>
         </div>
       </div>
-      <header className="header">
-        <div className="container nav-row">
-          <Logo />
-          <nav className={open ? "nav-links open" : "nav-links"} aria-label="Main navigation">
-            {links.map(([href, name]) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setOpen(false)}
-                className={path === href ? "active" : ""}
-              >
-                {name}
-              </Link>
-            ))}
-          </nav>
-          <div className="nav-actions">
-            <button
-              className="icon-btn theme-toggle"
-              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-              aria-label="Toggle color theme"
-            >
-              {resolvedTheme === "dark" ? <Moon size={18} /> : <Sun size={18} />}
-            </button>
-            {session ? (
-              <>
-                <Link href="/notifications" className="icon-btn" aria-label="Notifications">
-                  <Bell size={18} />
-                </Link>
-                <Button asChild size="sm">
-                  <Link href="/dashboard">
-                    <LayoutDashboard size={15} />
-                    <span className="desktop-label">Dashboard</span>
-                  </Link>
-                </Button>
-                <button
-                  className="icon-btn"
-                  onClick={() => signOut({ callbackUrl: "/" })}
-                  aria-label="Sign out"
-                >
-                  <LogOut size={17} />
-                </button>
-              </>
-            ) : (
-              <>
-                <Link className="login-link" href="/login">
-                  Log in
-                </Link>
-                <Button asChild size="sm">
-                  <Link href="/register">
-                    Get involved <ArrowUpRight size={16} />
-                  </Link>
-                </Button>
-              </>
-            )}
-            <button
-              className="icon-btn mobile-menu"
-              aria-expanded={open}
-              aria-label="Toggle navigation"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <X /> : <Menu />}
-            </button>
-          </div>
-        </div>
-      </header>
-    </>
+    </header>
   );
 }

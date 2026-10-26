@@ -1,30 +1,73 @@
 import Link from "next/link";
 import {
-  ArrowRight,
-  ArrowUpRight,
-  Check,
-  CheckCircle2,
-  CircleArrowRight,
-  Globe2,
-  GraduationCap,
-  Handshake,
-  Lightbulb,
-  MapPin,
-  MoveUpRight,
   Plus,
-  Send,
-  Sparkles,
+  ArrowRight,
+  MapPin,
   Users,
+  Lightbulb,
+  Check,
+  MessageSquare,
+  Handshake,
+  ChartNoAxesCombined,
 } from "lucide-react";
 import { db } from "@/lib/db";
 import { platformStats } from "@/lib/queries";
 import { publicStatuses } from "@/lib/domain";
 import { Button } from "@/components/ui/button";
 import { ProblemCard } from "@/components/common";
-import { IndiaNetwork } from "@/components/india-network";
+import { Text } from "@/components/i18n";
 export const dynamic = "force-dynamic";
+function Neighbourhood() {
+  return (
+    <div className="neighbourhood" aria-hidden="true">
+      <svg viewBox="0 0 500 370" fill="none">
+        <path d="M30 220 235 100l235 125-207 120L30 220Z" fill="#EDF0F6" />
+        <path
+          d="m50 222 205-119m-124 163 203-118m-124 159 201-118M118 168l235 126M196 123l235 125"
+          stroke="white"
+          strokeWidth="19"
+        />
+        <path d="m90 173 45-26 45 24-45 27-45-25Z" fill="#DFE5F0" />
+        <path d="M90 173v39l45 25v-39m45-27v40l-45 26" fill="#D1D9E7" />
+        <path d="m270 161 49-28 48 25-48 29-49-26Z" fill="#fff" />
+        <path d="M270 161v55l49 26v-55m48-29v55l-48 29" fill="#D5DEF0" />
+        <path d="m193 243 51-30 50 27-51 30-50-27Z" fill="#fff" />
+        <path d="M193 243v39l50 27v-39m51-30v40l-51 29" fill="#D5DEF0" />
+        <path
+          d="M144 124c0-17 14-31 31-31s31 14 31 31c0 22-31 48-31 48s-31-26-31-48Z"
+          fill="#335CDE"
+        />
+        <circle cx="175" cy="124" r="10" fill="white" />
+        <path
+          d="M326 103c0-13 11-24 24-24s24 11 24 24c0 17-24 37-24 37s-24-20-24-37Z"
+          fill="#335CDE"
+          opacity=".4"
+        />
+        <circle cx="350" cy="103" r="7" fill="white" />
+        <path
+          d="M234 212c0-14 11-25 25-25s25 11 25 25c0 18-25 38-25 38s-25-20-25-38Z"
+          fill="#335CDE"
+        />
+        <circle cx="259" cy="212" r="8" fill="white" />
+      </svg>
+      <div className="neighbourhood-note">
+        <span>
+          <Check size={17} />
+        </span>
+        <div>
+          <strong>
+            <Text>A place for local progress</Text>
+          </strong>
+          <small>
+            <Text>Share a local problem.</Text>
+          </small>
+        </div>
+      </div>
+    </div>
+  );
+}
 export default async function Home() {
-  const [stats, featured, stories, orgs] = await Promise.all([
+  const [stats, featured] = await Promise.all([
     platformStats(),
     db.problem.findMany({
       where: { status: { in: [...publicStatuses] } },
@@ -35,304 +78,117 @@ export default async function Home() {
       orderBy: [{ urgencyRank: "desc" }, { createdAt: "desc" }],
       take: 3,
     }),
-    db.solutionProposal.findMany({
-      where: { status: { in: ["PILOT", "COMPLETED"] } },
-      include: {
-        problem: { select: { city: true, category: true, population: true } },
-        team: { select: { name: true } },
-      },
-      take: 2,
-    }),
-    db.organization.findMany({ where: { verified: true }, take: 5 }),
   ]);
   return (
     <>
-      <section className="hero">
-        <div className="container hero-layout">
-          <div className="hero-copy">
-            <div className="hero-badge">
-              <span className="live-dot" /> Big change starts with all of us{" "}
-              <ArrowUpRight size={13} />
-            </div>
-            <h1>
-              Turning society’s
-              <br />
-              challenges into
-              <br />
-              <span>tomorrow’s innovations.</span>
-            </h1>
-            <p>
-              A unified platform connecting citizens, academic institutions, and industries to solve
-              real-world challenges. Because a better India is something we build together.
-            </p>
-            <div className="hero-buttons">
-              <Button asChild size="lg">
-                <Link href="/problems/new">
-                  <Plus size={19} />
-                  Report a problem
-                  <ArrowUpRight size={17} />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/explore">
-                  Explore challenges
-                  <ArrowRight size={17} />
-                </Link>
-              </Button>
-            </div>
-            <div className="hero-proof">
-              <span>
-                <CheckCircle2 size={15} /> Community led
-              </span>
-              <span>
-                <CheckCircle2 size={15} /> Innovation driven
-              </span>
-              <span>
-                <CheckCircle2 size={15} /> Impact focused
-              </span>
-            </div>
-          </div>
-          <IndiaNetwork open={stats.problems} resolved={stats.resolved} />
-        </div>
-      </section>
-      <section className="stat-section">
-        <div className="container stats-grid">
-          {[
-            [stats.problems, "Societal challenges", Globe2],
-            [stats.contributors, "Changemakers connected", Users],
-            [stats.innovations, "Innovations in action", Lightbulb],
-            [stats.organizations, "Ecosystem partners", Handshake],
-          ].map(([num, text, Icon]: any, i) => (
-            <div className="stat-item" key={text}>
-              <span className={`stat-icon stat-icon-${i}`}>
-                <Icon size={22} />
-              </span>
-              <div>
-                <strong>
-                  {Number(num).toLocaleString("en-IN")}
-                  <span>+</span>
-                </strong>
-                <span>{text}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="container data-note">
-          <span className="live-dot" />
-          Live from the platform{" "}
-          {stats.demo > 0 && <span>· Includes clearly labeled demonstration records</span>}
-        </div>
-      </section>
-      <section className="partners-band container">
-        <span>
-          Better together.
-          <br />
-          <strong>Our innovation ecosystem.</strong>
-        </span>
-        <div className="partner-logos">
-          {orgs.map((o, i) => (
-            <Link href="/organizations" key={o.id}>
-              <span className="partner-symbol">
-                {i % 2 === 0 ? <GraduationCap size={26} /> : <Globe2 size={25} />}
-              </span>
-              <span>
-                {o.name}
-                <small>{o.isDemo ? "Illustrative demo partner" : "Verified organization"}</small>
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-      <section className="section section-soft" id="challenges">
-        <div className="container">
-          <div className="section-heading">
-            <div>
-              <span className="section-kicker">
-                <span /> Challenges worth solving
-              </span>
-              <h2>Real problems. Room for your ideas.</h2>
-              <p>Find a challenge that matters to you. Be part of what comes next.</p>
-            </div>
-            <Button asChild variant="outline">
+      <section className="home-hero container">
+        <div className="home-hero-copy">
+          <span className="home-context">
+            <span className="live-dot" />
+            <Text>Independent community platform</Text>
+          </span>
+          <h1>
+            <Text>Better neighbourhoods start with you.</Text>
+          </h1>
+          <p>
+            <Text>Report a local issue. Help build a practical solution.</Text>
+          </p>
+          <div className="home-actions">
+            <Button asChild size="lg">
+              <Link href="/problems/new">
+                <Plus size={18} />
+                <Text>Report a problem</Text>
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline">
               <Link href="/explore">
-                View all challenges <ArrowUpRight size={16} />
+                <Text>Explore problems</Text>
+                <ArrowRight size={17} />
               </Link>
             </Button>
           </div>
-          <div className="challenge-grid">
-            {featured.map((p) => (
-              <ProblemCard key={p.id} problem={p} />
-            ))}
-          </div>
-          <div className="challenge-invite">
-            <span>
-              <Lightbulb size={17} />
-              See something that needs to change in your community?
+          <div className="home-members">
+            <span className="member-dots" aria-hidden="true">
+              <i>क</i>
+              <i>அ</i>
+              <i>తె</i>
+              <i>ব</i>
             </span>
-            <Link href="/problems/new">
-              Put it on the map <ArrowRight size={15} />
-            </Link>
+            <span>
+              <Text>Connect ideas with people.</Text>
+            </span>
           </div>
+        </div>
+        <Neighbourhood />
+      </section>
+      <section className="container home-stats" aria-label="Platform statistics">
+        {[
+          [stats.problems, "Problems shared", MapPin],
+          [stats.contributors, "People contributing", Users],
+          [stats.innovations, "Solutions in progress", Lightbulb],
+        ].map(([value, text, Icon]: any) => (
+          <div key={text}>
+            <Icon size={19} />
+            <strong>{value}</strong>
+            <span>
+              <Text>{text}</Text>
+            </span>
+          </div>
+        ))}
+        {stats.demo > 0 && (
+          <small>
+            <Text>Includes labelled demo records.</Text>
+          </small>
+        )}
+      </section>
+      <section className="container home-board">
+        <div className="section-heading">
+          <div>
+            <h2>
+              <Text>Recently shared</Text>
+            </h2>
+            <p>
+              <Text>Find a problem you can help solve.</Text>
+            </p>
+          </div>
+          <Link className="text-link" href="/explore">
+            <Text>View all</Text>
+            <ArrowRight size={16} />
+          </Link>
+        </div>
+        <div className="challenge-grid">
+          {featured.map((p) => (
+            <ProblemCard key={p.id} problem={p} />
+          ))}
         </div>
       </section>
-      <section className="section how-section" id="how-it-works">
-        <div className="container">
-          <div className="center-heading">
-            <span className="section-kicker">A simple idea. A powerful journey.</span>
-            <h2>From “someone should” to “we did.”</h2>
-            <p>Every meaningful innovation begins with someone who cares.</p>
-          </div>
-          <div className="how-grid">
-            {[
-              {
-                icon: MapPin,
-                title: "Spot a challenge",
-                copy: "Share a real issue in your community. A local perspective is where progress begins.",
-                step: "01",
-                href: "/problems/new",
-                cta: "Report a problem",
-              },
-              {
-                icon: Lightbulb,
-                title: "Bring an idea",
-                copy: "Researchers and student teams turn lived challenges into practical, thoughtful solutions.",
-                step: "02",
-                href: "/explore",
-                cta: "Find your challenge",
-              },
-              {
-                icon: Handshake,
-                title: "Build it together",
-                copy: "Connect with institutions, mentors, and industry partners to bring good ideas to life.",
-                step: "03",
-                href: "/innovations",
-                cta: "Explore innovations",
-              },
-              {
-                icon: CircleArrowRight,
-                title: "Make a difference",
-                copy: "Pilot, measure, and grow. Follow the journey from first idea to lasting community impact.",
-                step: "04",
-                href: "/impact",
-                cta: "See the impact",
-              },
-            ].map(({ icon: Icon, ...s }) => (
-              <div className="how-step" key={s.step}>
-                <div className="step-top">
-                  <span className="how-icon">
-                    <Icon size={25} />
-                  </span>
-                  <span className="step-number">{s.step}</span>
-                </div>
-                <h3>{s.title}</h3>
-                <p>{s.copy}</p>
-                <Link href={s.href}>
-                  {s.cta}
-                  <ArrowUpRight size={15} />
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="section stories-section">
-        <div className="container">
-          <div className="section-heading">
-            <div>
-              <span className="section-kicker">
-                <span /> Innovation in motion
-              </span>
-              <h2>Good ideas deserve to go places.</h2>
-              <p>Meet the projects moving from possibility to positive change.</p>
-            </div>
-            <Link className="text-link" href="/innovations">
-              Discover innovations <ArrowUpRight size={17} />
-            </Link>
-          </div>
-          <div className="stories-grid">
-            {stories.map((s, i) => (
-              <Link className={`story-card story-${i}`} href={`/innovations/${s.id}`} key={s.id}>
-                <div className="story-visual">
-                  <div className="story-orb">
-                    <span />
-                    {i === 0 ? (
-                      <Lightbulb size={68} strokeWidth={1} />
-                    ) : (
-                      <Globe2 size={68} strokeWidth={1} />
-                    )}
-                  </div>
-                  <span className="story-label">
-                    {s.status === "COMPLETED" ? (
-                      <>
-                        <Check size={13} /> Completed pilot
-                      </>
-                    ) : (
-                      <>
-                        <span className="live-dot" /> Pilot in progress
-                      </>
-                    )}
-                  </span>
-                </div>
-                <div className="story-body">
-                  <small>
-                    {s.problem.category} {s.isDemo && "· Demonstration project"}
-                  </small>
-                  <h3>{s.title}</h3>
-                  <p>{s.impact}</p>
-                  <div>
-                    <span>
-                      {s.team?.name || "Independent innovation"} <span>· {s.problem.city}</span>
-                    </span>
-                    <ArrowUpRight size={20} />
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="container cta-section">
-        <div className="cta-bridge" aria-hidden="true">
-          <svg viewBox="0 0 360 200" fill="none">
-            <path
-              d="M10 170h340M55 170V68m250 102V68M55 96C155 96 105 15 180 15S205 96 305 96M180 15v155M55 96v74M90 88v82M125 60v110M235 60v110M270 88v82"
-              stroke="currentColor"
-              strokeWidth="2"
-            />
-            <circle cx="180" cy="15" r="5" fill="currentColor" />
-          </svg>
-        </div>
+      <section className="container home-process" id="how-it-works">
         <div>
-          <span className="section-kicker">Your perspective could change everything.</span>
           <h2>
-            A better tomorrow
-            <br />
-            needs you today.
+            <Text>How it works</Text>
           </h2>
           <p>
-            A challenge to share. An idea to explore. A hand to lend.
-            <br />
-            There’s a place for you on CivicBridge.
+            <Text>Choose what you want to do.</Text>
           </p>
-          <Button asChild size="lg">
-            <Link href="/register">
-              Let’s build something that matters <ArrowUpRight size={18} />
-            </Link>
-          </Button>
         </div>
-        <div className="cta-side">
-          <span>
-            <Users size={19} />
-            Citizens with a voice
-          </span>
-          <span>
-            <GraduationCap size={19} />
-            Minds with a mission
-          </span>
-          <span>
-            <Handshake size={19} />
-            Partners with a purpose
-          </span>
+        <div className="process-items">
+          {[
+            [MessageSquare, "Share", "Share a local problem."],
+            [Handshake, "Collaborate", "Connect ideas with people."],
+            [ChartNoAxesCombined, "Track progress", "See what changes."],
+          ].map(([Icon, title, copy]: any) => (
+            <div key={title}>
+              <span>
+                <Icon size={21} />
+              </span>
+              <strong>
+                <Text>{title}</Text>
+              </strong>
+              <p>
+                <Text>{copy}</Text>
+              </p>
+            </div>
+          ))}
         </div>
       </section>
     </>

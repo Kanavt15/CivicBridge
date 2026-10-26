@@ -1,6 +1,11 @@
 "use client";
+import { LocalDate } from "@/components/i18n";
+
+import { Input, Textarea } from "@/components/localized-fields";
+import { Text } from "@/components/i18n";
+
 import { use, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/localized-fields";
 import { useSession } from "next-auth/react";
 import { Send, Plus, Lock, ArrowUpRight } from "lucide-react";
 import { toast } from "sonner";
@@ -48,6 +53,7 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
       <PageIntro
         eyebrow="Private collaboration workspace"
         title={c.proposal.title}
+        content
         description={c.proposal.problem.title}
         action={<Status value={c.proposal.status} />}
       />
@@ -57,8 +63,11 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
       >
         <Lock size={16} />
         <span>
-          Only the approved team, accepted support partners, and administrators can access this
-          workspace.
+          <Text>
+            {
+              "Only the approved team, accepted support partners, and administrators can access this workspace."
+            }
+          </Text>
         </span>
       </div>
       <WorkspaceEvidence collaborationId={id} canSubmit={!!teamMember} />
@@ -66,7 +75,9 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
         <div>
           <section className="dashboard-panel">
             <div className="panel-heading">
-              <h2>Project milestones</h2>
+              <h2>
+                <Text>{"Project milestones"}</Text>
+              </h2>
               <span className="muted">
                 {done} / {c.milestones.length}
               </span>
@@ -80,7 +91,7 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
             </div>
             {c.milestones.map((m: any) => (
               <div className={`check-row ${m.completedAt ? "done" : ""}`} key={m.id}>
-                <input
+                <Input
                   type="checkbox"
                   checked={!!m.completedAt}
                   disabled={!lead || busy || !!m.verifiedAt}
@@ -92,12 +103,15 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
                 <div>
                   <strong>{m.title}</strong>
                   <small>
-                    Due {date(m.dueDate)}
+                    <Text>{"Due"}</Text>
+                    <LocalDate value={m.dueDate} />
                     {m.completedAt ? ` · Completed ${date(m.completedAt)}` : ""}
                   </small>
                   {m.description && <p style={{ fontSize: 11, marginTop: 5 }}>{m.description}</p>}
                   {m.verifiedAt && (
-                    <small style={{ color: "var(--teal)" }}>Verified achievement · 20 points</small>
+                    <small style={{ color: "var(--teal)" }}>
+                      <Text>{"Verified achievement · 20 points"}</Text>
+                    </small>
                   )}
                   {m.completedAt && !m.verifiedAt && session?.user.role === "ADMIN" && (
                     <Button
@@ -112,7 +126,7 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
                         })
                       }
                     >
-                      Verify achievement
+                      <Text>{"Verify achievement"}</Text>
                     </Button>
                   )}
                 </div>
@@ -120,7 +134,7 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
             ))}
             {!c.milestones.length && (
               <p className="muted">
-                Define your first milestone to give the project a clear direction.
+                <Text>{"Define your first milestone to give the project a clear direction."}</Text>
               </p>
             )}
             {lead && (
@@ -134,8 +148,8 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
                 }}
               >
                 <label className="field">
-                  Milestone title
-                  <input
+                  <Text>{"Milestone title"}</Text>
+                  <Input
                     name="title"
                     required
                     minLength={3}
@@ -145,12 +159,12 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
                 </label>
                 <div className="form-grid">
                   <label className="field">
-                    Target date
-                    <input type="date" name="dueDate" required />
+                    <Text>{"Target date"}</Text>
+                    <Input type="date" name="dueDate" required />
                   </label>
                   <label className="field">
-                    Description (optional)
-                    <input
+                    <Text>{"Description (optional)"}</Text>
+                    <Input
                       name="description"
                       maxLength={2000}
                       placeholder="A clear, measurable outcome"
@@ -159,18 +173,20 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
                 </div>
                 <Button type="submit" variant="outline" disabled={busy}>
                   <Plus size={15} />
-                  Add milestone
+                  <Text>{"Add milestone"}</Text>
                 </Button>
               </form>
             )}
           </section>
           <section className="dashboard-panel">
             <div className="panel-heading">
-              <h2>Team tasks</h2>
+              <h2>
+                <Text>{"Team tasks"}</Text>
+              </h2>
             </div>
             {c.tasks.map((t: any) => (
               <label className={`check-row ${t.done ? "done" : ""}`} key={t.id}>
-                <input
+                <Input
                   type="checkbox"
                   checked={t.done}
                   disabled={
@@ -187,7 +203,9 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
               </label>
             ))}
             {!c.tasks.length && (
-              <p className="muted">Break the next milestone into manageable tasks.</p>
+              <p className="muted">
+                <Text>{"Break the next milestone into manageable tasks."}</Text>
+              </p>
             )}
             {teamMember && (
               <form
@@ -199,7 +217,7 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
                   if (await mutate("tasks", "POST", { title })) f.reset();
                 }}
               >
-                <input
+                <Input
                   name="title"
                   minLength={3}
                   maxLength={200}
@@ -209,14 +227,16 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
                 />
                 <Button variant="outline" type="submit" disabled={busy}>
                   <Plus size={15} />
-                  Add task
+                  <Text>{"Add task"}</Text>
                 </Button>
               </form>
             )}
           </section>
           <section className="dashboard-panel">
             <div className="panel-heading">
-              <h2>Progress & discussion</h2>
+              <h2>
+                <Text>{"Progress & discussion"}</Text>
+              </h2>
             </div>
             <div className="comment-list">
               {c.discussions.map((m: any) => (
@@ -224,7 +244,9 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
                   <span className="avatar">{initials(m.author.name)}</span>
                   <div>
                     <strong>{m.author.name}</strong>
-                    <small>{date(m.createdAt)}</small>
+                    <small>
+                      <LocalDate value={m.createdAt} />
+                    </small>
                     <p>{m.body}</p>
                   </div>
                 </div>
@@ -237,7 +259,7 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
                 if (await mutate("discussion", "POST", { body: message })) setMessage("");
               }}
             >
-              <textarea
+              <Textarea
                 aria-label="Workspace message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -248,7 +270,7 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
               />
               <Button type="submit" disabled={busy}>
                 <Send size={15} />
-                Post update
+                <Text>{"Post update"}</Text>
               </Button>
             </form>
           </section>
@@ -256,12 +278,16 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
         <div>
           <section className="dashboard-panel">
             <div className="panel-heading">
-              <h2>People behind the project</h2>
+              <h2>
+                <Text>{"People behind the project"}</Text>
+              </h2>
             </div>
             <div className="member-row">
               <span className="avatar">{initials(c.proposal.author.name)}</span>
               <Link href={`/people/${c.proposal.author.id}`}>{c.proposal.author.name}</Link>
-              <small>Project lead</small>
+              <small>
+                <Text>{"Project lead"}</Text>
+              </small>
             </div>
             {c.proposal.team?.members
               .filter((m: any) => m.userId !== c.proposal.authorId)
@@ -269,17 +295,21 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
                 <div className="member-row" key={m.id}>
                   <span className="avatar">{initials(m.user.name)}</span>
                   <Link href={`/people/${m.user.id}`}>{m.user.name}</Link>
-                  <small>Team member</small>
+                  <small>
+                    <Text>{"Team member"}</Text>
+                  </small>
                 </div>
               ))}
             <Link className="text-link space-top" href={`/innovations/${c.proposalId}`}>
-              View innovation proposal
+              <Text>{"View innovation proposal"}</Text>
               <ArrowUpRight size={14} />
             </Link>
           </section>
           <section className="dashboard-panel">
             <div className="panel-heading">
-              <h2>Resources & support</h2>
+              <h2>
+                <Text>{"Resources & support"}</Text>
+              </h2>
             </div>
             <p className="prose-text" style={{ fontSize: 12 }}>
               {c.proposal.resources}
@@ -304,7 +334,7 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
                           mutate("support", "PATCH", { commitmentId: s.id, status: "ACCEPTED" })
                         }
                       >
-                        Accept partner
+                        <Text>{"Accept partner"}</Text>
                       </Button>
                       <Button
                         size="sm"
@@ -314,7 +344,7 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
                           mutate("support", "PATCH", { commitmentId: s.id, status: "DECLINED" })
                         }
                       >
-                        Decline
+                        <Text>{"Decline"}</Text>
                       </Button>
                     </div>
                   )}
@@ -323,8 +353,11 @@ export default function Workspace({ params }: { params: Promise<{ id: string }> 
             </div>
             {!c.commitments.length && (
               <p className="muted" style={{ fontSize: 12, marginTop: 15 }}>
-                Partner requests will appear here. Industry and institution accounts can offer
-                support from the innovation’s public page.
+                <Text>
+                  {
+                    "Partner requests will appear here. Industry and institution accounts can offer support from the innovation’s public page."
+                  }
+                </Text>
               </p>
             )}
           </section>

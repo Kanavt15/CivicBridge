@@ -1,4 +1,7 @@
 "use client";
+import { Input, Textarea } from "@/components/localized-fields";
+import { Text } from "@/components/i18n";
+
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { Users, Plus, ShieldCheck, Mail } from "lucide-react";
@@ -55,17 +58,19 @@ export default function Teams() {
           session && ["RESEARCHER", "INSTITUTION", "ADMIN"].includes(session.user.role) ? (
             <Button onClick={() => setCreating(!creating)}>
               <Plus size={16} />
-              {creating ? "Close form" : "Create a team"}
+              <Text>{creating ? "Close form" : "Create a team"}</Text>
             </Button>
           ) : undefined
         }
       />
       {creating && (
         <form className="form-card form-stack" style={{ marginBottom: 25 }} onSubmit={create}>
-          <h2>Give your team a beginning</h2>
+          <h2>
+            <Text>{"Give your team a beginning"}</Text>
+          </h2>
           <label className="field">
-            Team name
-            <input
+            <Text>{"Team name"}</Text>
+            <Input
               name="name"
               minLength={3}
               maxLength={100}
@@ -74,8 +79,8 @@ export default function Teams() {
             />
           </label>
           <label className="field">
-            Your shared mission
-            <textarea
+            <Text>{"Your shared mission"}</Text>
+            <Textarea
               name="description"
               minLength={20}
               maxLength={2000}
@@ -84,7 +89,7 @@ export default function Teams() {
             />
           </label>
           <Button type="submit" disabled={busy}>
-            Create team
+            <Text>{"Create team"}</Text>
           </Button>
         </form>
       )}
@@ -112,17 +117,21 @@ export default function Teams() {
                   {t.verified && (
                     <Badge type="approved">
                       <ShieldCheck size={12} />
-                      Verified team
+                      <Text>{"Verified team"}</Text>
                     </Badge>
                   )}
                   {t.isDemo && <DemoBadge />}
-                  {me && !me.accepted && <Badge type="pending">Invitation pending</Badge>}
+                  {me && !me.accepted && (
+                    <Badge type="pending">
+                      <Text>{"Invitation pending"}</Text>
+                    </Badge>
+                  )}
                 </div>
                 <h3>{t.name}</h3>
                 <p>{t.description}</p>
                 {t.organization && (
                   <small className="muted">
-                    {t.organization.name} · {t._count.proposals} proposals
+                    {t.organization.name} · {t._count.proposals} <Text>{"proposals"}</Text>
                   </small>
                 )}
                 <div className="space-top">
@@ -131,7 +140,9 @@ export default function Teams() {
                       <span className="avatar">{initials(m.user.name)}</span>
                       <span>{m.user.name}</span>
                       <small>
-                        {!m.accepted ? "Invited" : m.role === "LEAD" ? "Team lead" : "Member"}
+                        <Text>
+                          {!m.accepted ? "Invited" : m.role === "LEAD" ? "Team lead" : "Member"}
+                        </Text>
                       </small>
                     </div>
                   ))}
@@ -142,7 +153,7 @@ export default function Teams() {
                     disabled={busy}
                     onClick={() => action(t.id, "accept")}
                   >
-                    Accept invitation
+                    <Text>{"Accept invitation"}</Text>
                   </Button>
                 )}
                 {me?.role === "LEAD" && me.accepted && (
@@ -154,7 +165,7 @@ export default function Teams() {
                       e.currentTarget.reset();
                     }}
                   >
-                    <input
+                    <Input
                       type="email"
                       name="email"
                       required
@@ -163,7 +174,7 @@ export default function Teams() {
                     />
                     <Button type="submit" variant="outline" disabled={busy}>
                       <Mail size={14} />
-                      Invite
+                      <Text>{"Invite"}</Text>
                     </Button>
                   </form>
                 )}
@@ -175,7 +186,7 @@ export default function Teams() {
                     onClick={() => action(t.id, "verify")}
                   >
                     <ShieldCheck size={15} />
-                    Verify team
+                    <Text>{"Verify team"}</Text>
                   </Button>
                 )}
               </article>

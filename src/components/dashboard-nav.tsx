@@ -12,6 +12,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { initials, label } from "@/lib/utils";
+import { Text } from "./i18n";
 export function DashboardNav({ user }: { user: { name: string; role: string } }) {
   const path = usePathname();
   return (
@@ -19,7 +20,9 @@ export function DashboardNav({ user }: { user: { name: string; role: string } })
       <div className="dashboard-user">
         <div className="avatar">{initials(user.name)}</div>
         <strong>{user.name}</strong>
-        <small>{label(user.role)} workspace</small>
+        <small>
+          <Text>{label(user.role)}</Text>
+        </small>
       </div>
       <nav className="dashboard-nav" aria-label="Workspace navigation">
         {[
@@ -39,7 +42,7 @@ export function DashboardNav({ user }: { user: { name: string; role: string } })
         ].map(([href, text, Icon]: any) => (
           <Link href={href} key={href} className={path === href ? "active" : ""}>
             <Icon size={17} />
-            {text}
+            <Text>{text}</Text>
           </Link>
         ))}
       </nav>

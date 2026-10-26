@@ -1,5 +1,7 @@
 "use client";
-import Link from "next/link";
+import { Text } from "@/components/i18n";
+
+import Link from "@/components/localized-fields";
 import { GraduationCap, Handshake, MapPin, ArrowUpRight } from "lucide-react";
 import { useData } from "@/lib/client";
 import { PageIntro, Loading, ErrorState, Empty, DemoBadge, Badge } from "@/components/common";
@@ -15,16 +17,22 @@ export default function Organizations() {
         action={
           <Button asChild>
             <Link href="/register">
-              Join the ecosystem <ArrowUpRight size={15} />
+              <Text>{"Join the ecosystem"}</Text>
+              <ArrowUpRight size={15} />
             </Link>
           </Button>
         }
       />
       <div className="info-box" style={{ marginBottom: 25 }}>
-        <strong>A demonstration ecosystem.</strong>
+        <strong>
+          <Text>{"A demonstration ecosystem."}</Text>
+        </strong>
         <p>
-          Organizations labeled “Demo” are illustrative records. Their inclusion does not indicate
-          actual affiliation, endorsement, or a partnership with CivicBridge.
+          <Text>
+            {
+              "Organizations labeled “Demo” are illustrative records. Their inclusion does not indicate actual affiliation, endorsement, or a partnership with CivicBridge."
+            }
+          </Text>
         </p>
       </div>
       {loading ? (
@@ -44,7 +52,9 @@ export default function Organizations() {
                 <span className="mini-icon teal">
                   {o.type === "INSTITUTION" ? <GraduationCap size={22} /> : <Handshake size={22} />}
                 </span>
-                <Badge type="approved">Verified organization</Badge>
+                <Badge type="approved">
+                  <Text>{"Verified organization"}</Text>
+                </Badge>
                 {o.isDemo && <DemoBadge />}
               </div>
               <h3>{o.name}</h3>
@@ -53,7 +63,9 @@ export default function Organizations() {
                 <span>
                   <MapPin size={12} style={{ display: "inline" }} /> {o.city}
                 </span>
-                <span>{o._count.teams} teams</span>
+                <span>
+                  {o._count.teams} <Text>{" teams"}</Text>
+                </span>
               </div>
             </article>
           ))}

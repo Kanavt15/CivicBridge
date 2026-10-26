@@ -1,6 +1,8 @@
 "use client";
+import { Text } from "@/components/i18n";
+
 import { use } from "react";
-import Link from "next/link";
+import Link from "@/components/localized-fields";
 import { Award, ArrowUpRight } from "lucide-react";
 import { useData } from "@/lib/client";
 import { initials, label } from "@/lib/utils";
@@ -18,6 +20,7 @@ export default function Profile({ params }: { params: Promise<{ id: string }> })
       <PageIntro
         eyebrow={`${label(u.role)} · ${u.organization?.name || "Independent contributor"}`}
         title={u.name}
+        content
         description={u.bio || "Part of the CivicBridge community."}
         action={u.isDemo ? <DemoBadge /> : undefined}
       />
@@ -30,12 +33,14 @@ export default function Profile({ params }: { params: Promise<{ id: string }> })
         {u.achievements.map((a: any, i: number) => (
           <span className="achievement" key={i}>
             <Award size={17} />
-            {a.label} · {a.points} points
+            {a.label} · {a.points} <Text>{"points"}</Text>
           </span>
         ))}
       </div>
       <div className="section-heading space-top">
-        <h2 style={{ fontSize: 24 }}>Innovation portfolio</h2>
+        <h2 style={{ fontSize: 24 }}>
+          <Text>{"Innovation portfolio"}</Text>
+        </h2>
       </div>
       {u.proposals.length ? (
         <div className="team-grid">
@@ -44,16 +49,19 @@ export default function Profile({ params }: { params: Promise<{ id: string }> })
               <Status value={p.status} />
               <h3>{p.title}</h3>
               <p>
-                {p.problem.category} · {p.problem.city}
+                <Text>{p.problem.category}</Text> · {p.problem.city}
               </p>
               <span className="text-link">
-                Explore innovation <ArrowUpRight size={15} />
+                <Text>{"Explore innovation"}</Text>
+                <ArrowUpRight size={15} />
               </span>
             </Link>
           ))}
         </div>
       ) : (
-        <p className="muted">Approved innovations will appear here.</p>
+        <p className="muted">
+          <Text>{"Approved innovations will appear here."}</Text>
+        </p>
       )}
     </div>
   );

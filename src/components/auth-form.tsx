@@ -1,5 +1,8 @@
 "use client";
-import Link from "next/link";
+import { Input, Select, Control } from "@/components/localized-fields";
+import { Text } from "@/components/i18n";
+
+import Link from "@/components/localized-fields";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -52,36 +55,12 @@ export function AuthForm({
   }
   return (
     <div className="auth-wrap">
-      <aside className="auth-story">
-        <Logo />
-        <h2>
-          One connection.
-          <br />A world of
-          <br />
-          possibilities.
-        </h2>
-        <p>
-          Join the citizens, researchers, and partners turning everyday challenges into meaningful
-          change.
-        </p>
-        <ul>
-          <li>
-            <CheckCircle size={16} /> Give your community a voice
-          </li>
-          <li>
-            <CheckCircle size={16} /> Put good ideas into action
-          </li>
-          <li>
-            <CheckCircle size={16} /> Make progress, together
-          </li>
-        </ul>
-      </aside>
       <div className="auth-form">
-        <h1>{register ? "Find your place on the bridge." : "Welcome back."}</h1>
+        <h1>
+          <Text>{register ? "Find your place on the bridge." : "Welcome back."}</Text>
+        </h1>
         <p>
-          {register
-            ? "Create an account. Your next idea could make a difference."
-            : "Your community’s next chapter starts here."}
+          <Text>{register ? "One account. A shared purpose." : "Sign in to your community."}</Text>
         </p>
         {error && (
           <div className="form-message" role="alert">
@@ -92,8 +71,8 @@ export function AuthForm({
           {register && (
             <>
               <label className="field">
-                Full name
-                <input
+                <Text>{"Full name"}</Text>
+                <Input
                   name="name"
                   autoComplete="name"
                   minLength={2}
@@ -103,34 +82,42 @@ export function AuthForm({
                 />
               </label>
               <label className="field">
-                I’m joining as
-                <select value={role} onChange={(e) => setRole(e.target.value)}>
-                  <option value="CITIZEN">Citizen</option>
-                  <option value="RESEARCHER">Student / researcher</option>
-                  <option value="INSTITUTION">University / institution</option>
-                  <option value="INDUSTRY">Industry / NGO</option>
-                </select>
+                <Text>{"I’m joining as"}</Text>
+                <Select value={role} onChange={(e) => setRole(e.target.value)}>
+                  <option value="CITIZEN">
+                    <Text>{"Citizen"}</Text>
+                  </option>
+                  <option value="RESEARCHER">
+                    <Text>{"Student / researcher"}</Text>
+                  </option>
+                  <option value="INSTITUTION">
+                    <Text>{"University / institution"}</Text>
+                  </option>
+                  <option value="INDUSTRY">
+                    <Text>{"Industry / NGO"}</Text>
+                  </option>
+                </Select>
               </label>
               {["INSTITUTION", "INDUSTRY"].includes(role) && (
                 <>
                   <label className="field">
-                    Organization name
-                    <input name="organizationName" minLength={2} required />
+                    <Text>{"Organization name"}</Text>
+                    <Input name="organizationName" minLength={2} required />
                   </label>
                   <label className="field">
-                    Organization city
-                    <input name="city" minLength={2} required />
+                    <Text>{"Organization city"}</Text>
+                    <Input name="city" minLength={2} required />
                   </label>
                   <small className="muted">
-                    An administrator will review your organization’s verification.
+                    <Text>{"An administrator will review your organization’s verification."}</Text>
                   </small>
                 </>
               )}
             </>
           )}
           <label className="field">
-            Email address
-            <input
+            <Text>{"Email address"}</Text>
+            <Input
               type="email"
               autoComplete="email"
               value={email}
@@ -141,8 +128,8 @@ export function AuthForm({
             />
           </label>
           <label className="field">
-            Password
-            <input
+            <Text>{"Password"}</Text>
+            <Input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -152,41 +139,46 @@ export function AuthForm({
               required
               placeholder={register ? "At least 12 characters" : "Your password"}
             />
-            {register && <small>Use uppercase and lowercase letters and a number.</small>}
+            {register && (
+              <small>
+                <Text>{"Use uppercase and lowercase letters and a number."}</Text>
+              </small>
+            )}
           </label>
           <Button disabled={busy} type="submit">
-            {busy ? <LoaderCircle size={16} className="spin" /> : <ArrowUpRight size={16} />}{" "}
-            {busy ? "Connecting…" : register ? "Create account" : "Sign in"}
+            {busy ? <LoaderCircle size={16} className="spin" /> : <ArrowUpRight size={16} />}
+            <Text> </Text>
+            <Text>{busy ? "Connecting…" : register ? "Create account" : "Sign in"}</Text>
           </Button>
         </form>
         <div className="auth-switch">
-          {register ? "Already on the bridge? " : "New to CivicBridge? "}
+          <Text>{register ? "Already on the bridge? " : "New to CivicBridge? "}</Text>
           <Link href={register ? "/login" : "/register"}>
-            {register ? "Sign in" : "Create an account"}
+            <Text>{register ? "Sign in" : "Create an account"}</Text>
           </Link>
         </div>
         {!register && demoEnabled && (
-          <div className="demo-panel">
-            <strong>Take a look around</strong>
-            <p>Local demo accounts · sample data only</p>
+          <details className="demo-panel">
+            <summary>
+              <Text>{"Try a demo account"}</Text>
+            </summary>
+            <p>
+              <Text>{"Local demo accounts · sample data only"}</Text>
+            </p>
             <div className="demo-roles">
               {["CITIZEN", "RESEARCHER", "INSTITUTION", "INDUSTRY", "ADMIN"].map((r) => (
-                <button
+                <Control
                   key={r}
                   onClick={() => {
                     setEmail(`${r.toLowerCase()}@demo.civicbridge.in`);
                     setPassword("CivicBridge@2026");
                   }}
                 >
-                  {label(r)}
-                </button>
+                  <Text>{label(r)}</Text>
+                </Control>
               ))}
             </div>
-            <small>
-              Choose a role to fill the credentials, then sign in. Default password:
-              CivicBridge@2026. Available after running the seed script with that password.
-            </small>
-          </div>
+          </details>
         )}
       </div>
     </div>

@@ -1,10 +1,10 @@
 "use client";
-import Link from "next/link";
+
+import Link from "@/components/localized-fields";
 import {
   AlertCircle,
   ArrowRight,
   MapPin,
-  MessageCircle,
   ThumbsUp,
   Lightbulb,
   Droplets,
@@ -24,6 +24,8 @@ import {
 } from "lucide-react";
 import { categories } from "@/lib/domain";
 import { label, cn } from "@/lib/utils";
+import { Text, useI18n } from "./i18n";
+import { localeTags } from "@/lib/i18n/messages";
 import { Button } from "./ui/button";
 export const categoryIcons = [
   Trash2,
@@ -49,39 +51,49 @@ export function Badge({
   children: React.ReactNode;
   type?: string;
 }) {
-  return <span className={cn("badge", `badge-${type.toLowerCase()}`)}>{children}</span>;
+  return (
+    <span className={cn("badge", "badge-" + type.toLowerCase())}>
+      {typeof children === "string" ? <Text>{children}</Text> : children}
+    </span>
+  );
 }
 export function Status({ value }: { value: string }) {
   return (
     <Badge type={value}>
-      {value === "OPEN"
-        ? "Open for solutions"
-        : value === "PILOT"
-          ? "Pilot implementation"
-          : label(value)}
+      <Text>
+        {value === "OPEN"
+          ? "Open for solutions"
+          : value === "PILOT"
+            ? "Pilot implementation"
+            : label(value)}
+      </Text>
     </Badge>
   );
 }
 export function DemoBadge() {
-  return <span className="demo-tag">Demo</span>;
+  return (
+    <span className="demo-tag">
+      <Text>Demo</Text>
+    </span>
+  );
 }
 export function PageIntro({
-  eyebrow,
   title,
   description,
   action,
+  content = false,
 }: {
   eyebrow?: string;
   title: string;
   description: string;
   action?: React.ReactNode;
+  content?: boolean;
 }) {
   return (
     <div className="page-intro">
       <div>
-        {eyebrow && <div className="section-kicker">{eyebrow}</div>}
-        <h1>{title}</h1>
-        <p>{description}</p>
+        <h1>{content ? title : <Text>{title}</Text>}</h1>
+        <p>{content ? description : <Text>{description}</Text>}</p>
       </div>
       {action}
     </div>
@@ -90,11 +102,19 @@ export function PageIntro({
 export function Breadcrumbs({ items }: { items: { label: string; href?: string }[] }) {
   return (
     <nav className="breadcrumbs" aria-label="Breadcrumb">
-      <Link href="/">Home</Link>
+      <Link href="/">
+        <Text>Home</Text>
+      </Link>
       {items.map((i, n) => (
         <span key={n}>
-          <ChevronRight size={13} />
-          {i.href ? <Link href={i.href}>{i.label}</Link> : i.label}
+          <ChevronRight size={12} />
+          {i.href ? (
+            <Link href={i.href}>
+              <Text>{i.label}</Text>
+            </Link>
+          ) : (
+            <Text>{i.label}</Text>
+          )}
         </span>
       ))}
     </nav>
@@ -103,8 +123,10 @@ export function Breadcrumbs({ items }: { items: { label: string; href?: string }
 export function Loading() {
   return (
     <div className="loading-area" role="status">
-      <LoaderCircle className="spin" size={26} />
-      <span>Connecting the dots…</span>
+      <LoaderCircle className="spin" size={23} />
+      <span>
+        <Text>Loading…</Text>
+      </span>
       <div className="skeleton-row">
         <i />
         <i />
@@ -116,17 +138,25 @@ export function Loading() {
 export function ErrorState({ error, retry }: { error: string; retry?: () => void }) {
   return (
     <div className="empty-state" role="alert">
-      <AlertCircle size={32} />
-      <h3>We couldn’t load this page</h3>
-      <p>{error}</p>
+      <span className="state-icon">
+        <AlertCircle size={24} />
+      </span>
+      <h3>
+        <Text>We couldn’t load this page</Text>
+      </h3>
+      <p>
+        <Text>{error}</Text>
+      </p>
       {retry && (
         <Button onClick={retry} variant="outline">
-          Try again
+          <Text>Try again</Text>
         </Button>
       )}
       {error.includes("Sign in") && (
         <Button asChild>
-          <Link href="/login">Sign in</Link>
+          <Link href="/login">
+            <Text>Sign in</Text>
+          </Link>
         </Button>
       )}
     </div>
@@ -143,83 +173,85 @@ export function Empty({
 }) {
   return (
     <div className="empty-state">
-      <Inbox size={32} />
-      <h3>{title}</h3>
-      <p>{description}</p>
+      <span className="state-icon">
+        <Inbox size={24} />
+      </span>
+      <h3>
+        <Text>{title}</Text>
+      </h3>
+      <p>
+        <Text>{description}</Text>
+      </p>
       {action}
     </div>
   );
 }
 export function ProblemCard({ problem: p }: { problem: any }) {
+  const { t } = useI18n();
   return (
     <article className="problem-card">
-      <div className={cn("problem-art", `art-${categories.indexOf(p.category)}`)}>
-        {p.images?.[0] ? (
-          <img src={`/api/files/${p.images[0].id}`} alt={p.title} />
-        ) : (
-          <>
-            <div className="art-landscape" />
-            <CategoryIcon category={p.category} size={50} />
-          </>
-        )}
-        <div className="art-top">
-          <Badge type="white">
-            <CategoryIcon category={p.category} size={13} />
-            {p.category}
-          </Badge>
+      {p.images?.[0] && (
+        <div className="problem-photo">
+          <img src={"/api/files/" + p.images[0].id} alt={p.title} loading="lazy" />
+        </div>
+      )}
+      <div className="problem-card-body">
+        <div className="problem-category">
+          <span className="category-symbol">
+            <CategoryIcon category={p.category} size={18} />
+          </span>
+          <Text>{p.category}</Text>
           {p.isDemo && <DemoBadge />}
         </div>
-        <span className={cn("urgency-flag", p.urgency.toLowerCase())}>
-          <i />
-          {label(p.urgency)} priority
-        </span>
-      </div>
-      <div className="problem-card-body">
-        <div className="location">
-          <MapPin size={13} />
-          {p.city}, {p.state}
-        </div>
         <h3>
-          <Link href={`/problems/${p.id}`}>{p.title}</Link>
+          <Link href={"/problems/" + p.id}>{p.title}</Link>
         </h3>
         <p>{p.description}</p>
+        <div className="location">
+          <MapPin size={14} />
+          {p.city}
+          <span className="location-state">, {p.state}</span>
+        </div>
         <div className="problem-card-foot">
           <Status value={p.status} />
-          <Link href={`/problems/${p.id}`} className="card-arrow" aria-label={`View ${p.title}`}>
-            <ArrowRight size={18} />
+          <Link href={"/problems/" + p.id} className="card-arrow" aria-label={t("View details")}>
+            <ArrowRight size={17} />
           </Link>
         </div>
         <div className="problem-meta">
           <span>
             <ThumbsUp size={13} />
-            {p._count?.votes ?? 0} supporters
+            {p._count?.votes ?? 0} <Text>supporters</Text>
           </span>
           <span>
             <Lightbulb size={13} />
-            {p._count?.proposals ?? 0} solutions
+            {p._count?.proposals ?? 0} <Text>solutions</Text>
           </span>
-          {p.match > 0 && <span className="match">{p.match}% match</span>}
+          {p.match > 0 && <span className="match">{p.match}%</span>}
         </div>
       </div>
     </article>
   );
 }
 export function Timeline({ items }: { items: any[] }) {
+  const { locale } = useI18n();
   return (
     <ol className="timeline">
       {items.map((i, n) => (
         <li key={i.id || n}>
           <CircleCheck size={17} />
           <div>
-            <strong>{label(i.toStatus || i.action)}</strong>
+            <strong>
+              <Text>{label(i.toStatus || i.action)}</Text>
+            </strong>
             {i.note && <p>{i.note}</p>}
             <small>
-              {new Date(i.createdAt).toLocaleString("en-IN", {
+              {new Date(i.createdAt).toLocaleString(localeTags[locale], {
                 timeZone: "Asia/Kolkata",
                 dateStyle: "medium",
                 timeStyle: "short",
               })}{" "}
-              IST
+              <Text>{" IST"}</Text>
             </small>
           </div>
         </li>

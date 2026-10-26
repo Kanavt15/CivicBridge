@@ -1,6 +1,11 @@
 "use client";
+import { LocalDate } from "@/components/i18n";
+
+import { Textarea } from "@/components/localized-fields";
+import { Text } from "@/components/i18n";
+
 import { use, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/localized-fields";
 import { useSession } from "next-auth/react";
 import { MapPin, Calendar, ThumbsUp, Lightbulb, User, ArrowUpRight, Send } from "lucide-react";
 import { toast } from "sonner";
@@ -74,10 +79,12 @@ export default function Problem({ params }: { params: Promise<{ id: string }> })
       <Breadcrumbs items={[{ label: "Challenges", href: "/explore" }, { label: p.title }]} />
       <div className="detail-header">
         <div className="detail-badges">
-          <Badge>{p.category}</Badge>
+          <Badge>
+            <Text>{p.category}</Text>
+          </Badge>
           <Status value={p.status} />
           <Badge type={p.urgency === "CRITICAL" ? "rejected" : "pending"}>
-            {label(p.urgency)} urgency
+            <Text>{label(p.urgency)}</Text> <Text>{"urgency"}</Text>
           </Badge>
           {p.isDemo && <DemoBadge />}
         </div>
@@ -89,7 +96,7 @@ export default function Problem({ params }: { params: Promise<{ id: string }> })
           </span>
           <span>
             <Calendar size={14} />
-            {date(p.createdAt)}
+            <LocalDate value={p.createdAt} />
           </span>
           <span>
             <User size={14} />
@@ -109,15 +116,20 @@ export default function Problem({ params }: { params: Promise<{ id: string }> })
                 ))}
               </div>
             )}
-            <h2>The challenge</h2>
+            <h2>
+              <Text>{"The challenge"}</Text>
+            </h2>
             <p>{p.description}</p>
             <div className="detail-section">
-              <h2>Where it’s happening</h2>
+              <h2>
+                <Text>{"Where it’s happening"}</Text>
+              </h2>
               <MapView value={[p.latitude, p.longitude]} />
             </div>
             <div className="detail-section">
               <h2>
-                Ideas taking shape <span className="muted">({p.proposals.length})</span>
+                <Text>{"Ideas taking shape"}</Text>
+                <span className="muted">({p.proposals.length})</span>
               </h2>
               {p.proposals.length ? (
                 p.proposals.map((s: any) => (
@@ -134,19 +146,23 @@ export default function Problem({ params }: { params: Promise<{ id: string }> })
                 ))
               ) : (
                 <p className="muted">
-                  No public proposals yet. Bring the first idea to this challenge.
+                  <Text>{"No public proposals yet. Bring the first idea to this challenge."}</Text>
                 </p>
               )}
             </div>
             <div className="detail-section">
-              <h2>Community conversation</h2>
+              <h2>
+                <Text>{"Community conversation"}</Text>
+              </h2>
               <div className="comment-list">
                 {p.comments.map((c: any) => (
                   <div className="comment" key={c.id}>
                     <div className="avatar">{initials(c.author.name)}</div>
                     <div>
                       <strong>{c.author.name}</strong>
-                      <small>{date(c.createdAt)}</small>
+                      <small>
+                        <LocalDate value={c.createdAt} />
+                      </small>
                       <p>{c.body}</p>
                     </div>
                   </div>
@@ -154,7 +170,7 @@ export default function Problem({ params }: { params: Promise<{ id: string }> })
               </div>
               {session ? (
                 <form className="compact-form" onSubmit={post}>
-                  <textarea
+                  <Textarea
                     aria-label="Your feedback"
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
@@ -165,12 +181,13 @@ export default function Problem({ params }: { params: Promise<{ id: string }> })
                   />
                   <Button type="submit" disabled={busy}>
                     <Send size={15} />
-                    Post feedback
+                    <Text>{"Post feedback"}</Text>
                   </Button>
                 </form>
               ) : (
                 <Link className="text-link" href="/login">
-                  Sign in to join the conversation <ArrowUpRight size={15} />
+                  <Text>{"Sign in to join the conversation"}</Text>
+                  <ArrowUpRight size={15} />
                 </Link>
               )}
             </div>
@@ -178,8 +195,14 @@ export default function Problem({ params }: { params: Promise<{ id: string }> })
         </div>
         <aside className="side-stack">
           <div className="side-card">
-            <h3>Be part of the solution.</h3>
-            <p>Have an idea that could help? Turn your expertise into an actionable proposal.</p>
+            <h3>
+              <Text>{"Be part of the solution."}</Text>
+            </h3>
+            <p>
+              <Text>
+                {"Have an idea that could help? Turn your expertise into an actionable proposal."}
+              </Text>
+            </p>
             {p.status === "OPEN" && (
               <Button asChild>
                 <Link
@@ -190,25 +213,31 @@ export default function Problem({ params }: { params: Promise<{ id: string }> })
                   }
                 >
                   <Lightbulb size={16} />
-                  Propose a solution
+                  <Text>{"Propose a solution"}</Text>
                 </Link>
               </Button>
             )}
             <Button variant={p.voted ? "secondary" : "outline"} disabled={busy} onClick={vote}>
               <ThumbsUp size={15} />
-              {p.voted ? "Supported" : "Support this challenge"} ({p._count.votes})
+              <Text>{p.voted ? "Supported" : "Support this challenge"}</Text> ({p._count.votes})
             </Button>
             <div className="side-row">
-              <span>People affected</span>
+              <span>
+                <Text>{"People affected"}</Text>
+              </span>
               <strong>{p.population.toLocaleString("en-IN")}</strong>
             </div>
             <div className="side-row">
-              <span>Reference</span>
+              <span>
+                <Text>{"Reference"}</Text>
+              </span>
               <small title={p.id}>{p.id.slice(-16)}</small>
             </div>
           </div>
           <div className="side-card">
-            <h3>Estimated impact potential</h3>
+            <h3>
+              <Text>{"Estimated impact potential"}</Text>
+            </h3>
             <div className="score-number">
               {score.total}
               <small> / 100</small>
@@ -216,7 +245,9 @@ export default function Problem({ params }: { params: Promise<{ id: string }> })
             <div className="progress-bar">
               <span style={{ width: `${score.total}%` }} />
             </div>
-            <p>A transparent estimate, not a measured outcome.</p>
+            <p>
+              <Text>{"A transparent estimate, not a measured outcome."}</Text>
+            </p>
             {[
               ["Urgency", score.urgency, 30],
               ["People affected", score.population, 25],
@@ -231,26 +262,37 @@ export default function Problem({ params }: { params: Promise<{ id: string }> })
               </div>
             ))}
             <small className="muted">
-              Population is logarithmically scaled. Readiness is awarded when a solution is
-              approved.
+              <Text>
+                {
+                  "Population is logarithmically scaled. Readiness is awarded when a solution is approved."
+                }
+              </Text>
             </small>
           </div>
           <div className="side-card">
-            <h3>The journey so far</h3>
+            <h3>
+              <Text>{"The journey so far"}</Text>
+            </h3>
             <Timeline items={p.timeline} />
           </div>
           {session?.user.role === "ADMIN" && (
             <div className="side-card">
-              <h3>Review this report</h3>
+              <h3>
+                <Text>{"Review this report"}</Text>
+              </h3>
               <StatusControl type="problems" id={id} status={p.status} onUpdate={reload} />
             </div>
           )}
           {session?.user.id === p.authorId && p.status === "REPORTED" && (
             <div className="side-card">
-              <h3>Manage your report</h3>
-              <p>You may withdraw this report while it awaits review.</p>
+              <h3>
+                <Text>{"Manage your report"}</Text>
+              </h3>
+              <p>
+                <Text>{"You may withdraw this report while it awaits review."}</Text>
+              </p>
               <Button variant="outline" disabled={busy} onClick={withdraw}>
-                Withdraw report
+                <Text>{"Withdraw report"}</Text>
               </Button>
             </div>
           )}

@@ -1,6 +1,8 @@
 "use client";
-import Link from "next/link";
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "@/components/localized-fields";
+import { Input, Select, Control } from "@/components/localized-fields";
 import { Search, SlidersHorizontal, LayoutGrid, List, Map, Plus, X } from "lucide-react";
 import { useData } from "@/lib/client";
 import { categories } from "@/lib/domain";
@@ -14,16 +16,20 @@ import {
   ProblemCard,
 } from "@/components/common";
 import { MapView } from "@/components/map";
-export default function Explore() {
-  const [query, setQuery] = useState(""),
-    [search, setSearch] = useState(""),
+import { Text, useI18n } from "@/components/i18n";
+function Discovery() {
+  const initial = useSearchParams();
+  const { t } = useI18n();
+  const [query, setQuery] = useState(initial.get("q") ?? ""),
+    [search, setSearch] = useState(initial.get("q") ?? ""),
     [category, setCategory] = useState(""),
     [city, setCity] = useState(""),
     [urgency, setUrgency] = useState(""),
     [status, setStatus] = useState(""),
     [sort, setSort] = useState("newest"),
     [view, setView] = useState("grid"),
-    [page, setPage] = useState(1);
+    [page, setPage] = useState(1),
+    [more, setMore] = useState(false);
   const params = new URLSearchParams({
     q: search,
     category,
@@ -33,7 +39,7 @@ export default function Explore() {
     sort,
     page: String(page),
   });
-  const { data, error, loading, reload } = useData(`problems?${params}`);
+  const { data, error, loading, reload } = useData("problems?" + params);
   function reset() {
     setQuery("");
     setSearch("");
@@ -45,46 +51,44 @@ export default function Explore() {
   }
   return (
     <div className="container page-wrap">
-      <Breadcrumbs items={[{ label: "Explore challenges" }]} />
+      <Breadcrumbs items={[{ label: "Problems" }]} />
       <PageIntro
-        eyebrow="Find your opportunity to make a difference"
-        title="Every challenge is a beginning."
-        description="Discover what your community needs. Bring your perspective, your skills, and your next big idea."
+        title="Explore problems"
+        description="Find a problem you can help solve."
         action={
           <Button asChild>
             <Link href="/problems/new">
               <Plus size={17} />
-              Report a problem
+              <Text>Report a problem</Text>
             </Link>
           </Button>
         }
       />
       <div className="filter-panel">
-        <form
-          className="filter-row"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSearch(query);
-            setPage(1);
-          }}
-        >
-          <div className="search-input">
-            <Search size={18} />
-            <input
-              aria-label="Search challenges"
-              placeholder="Search challenges, places, or ideas…"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </div>
-          <Button type="submit">
-            <Search size={16} />
-            Search
-          </Button>
-        </form>
-        <div className="filter-row">
-          <SlidersHorizontal size={17} />
-          <select
+        <div className="discovery-search">
+          <form
+            className="filter-row"
+            onSubmit={(e) => {
+              e.preventDefault();
+              setSearch(query);
+              setPage(1);
+            }}
+          >
+            <div className="search-input">
+              <Search size={17} />
+              <Input
+                aria-label="Search problems or places"
+                placeholder="Search problems or places"
+                value={query}
+                maxLength={200}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </div>
+            <Button type="submit">
+              <Text>Search</Text>
+            </Button>
+          </form>
+          <Select
             aria-label="Category"
             value={category}
             onChange={(e) => {
@@ -92,62 +96,87 @@ export default function Explore() {
               setPage(1);
             }}
           >
-            <option value="">All categories</option>
+            <option value="">
+              <Text>All categories</Text>
+            </option>
             {categories.map((c) => (
-              <option key={c}>{c}</option>
-            ))}
-          </select>
-          <input
-            aria-label="City"
-            className="input"
-            value={city}
-            placeholder="Filter by city"
-            onChange={(e) => {
-              setCity(e.target.value);
-              setPage(1);
-            }}
-          />
-          <select
-            aria-label="Urgency"
-            value={urgency}
-            onChange={(e) => {
-              setUrgency(e.target.value);
-              setPage(1);
-            }}
-          >
-            <option value="">Any urgency</option>
-            {["LOW", "MEDIUM", "HIGH", "CRITICAL"].map((v) => (
-              <option key={v} value={v}>
-                {v.toLowerCase()}
+              <option value={c} key={c}>
+                <Text>{c}</Text>
               </option>
             ))}
-          </select>
-          <select
-            aria-label="Status"
-            value={status}
-            onChange={(e) => {
-              setStatus(e.target.value);
-              setPage(1);
-            }}
+          </Select>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setMore((v) => !v)}
+            aria-expanded={more}
           >
-            <option value="">All public statuses</option>
-            <option value="OPEN">Open for solutions</option>
-            <option value="COLLABORATION">Collaboration</option>
-            <option value="PILOT">Pilot implementation</option>
-            <option value="RESOLVED">Resolved</option>
-          </select>
-          <button className="icon-btn" onClick={reset} aria-label="Reset filters">
-            <X size={17} />
-          </button>
+            <SlidersHorizontal size={16} />
+            <Text>More filters</Text>
+          </Button>
         </div>
+        {more && (
+          <div className="filter-row discovery-extra">
+            <Input
+              aria-label="City"
+              placeholder="Filter by city"
+              value={city}
+              onChange={(e) => {
+                setCity(e.target.value);
+                setPage(1);
+              }}
+            />
+            <Select
+              aria-label="Urgency"
+              value={urgency}
+              onChange={(e) => {
+                setUrgency(e.target.value);
+                setPage(1);
+              }}
+            >
+              <option value="">
+                <Text>Any urgency</Text>
+              </option>
+              {["LOW", "MEDIUM", "HIGH", "CRITICAL"].map((v) => (
+                <option value={v} key={v}>
+                  <Text>{v[0] + v.slice(1).toLowerCase()}</Text>
+                </option>
+              ))}
+            </Select>
+            <Select
+              aria-label="Status"
+              value={status}
+              onChange={(e) => {
+                setStatus(e.target.value);
+                setPage(1);
+              }}
+            >
+              <option value="">
+                <Text>All public statuses</Text>
+              </option>
+              {[
+                ["OPEN", "Open for solutions"],
+                ["COLLABORATION", "Collaboration"],
+                ["PILOT", "Pilot implementation"],
+                ["RESOLVED", "Resolved"],
+              ].map(([v, l]) => (
+                <option value={v} key={v}>
+                  <Text>{l}</Text>
+                </option>
+              ))}
+            </Select>
+            <Control type="button" className="icon-btn" aria-label="Clear filters" onClick={reset}>
+              <X size={16} />
+            </Control>
+          </div>
+        )}
       </div>
       <div className="results-bar">
         <span>
-          <strong>{data?.total ?? 0}</strong> challenges to explore{" "}
-          {view === "map" && "· map shows the current results page"}
+          <strong>{data?.total ?? 0}</strong> <Text>results</Text>
         </span>
         <div className="filter-row">
-          <select
+          <Select
             aria-label="Sort challenges"
             value={sort}
             onChange={(e) => {
@@ -155,26 +184,32 @@ export default function Explore() {
               setPage(1);
             }}
           >
-            <option value="newest">Newest first</option>
-            <option value="popular">Most supported</option>
-            <option value="urgent">Highest urgency</option>
-          </select>
+            {[
+              ["newest", "Newest first"],
+              ["popular", "Most supported"],
+              ["urgent", "Highest urgency"],
+            ].map(([v, l]) => (
+              <option value={v} key={v}>
+                <Text>{l}</Text>
+              </option>
+            ))}
+          </Select>
           <div className="view-toggle">
             {[
-              ["grid", LayoutGrid],
-              ["list", List],
-              ["map", Map],
-            ].map(([v, Icon]: any) => (
-              <button
+              ["grid", "Grid view", LayoutGrid],
+              ["list", "List view", List],
+              ["map", "Map view", Map],
+            ].map(([v, l, Icon]: any) => (
+              <Control
+                type="button"
                 key={v}
                 className={view === v ? "active" : ""}
-                onClick={() => setView(v)}
-                aria-label={`${v} view`}
+                aria-label={t(l)}
                 aria-pressed={view === v}
+                onClick={() => setView(v)}
               >
-                <Icon size={15} />
-                <span>{v}</span>
-              </button>
+                <Icon size={16} />
+              </Control>
             ))}
           </div>
         </div>
@@ -183,18 +218,23 @@ export default function Explore() {
         <Loading />
       ) : error ? (
         <ErrorState error={error} retry={reload} />
-      ) : !data?.items.length ? (
+      ) : !data?.items?.length ? (
         <Empty
-          title="A fresh opportunity awaits"
-          description="Try another city or category, or clear your filters."
+          title="No matching problems"
+          description="Try another search or clear the filters."
           action={
-            <Button variant="outline" onClick={reset}>
-              Clear filters
+            <Button type="button" variant="outline" onClick={reset}>
+              <Text>Clear filters</Text>
             </Button>
           }
         />
       ) : view === "map" ? (
-        <MapView points={data.items} large />
+        <>
+          <MapView points={data.items} large />
+          <p className="map-hint">
+            <Text>Map shows the current page.</Text>
+          </p>
+        </>
       ) : (
         <div className={view === "list" ? "problem-list" : "challenge-grid"}>
           {data.items.map((p: any) => (
@@ -204,21 +244,28 @@ export default function Explore() {
       )}
       {data?.pages > 1 && (
         <div className="pagination">
-          <Button variant="outline" disabled={page === 1} onClick={() => setPage((p) => p - 1)}>
-            Previous
+          <Button variant="outline" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>
+            <Text>Previous</Text>
           </Button>
           <span>
-            Page {page} of {data.pages}
+            <Text>Page</Text> {page} <Text>of</Text> {data.pages}
           </span>
           <Button
             variant="outline"
             disabled={page >= data.pages}
             onClick={() => setPage((p) => p + 1)}
           >
-            Next
+            <Text>Next</Text>
           </Button>
         </div>
       )}
     </div>
+  );
+}
+export default function Explore() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Discovery />
+    </Suspense>
   );
 }

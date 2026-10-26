@@ -1,6 +1,9 @@
 "use client";
+import { Select, Textarea, Control } from "@/components/localized-fields";
+import { Text } from "@/components/i18n";
+
 import { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/localized-fields";
 import { FlaskConical, ArrowUpRight, Play, ShieldCheck } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { api, useData } from "@/lib/client";
@@ -36,40 +39,61 @@ export default function Intelligence() {
         description="Inspect a real, locally trained text classifier. Compare its suggestions with keyword rules, see which words contributed, and examine the held-out evaluation."
       />
       <label className="field" style={{ maxWidth: 520, marginBottom: 24 }}>
-        Dataset and model
-        <select
+        <Text>{"Dataset and model"}</Text>
+        <Select
           value={dataset}
           onChange={(e) => {
             setDataset(e.target.value);
             setResult(null);
           }}
         >
-          <option value="public">NYC311 · real public municipal descriptors · English</option>
-          <option value="demo">Authored demonstration · synthetic · English + Hindi</option>
-        </select>
+          <option value="public">
+            <Text>{"NYC311 · real public municipal descriptors · English"}</Text>
+          </option>
+          <option value="demo">
+            <Text>{"Authored demonstration · synthetic · English + Hindi"}</Text>
+          </option>
+        </Select>
       </label>
       <div className="evidence-banner">
         <FlaskConical size={27} />
         <div>
-          <strong>Research demonstrator · {card.provenance}</strong>
+          <strong>
+            <Text>{"Research demonstrator · "}</Text>
+            {card.provenance}
+          </strong>
           <p>
-            {card.limitations} Your text stays on this server; this lab does not call an external AI
-            service.
+            <Text>Research model. Review every suggestion.</Text>
           </p>
+          <details className="compact-details">
+            <summary>
+              <Text>Model details</Text>
+            </summary>
+            <p>{card.limitations}</p>
+            <p>
+              <Text>
+                {"Your text stays on this server; this lab does not call an external AI service."}
+              </Text>
+            </p>
+          </details>
         </div>
       </div>
       <div className="lab-layout">
         <section className="dashboard-panel">
           <div className="panel-heading">
-            <h2>Put a report to the test.</h2>
+            <h2>
+              <Text>{"Put a report to the test."}</Text>
+            </h2>
             <Badge>
-              {dataset === "demo" ? "English + हिन्दी demo" : "English municipal baseline"}
+              <Text>
+                {dataset === "demo" ? "English + हिन्दी demo" : "English municipal baseline"}
+              </Text>
             </Badge>
           </div>
           <form className="form-stack" onSubmit={run}>
             <label className="field">
-              Describe a community challenge
-              <textarea
+              <Text>{"Describe a community challenge"}</Text>
+              <Textarea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 minLength={20}
@@ -84,7 +108,7 @@ export default function Intelligence() {
               />
             </label>
             <div className="lab-examples">
-              <button
+              <Control
                 type="button"
                 onClick={() =>
                   setText(
@@ -92,9 +116,9 @@ export default function Intelligence() {
                   )
                 }
               >
-                Try a water challenge
-              </button>
-              <button
+                <Text>{"Try a water challenge"}</Text>
+              </Control>
+              <Control
                 type="button"
                 onClick={() =>
                   setText(
@@ -104,8 +128,8 @@ export default function Intelligence() {
                   )
                 }
               >
-                {dataset === "demo" ? "हिन्दी उदाहरण" : "Try a street-light challenge"}
-              </button>
+                <Text>{dataset === "demo" ? "हिन्दी उदाहरण" : "Try a street-light challenge"}</Text>
+              </Control>
             </div>
             {message && (
               <div className="form-message" role="alert">
@@ -115,12 +139,13 @@ export default function Intelligence() {
             {session ? (
               <Button disabled={busy || text.length < 20} type="submit">
                 <Play size={15} />
-                {busy ? "Classifying locally…" : "Compare suggestions"}
+                <Text>{busy ? "Classifying locally…" : "Compare suggestions"}</Text>
               </Button>
             ) : (
               <Button asChild>
                 <Link href="/login">
-                  Sign in to try the classifier <ArrowUpRight size={15} />
+                  <Text>{"Sign in to try the classifier"}</Text>
+                  <ArrowUpRight size={15} />
                 </Link>
               </Button>
             )}
@@ -129,7 +154,9 @@ export default function Intelligence() {
             <div className="lab-result">
               <div className="lab-comparison">
                 <div>
-                  <small>Trained local model</small>
+                  <small>
+                    <Text>{"Trained local model"}</Text>
+                  </small>
                   <h3>
                     {result.model.abstained ? "Needs human classification" : result.model.category}
                   </h3>
@@ -140,15 +167,23 @@ export default function Intelligence() {
                   </p>
                 </div>
                 <div>
-                  <small>Keyword-rule baseline</small>
-                  <h3>{result.rules.category}</h3>
+                  <small>
+                    <Text>{"Keyword-rule baseline"}</Text>
+                  </small>
+                  <h3>
+                    <Text>{result.rules.category}</Text>
+                  </h3>
                   <p>{result.rules.explanation}</p>
                 </div>
               </div>
-              <h4>Relative model scores</h4>
+              <h4>
+                <Text>{"Relative model scores"}</Text>
+              </h4>
               {result.model.scores.map((s: any) => (
                 <div className="model-score" key={s.category}>
-                  <span>{s.category}</span>
+                  <span>
+                    <Text>{s.category}</Text>
+                  </span>
                   <div className="progress-bar">
                     <span style={{ width: `${s.score * 100}%` }} />
                   </div>
@@ -156,15 +191,20 @@ export default function Intelligence() {
                 </div>
               ))}
               <p className="map-hint">
-                These are normalized, uncalibrated model scores, not probabilities of a report being
-                correct. Category suggestions never approve a report or determine urgency.
+                <Text>
+                  {
+                    "These are normalized, uncalibrated model scores, not probabilities of a report being correct. Category suggestions never approve a report or determine urgency."
+                  }
+                </Text>
               </p>
             </div>
           )}
         </section>
         <aside className="side-stack">
           <div className="side-card">
-            <h3>Model card</h3>
+            <h3>
+              <Text>{"Model card"}</Text>
+            </h3>
             <p>{card.algorithm}</p>
             {[
               ["Training examples", card.trainingSamples],
@@ -183,67 +223,97 @@ export default function Intelligence() {
               ],
             ].map(([name, value]) => (
               <div className="side-row" key={name}>
-                <span>{name}</span>
+                <span>
+                  <Text>{name}</Text>
+                </span>
                 <strong>{value}</strong>
               </div>
             ))}
             <p className="map-hint">
-              Accuracy counts the top-ranked label even when the model abstains. Coverage shows how
-              often it offered a suggestion. Neither metric establishes performance on Indian
-              citizen reports.
+              <Text>
+                {
+                  "Accuracy counts the top-ranked label even when the model abstains. Coverage shows how often it offered a suggestion. Neither metric establishes performance on Indian citizen reports."
+                }
+              </Text>
             </p>
             {card.sourceUrl && (
               <p>
                 <a href={card.sourceUrl} target="_blank" rel="noreferrer">
-                  View official source ↗
-                </a>{" "}
-                ·{" "}
+                  <Text>{"View official source ↗"}</Text>
+                </a>
+                <Text> </Text>·<Text> </Text>
                 <a href={card.termsUrl} target="_blank" rel="noreferrer">
-                  Reuse terms ↗
+                  <Text>{"Reuse terms ↗"}</Text>
                 </a>
               </p>
             )}
             {card.unsupportedCategories.length > 0 && (
               <p className="map-hint">
-                Outside model coverage: {card.unsupportedCategories.join(", ")}. Rules remain
-                available for these categories.
+                <Text>{"Outside model coverage:"}</Text>
+                {card.unsupportedCategories.join(", ")}
+                <Text>{". Rules remain available for these categories."}</Text>
               </p>
             )}
           </div>
           <div className="side-card">
             <h3>
-              <ShieldCheck size={16} style={{ display: "inline" }} /> What is reviewable?
+              <ShieldCheck size={16} style={{ display: "inline" }} />{" "}
+              <Text>{"What is reviewable?"}</Text>
             </h3>
             <p>
-              Dataset provenance, separate train/test examples, per-category performance,
-              abstention, and matched vocabulary. No automatic decisions or claims of a
-              production-trained model.
+              <Text>
+                {
+                  "Dataset provenance, separate train/test examples, per-category performance, abstention, and matched vocabulary. No automatic decisions or claims of a production-trained model."
+                }
+              </Text>
             </p>
-            <small className="muted">Dataset fingerprint: {card.datasetHash.slice(0, 16)}…</small>
+            <small className="muted">
+              <Text>{"Dataset fingerprint: "}</Text>
+              {card.datasetHash.slice(0, 16)}…
+            </small>
           </div>
         </aside>
       </div>
       {card.selection && (
-        <section className="dashboard-panel space-top">
+        <details className="dashboard-panel space-top">
+          <summary>
+            <Text>How the model was selected</Text>
+          </summary>
           <div className="panel-heading">
-            <h2>How the model was selected</h2>
-            <small className="muted">Training data only · {card.selection.folds} folds</small>
+            <h2>
+              <Text>{"How the model was selected"}</Text>
+            </h2>
+            <small className="muted">
+              <Text>{"Training data only · "}</Text>
+              {card.selection.folds} <Text>{" folds"}</Text>
+            </small>
           </div>
           <p className="map-hint">
-            Six candidates were compared using stratified cross-validation within the training
-            descriptors. The model with the best mean macro F1 was fitted on all 391 training
-            examples, then evaluated on the separate 112-example test set. These validation scores
-            are distinct from the held-out scores above.
+            <Text>
+              {
+                "Six candidates were compared using stratified cross-validation within the training descriptors. The model with the best mean macro F1 was fitted on all 391 training examples, then evaluated on the separate 112-example test set. These validation scores are distinct from the held-out scores above."
+              }
+            </Text>
           </p>
           <div className="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>Features</th>
-                  <th>Classifier</th>
-                  <th>Prior</th>
-                  <th>Validation accuracy</th>
-                  <th>Validation macro F1</th>
+                  <th>
+                    <Text>{"Features"}</Text>
+                  </th>
+                  <th>
+                    <Text>{"Classifier"}</Text>
+                  </th>
+                  <th>
+                    <Text>{"Prior"}</Text>
+                  </th>
+                  <th>
+                    <Text>{"Validation accuracy"}</Text>
+                  </th>
+                  <th>
+                    <Text>{"Validation macro F1"}</Text>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -259,30 +329,48 @@ export default function Intelligence() {
               </tbody>
             </table>
           </div>
-        </section>
+        </details>
       )}
-      <section className="dashboard-panel space-top">
+      <details className="dashboard-panel space-top">
+        <summary>
+          <Text>Held-out performance by category</Text>
+        </summary>
         <div className="panel-heading">
-          <h2>Held-out performance by category</h2>
+          <h2>
+            <Text>{"Held-out performance by category"}</Text>
+          </h2>
           <small className="muted">
-            {card.metrics.testSamples} held-out descriptors/examples · {card.license}
+            {card.metrics.testSamples} <Text>{" held-out descriptors/examples · "}</Text>
+            {card.license}
           </small>
         </div>
         <div className="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>Category</th>
-                <th>Test examples</th>
-                <th>Precision</th>
-                <th>Recall</th>
-                <th>F1</th>
+                <th>
+                  <Text>{"Category"}</Text>
+                </th>
+                <th>
+                  <Text>{"Test examples"}</Text>
+                </th>
+                <th>
+                  <Text>{"Precision"}</Text>
+                </th>
+                <th>
+                  <Text>{"Recall"}</Text>
+                </th>
+                <th>
+                  <Text>{"F1"}</Text>
+                </th>
               </tr>
             </thead>
             <tbody>
               {card.metrics.perCategory.map((m: any) => (
                 <tr key={m.category}>
-                  <td>{m.category}</td>
+                  <td>
+                    <Text>{m.category}</Text>
+                  </td>
                   <td>{m.support}</td>
                   <td>{m.precision.toFixed(2)}</td>
                   <td>{m.recall.toFixed(2)}</td>
@@ -293,10 +381,13 @@ export default function Intelligence() {
           </table>
         </div>
         <p className="map-hint">
-          For a credible field evaluation, collect consented, de-identified reports labeled by
-          reviewers, keep test cases separate, and evaluate performance by language and region.
+          <Text>
+            {
+              "For a credible field evaluation, collect consented, de-identified reports labeled by reviewers, keep test cases separate, and evaluate performance by language and region."
+            }
+          </Text>
         </p>
-      </section>
+      </details>
     </div>
   );
 }

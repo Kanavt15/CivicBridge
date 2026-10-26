@@ -41,7 +41,7 @@ export default function MapInner({
           <CircleMarker
             center={value}
             radius={9}
-            pathOptions={{ color: "#177e69", fillColor: "#2b9e85", fillOpacity: 0.8 }}
+            pathOptions={{ color: "#335cde", fillColor: "#6b8ae8", fillOpacity: 0.8 }}
           />
         )}
         {points.map((p) => (
@@ -49,7 +49,7 @@ export default function MapInner({
             key={p.id}
             center={[p.latitude, p.longitude]}
             radius={8}
-            pathOptions={{ color: "#177e69", fillColor: "#2b9e85", fillOpacity: 0.7 }}
+            pathOptions={{ color: "#335cde", fillColor: "#6b8ae8", fillOpacity: 0.7 }}
           >
             <Popup>
               <a href={`/problems/${p.id}`}>{p.title}</a>
