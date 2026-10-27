@@ -4,6 +4,7 @@ const config: NextConfig = {
   serverExternalPackages: ["@prisma/client", "bcryptjs"],
   async headers() {
     return [
+      { source: "/api/:path*", headers: [{ key: "Cache-Control", value: "private, no-store" }] },
       {
         source: "/sw.js",
         headers: [

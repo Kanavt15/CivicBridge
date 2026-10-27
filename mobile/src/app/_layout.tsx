@@ -6,7 +6,7 @@ import { StatusBar } from "expo-status-bar";
 import { useNetInfo } from "@react-native-community/netinfo";
 import { Bell, WifiOff } from "lucide-react-native";
 import { MobileProviders, useAuth, useI18n } from "../providers";
-import { apiUrl } from "../lib/api";
+import { apiUrl, isLoopbackPreview } from "../lib/api";
 import { colors, LanguagePicker, Loading, Screen, T, ui } from "../ui";
 const theme = {
   ...DefaultTheme,
@@ -42,7 +42,7 @@ function Navigator() {
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
-      {network.isConnected === false && (
+      {network.isConnected === false && !isLoopbackPreview && (
         <View
           accessibilityRole="alert"
           style={{ backgroundColor: colors.soft, flexDirection: "row", gap: 9, padding: 12 }}

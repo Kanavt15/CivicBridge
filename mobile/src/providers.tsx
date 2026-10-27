@@ -1,8 +1,10 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, useRef, type ReactNode } from "react";
 import { getLocales } from "expo-localization";
 import { api, configureSession, ApiError } from "./lib/api";
 import { storage } from "./lib/storage";
 import { translate, isLocale, type Locale } from "../../src/lib/i18n/messages";
+import { createLiveQuery } from "../../src/lib/live-query";
+import { watchActiveQuery } from "./lib/watch";
 export type User = {
   id: string;
   name: string;
@@ -38,6 +40,10 @@ export function useI18n() {
 export function MobileProviders({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [ready, setReady] = useState(false);
+  const userRef = useRef<User | null>(null);
+  useEffect(() => {
+    userRef.current = user;
+  }, [user]);
   const systemLocale = getLocales()[0]?.languageCode;
   const [locale, setLanguage] = useState<Locale>(isLocale(systemLocale) ? systemLocale : "en");
   useEffect(() => {
@@ -78,6 +84,20 @@ export function MobileProviders({ children }: { children: ReactNode }) {
       active = false;
     };
   }, []);
+  const userId = user?.id;
+  useEffect(() => {
+    if (!ready || !userId) return;
+    const query = createLiveQuery<{ user: User }>({
+      load: (signal) => api("/api/mobile/session", { signal }),
+      value: (result) => {
+        if (JSON.stringify(result.user) !== JSON.stringify(userRef.current)) setUser(result.user);
+      },
+      state: () => {},
+      error: () => {},
+      clear: () => {},
+    });
+    return watchActiveQuery(query);
+  }, [ready, userId]);
   async function signIn(email: string, password: string) {
     const session = await api<StoredSession>("/api/mobile/session", {
       method: "POST",

@@ -4,6 +4,8 @@
 
 The interface uses white surfaces, grey borders, black actions, and five tabs: Home, Explore, Create, Solutions, Account. English, Hindi, Marathi, Bengali, Tamil, and Telugu reuse the website's reviewed message catalog. Posts, names and locations remain in the author's language. Native-speaker review is still recommended before a broad release.
 
+The app and website use the same Atlas-backed API, with five-second foreground refresh and immediate local invalidation after edits. See [shared data, Android preview installation, and synchronization](DATA_SYNC.md). The local APK uses a localhost backend through USB forwarding, with no LAN exposure by default.
+
 ## Implemented
 
 - Existing-account sign-in and citizen/researcher/institution/industry registration.
@@ -18,13 +20,17 @@ Team management, administration, collaboration workspaces and full evidence tool
 
 ## Run locally on Windows
 
-Start the backend from the repository root using its existing Atlas `.env`:
+The ready-to-install Android APK is `artifacts/CivicBridge-preview.apk`. It contains both arm64 phone and x86_64 emulator builds, uses a local testing certificate, and needs no Expo account or Metro server. Follow [USB installation and the shared backend](DATA_SYNC.md#connect-the-installable-android-preview-locally). This preview is distinct from a store-signed release.
+
+To work on the source, install the server dependencies and update the additive MongoDB schema from the repository root using its existing Atlas `.env`:
 
 ```powershell
 npm.cmd ci
 npm.cmd run db:generate
 npm.cmd run db:push
-npm.cmd run dev
+npm.cmd run mobile:connect
+npm.cmd run build
+npm.cmd run start:shared
 ```
 
 `db:push` adds the `MobileSession` collection and indexes without a SQL migration. It is also part of the documented server release workflow. Keep Atlas credentials on the server; the phone never connects directly to Atlas.
@@ -34,13 +40,12 @@ In a second PowerShell window:
 ```powershell
 cd mobile
 npm.cmd ci
-Copy-Item .env.example .env
 npm.cmd start
 ```
 
-The example uses `EXPO_PUBLIC_API_URL=http://10.0.2.2:3000` for the Android emulator. On a Mac, the iOS simulator can use `http://localhost:3000`. Use a compatible Expo development client; the `development` EAS profile includes `expo-dev-client`. A local Android build requires Android Studio/SDK; local iOS compilation requires a Mac/Xcode. [Expo development-build setup](https://docs.expo.dev/develop/development-builds/create-a-build/).
+`mobile:connect` creates an ignored `mobile/.env.local` with the public localhost origin and local-preview flag. Use `adb reverse tcp:3000 tcp:3000` for a USB-connected Android phone or emulator. On a Mac, an iOS simulator can reach `http://localhost:3000`. Use a compatible Expo development client; the `development` EAS profile includes `expo-dev-client`. A local Android build requires Android Studio/SDK; local iOS compilation requires a Mac/Xcode. [Expo development-build setup](https://docs.expo.dev/develop/development-builds/create-a-build/).
 
-For a physical phone, set the API URL to the computer's LAN IPv4 address and run the backend explicitly with `npx.cmd next dev --hostname 0.0.0.0`. Both devices need network access and appropriate firewall permission. This is a development setup; release/preview builds require a deployed HTTPS backend. The server retains browser CSRF checks and permits origin-less writes only with a verified native bearer session.
+The local preview keeps Atlas access on a localhost-only server and disables demo-account sign-in. Optional LAN access requires separate authorization; it has not been enabled. Distributable EAS builds require a deployed HTTPS backend. The server retains browser CSRF checks and permits origin-less writes only with a verified native bearer session.
 
 ## Build and distribute
 
@@ -48,6 +53,7 @@ The backend is currently **not deployed**. Before distributing the app:
 
 1. Deploy the existing Next.js backend using [Atlas/Render/Railway instructions](ATLAS.md), run the release/schema checks, and verify `/api/health/ready` over HTTPS.
 2. Set `EXPO_PUBLIC_API_URL` to that HTTPS origin in the relevant EAS environment. It is a public URL, not an Atlas URI or secret. Restart/rebuild after changes; Expo embeds this value in the bundle.
+   Set `EXPO_PUBLIC_LOCAL_PREVIEW=false` for release builds so local `.env.local` settings do not select the preview identifier or HTTP transport.
 3. In `mobile/`, run `npx.cmd eas-cli@latest login`, then `npx.cmd eas-cli@latest init` to link your own Expo project. Review `in.civicbridge.community` package/bundle identifiers before registering them with the stores.
 4. Build with one of the supplied profiles:
 
@@ -62,9 +68,9 @@ npx.cmd eas-cli@latest build --platform ios --profile simulator
 npx.cmd eas-cli@latest build --platform all --profile production
 ```
 
-The app configuration rejects distributable EAS builds without a valid HTTPS origin. The `preview` Android profile produces an APK; production uses the platform's store format. [Expo APK profiles](https://docs.expo.dev/build-reference/apk/), [EAS signing/build setup](https://docs.expo.dev/build/setup/).
+The app configuration rejects distributable EAS builds without a valid HTTPS origin. The `preview` Android profile produces an APK; production uses the platform's store format. EAS manages developer build numbers remotely and increments production builds, while the app's user-facing version stays explicit in its configuration. [Expo APK profiles](https://docs.expo.dev/build-reference/apk/), [EAS signing/build setup](https://docs.expo.dev/build/setup/), [build version management](https://docs.expo.dev/build-reference/app-versions/).
 
-Signed device/store builds need your Expo account and platform signing credentials. Apple device distribution/TestFlight also needs Apple Developer provisioning. No APK/IPA, signing credential, cloud build, or store submission has been created in this session. Complete physical-device camera/GPS/accessibility review and store privacy/account-management requirements before submission.
+Cloud and store builds need your Expo account and platform signing credentials. Apple device distribution/TestFlight also needs Apple Developer provisioning. An installable Android preview APK has been built locally with the generated Android debug certificate; no cloud build, IPA or store submission has been produced. Android is the current priority; iPhone signing is deferred until the required accounts are available. Complete physical-device camera/GPS/accessibility review and store privacy/account-management requirements before submission.
 
 ## Sessions and server maintenance
 
@@ -82,4 +88,4 @@ The root integration suite tests native credentials, private reports/uploads, re
 
 For native-component UI review, export with `EXPO_PUBLIC_API_URL=https://civicbridge.example.test` using `npm.cmd run export:web` in `mobile/`, then run `npm.cmd run test:native:ui` at the repository root. This test mocks the API and verifies native component rendering, sign-in, preserved form state and bearer submission. It does not replace Android/iOS device tests. Browser review does not persist credentials to localStorage.
 
-Expo Doctor reports compatible dependencies. The current Expo CLI dependency tree still reports five upstream high-severity npm advisories involving `node-forge`/CLI `zod`. A compatible `npm audit fix` did not resolve them; forcing npm's proposed Expo downgrade is not appropriate. These are tooling dependencies, but audit findings still need upstream resolution/review before a release pipeline is trusted. See `npm.cmd audit` inside `mobile/`.
+Expo Doctor reports compatible dependencies. On 27 October 2026, the Expo CLI dependency tree reports four upstream high-severity npm advisories involving `node-forge`/CLI `zod`. A compatible `npm audit fix` did not resolve them; forcing npm's proposed Expo downgrade is not appropriate. These are tooling dependencies, but audit findings still need upstream resolution/review before a release pipeline is trusted. See `npm.cmd audit` inside `mobile/`.

@@ -12,3 +12,6 @@ data/nyc311-civic.json
 mobile/.expo/
 mobile/dist/
 mobile/dist-native/
+mobile/android/
+mobile/ios/
+artifacts/

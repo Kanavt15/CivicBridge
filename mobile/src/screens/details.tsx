@@ -36,7 +36,9 @@ export function ProblemScreen() {
   }
   return (
     <Screen
-      refreshControl={<RefreshControl refreshing={resource.loading} onRefresh={resource.reload} />}
+      refreshControl={
+        <RefreshControl refreshing={resource.refreshing} onRefresh={resource.reload} />
+      }
     >
       <View style={ui.row}>
         <T style={ui.small}>{p.category}</T>
@@ -155,7 +157,9 @@ export function SolutionScreen() {
   if (!p) return null;
   return (
     <Screen
-      refreshControl={<RefreshControl refreshing={resource.loading} onRefresh={resource.reload} />}
+      refreshControl={
+        <RefreshControl refreshing={resource.refreshing} onRefresh={resource.reload} />
+      }
     >
       <View style={ui.row}>
         <T style={ui.small}>{p.problem.category}</T>

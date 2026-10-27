@@ -531,7 +531,12 @@ test.describe.serial("Phase 2 and 3 · collaboration, privacy and intelligence",
     expect((await outsider.get("/api/system")).status()).toBe(401);
     expect((await citizen.get("/api/system")).status()).toBe(403);
     const systemResponse = await admin.get("/api/system");
-    expect(systemResponse.headers()["cache-control"]).toBe("no-store");
+    expect(
+      systemResponse
+        .headers()
+        ["cache-control"].split(",")
+        .map((value) => value.trim()),
+    ).toContain("no-store");
     const system = await systemResponse.json();
     expect(system.database.status).toBe("ready");
     expect(system.pipeline.trainingSamples).toBe(391);

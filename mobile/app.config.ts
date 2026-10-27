@@ -2,7 +2,10 @@ import type { ExpoConfig, ConfigContext } from "expo/config";
 export default ({ config }: ConfigContext): ExpoConfig => {
   const profile = process.env.EAS_BUILD_PROFILE;
   const api = process.env.EXPO_PUBLIC_API_URL;
+  const localPreview = process.env.EXPO_PUBLIC_LOCAL_PREVIEW === "true";
   if (profile && profile !== "development") {
+    if (localPreview)
+      throw new Error("Local preview mode cannot be used for distributable EAS builds.");
     const url = api ? new URL(api) : null;
     if (
       !url ||
@@ -19,7 +22,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   }
   return {
     ...config,
-    name: "CivicBridge",
+    name: localPreview ? "CivicBridge Preview" : "CivicBridge",
     slug: "civicbridge-mobile",
     version: "1.0.0",
     orientation: "portrait",
@@ -28,11 +31,13 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     userInterfaceStyle: "light",
     ios: {
       supportsTablet: true,
-      bundleIdentifier: "in.civicbridge.community",
+      bundleIdentifier: localPreview
+        ? "in.civicbridge.community.preview"
+        : "in.civicbridge.community",
       infoPlist: { ITSAppUsesNonExemptEncryption: false },
     },
     android: {
-      package: "in.civicbridge.community",
+      package: localPreview ? "in.civicbridge.community.preview" : "in.civicbridge.community",
       adaptiveIcon: {
         foregroundImage: "./assets/icon.png",
         backgroundColor: "#171717",
@@ -41,9 +46,11 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       predictiveBackGestureEnabled: true,
     },
     plugins: [
+      "./plugins/withShortNativePaths",
       "expo-router",
       "expo-secure-store",
       "expo-localization",
+      ["expo-build-properties", { android: { usesCleartextTraffic: localPreview } }],
       [
         "expo-image-picker",
         {

@@ -19,6 +19,8 @@ The website and dedicated installable app use white, grey, and black shades with
 
 `mobile/` contains the **separate Android/iPhone React Native app** using the same backend, with native posting, camera/gallery, GPS, activity, notifications and revocable device sessions. Android APK, iOS simulator and store build profiles are included; signed binaries require a deployed HTTPS backend and your build/signing accounts. See [native app setup](docs/NATIVE_APP.md).
 
+Website and app records live in the **same Atlas database**. Active screens refresh every five seconds, on foreground/reconnection, and after local edits. [Shared data and Android preview installation](docs/DATA_SYNC.md) explains the localhost/USB preview and deployment configuration.
+
 Use the [Atlas setup guide](docs/ATLAS.md) to create/select a cluster, configure a database user and IP access, and obtain the driver URI. The app already supports Atlas through `DATABASE_URL`; no schema rewrite is needed.
 
 ```powershell

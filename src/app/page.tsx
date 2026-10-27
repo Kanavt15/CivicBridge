@@ -16,6 +16,7 @@ import { publicStatuses } from "@/lib/domain";
 import { Button } from "@/components/ui/button";
 import { ProblemCard } from "@/components/common";
 import { Text } from "@/components/i18n";
+import { LiveServerView } from "@/components/live-server-view";
 export const dynamic = "force-dynamic";
 function Neighbourhood() {
   return (
@@ -81,6 +82,7 @@ export default async function Home() {
   ]);
   return (
     <>
+      <LiveServerView />
       <section className="home-hero container">
         <div className="home-hero-copy">
           <span className="home-context">

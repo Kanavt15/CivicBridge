@@ -1,6 +1,8 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { verifyCredentials } from "@/lib/credentials";
+import { db } from "@/lib/db";
+import { demoAccountsAllowed } from "@/lib/production";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
   pages: { signIn: "/login" },
@@ -18,6 +20,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (user) {
         token.id = user.id;
         token.role = user.role;
+      } else if (token.id) {
+        const current = await db.user.findFirst({
+          where: {
+            id: String(token.id),
+            active: true,
+            ...(!demoAccountsAllowed() ? { isDemo: false } : {}),
+          },
+          select: { name: true, email: true, role: true },
+        });
+        if (!current) return null;
+        token.name = current.name;
+        token.email = current.email;
+        token.role = current.role;
       }
       return token;
     },

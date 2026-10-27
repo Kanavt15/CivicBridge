@@ -73,7 +73,7 @@ export function FeedScreen({
       keyboardShouldPersistTaps="handled"
       refreshControl={
         <RefreshControl
-          refreshing={resource.loading && Boolean(resource.data)}
+          refreshing={resource.refreshing}
           onRefresh={resource.reload}
           tintColor={colors.ink}
         />

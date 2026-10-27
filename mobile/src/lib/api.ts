@@ -1,3 +1,4 @@
+import { notifyDataChanged } from "../../../src/lib/live-query";
 export class ApiError extends Error {
   constructor(
     message: string,
@@ -28,7 +29,13 @@ export function validateApiUrl(value: string | undefined, development: boolean) 
     return null;
   }
 }
-export const apiUrl = validateApiUrl(process.env.EXPO_PUBLIC_API_URL, __DEV__);
+export const apiUrl = validateApiUrl(
+  process.env.EXPO_PUBLIC_API_URL,
+  __DEV__ || process.env.EXPO_PUBLIC_LOCAL_PREVIEW === "true",
+);
+export const isLoopbackPreview =
+  process.env.EXPO_PUBLIC_LOCAL_PREVIEW === "true" &&
+  Boolean(apiUrl && ["127.0.0.1", "localhost"].includes(new URL(apiUrl).hostname));
 let sessionToken: string | null = null;
 let expired = () => {};
 export function configureSession(token: string | null, onExpired?: () => void) {
@@ -42,8 +49,12 @@ export const fileSource = (id: string) => ({
 export async function api<T = any>(path: string, options: RequestInit = {}): Promise<T> {
   if (!apiUrl) throw new ApiError("Server address has not been configured.");
   if (!path.startsWith("/api/")) throw new ApiError("Invalid API path.");
+  const requestToken = sessionToken;
   const abort = new AbortController();
   const timeout = setTimeout(() => abort.abort(), 25000);
+  const cancel = () => abort.abort();
+  options.signal?.addEventListener("abort", cancel);
+  if (options.signal?.aborted) abort.abort();
   try {
     const response = await fetch(apiUrl + path, {
       ...options,
@@ -51,27 +62,34 @@ export async function api<T = any>(path: string, options: RequestInit = {}): Pro
       credentials: "omit",
       headers: {
         "X-CivicBridge-Client": "native",
-        ...(sessionToken ? { Authorization: `Bearer ${sessionToken}` } : {}),
+        ...(requestToken ? { Authorization: `Bearer ${requestToken}` } : {}),
         ...(options.body && !(options.body instanceof FormData)
           ? { "Content-Type": "application/json" }
           : {}),
         ...options.headers,
       },
     });
-    if (response.status === 204) return undefined as T;
+    if (response.status === 204) {
+      if (options.method && options.method !== "GET") notifyDataChanged();
+      return undefined as T;
+    }
     const body = await response
       .json()
       .catch(() => ({ error: "The request failed. Please try again." }));
+    if ((!options.method || options.method === "GET") && requestToken !== sessionToken)
+      throw new ApiError("Your session changed. Please try again.", 409);
     if (!response.ok) {
-      if (response.status === 401 && sessionToken) expired();
+      if (response.status === 401 && requestToken && requestToken === sessionToken) expired();
       throw new ApiError(body.error || "The request failed. Please try again.", response.status);
     }
+    if (options.method && options.method !== "GET") notifyDataChanged();
     return body;
   } catch (e) {
     if (e instanceof ApiError) throw e;
     throw new ApiError("Could not connect. Check your internet connection and try again.");
   } finally {
     clearTimeout(timeout);
+    options.signal?.removeEventListener("abort", cancel);
   }
 }
 export const platform = <T = any>(path: string, method = "GET", body?: unknown) =>

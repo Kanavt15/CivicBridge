@@ -69,6 +69,13 @@ jobs:
     timeout-minutes: 20
     env:
       EXPO_PUBLIC_API_URL: https://civicbridge.example.test
+      EXPO_PUBLIC_LOCAL_PREVIEW: "false"
+      DATABASE_URL: mongodb://127.0.0.1:27018/civicbridge_ci_sync?replicaSet=civicbridge-rs
+      AUTH_URL: http://127.0.0.1:3000
+      AUTH_SECRET: civicbridge-sync-ci-only-ephemeral-secret
+      ALLOW_DEMO_ACCOUNTS: "true"
+      DEMO_PASSWORD: CivicBridge@Test2026
+      CIVICBRIDGE_TEST_MODE: "true"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -87,3 +94,30 @@ jobs:
       - run: npm run export:web --prefix mobile
       - run: npx playwright install --with-deps chromium
       - run: npm run test:native:ui
+      - name: Start isolated MongoDB for cross-client synchronization
+        run: |
+          docker run -d --name civicbridge-sync-mongo -p 127.0.0.1:27018:27018 mongo:8.2 --replSet civicbridge-rs --bind_ip_all --port 27018
+          for attempt in $(seq 1 30); do
+            if docker exec civicbridge-sync-mongo mongosh --port 27018 --quiet --eval 'db.adminCommand({ping:1})' >/dev/null 2>&1; then break; fi
+            sleep 1
+          done
+          docker exec civicbridge-sync-mongo mongosh --port 27018 --quiet --eval 'rs.initiate({_id:"civicbridge-rs",members:[{_id:0,host:"127.0.0.1:27018"}]})'
+          for attempt in $(seq 1 30); do
+            if docker exec civicbridge-sync-mongo mongosh --port 27018 --quiet --eval 'if(!db.hello().isWritablePrimary)quit(1)' >/dev/null 2>&1; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - run: npm run db:generate
+      - run: npm run db:push
+      - run: npm run db:seed
+      - run: npm run build
+      - name: Verify shared native and website records against the real API
+        run: |
+          npm run start > /tmp/civicbridge-sync-server.log 2>&1 &
+          sync_server_pid=$!
+          trap 'kill "$sync_server_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 45); do
+            if curl --fail --silent http://127.0.0.1:3000/api/health >/dev/null; then break; fi
+            sleep 1
+          done
+          TEST_BASE_URL=http://127.0.0.1:3000 npm run test:sync

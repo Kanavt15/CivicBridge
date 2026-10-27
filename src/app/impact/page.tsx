@@ -5,12 +5,14 @@ import { platformStats } from "@/lib/queries";
 import { Breadcrumbs, PageIntro } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { ImpactCharts } from "@/components/charts";
+import { LiveServerView } from "@/components/live-server-view";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Community impact" };
 export default async function Impact() {
   const s = await platformStats();
   return (
     <div className="container page-wrap">
+      <LiveServerView />
       <Breadcrumbs items={[{ label: "Community impact" }]} />
       <PageIntro
         eyebrow="Progress you can follow"

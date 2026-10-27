@@ -25,7 +25,9 @@ export function ActivityScreen() {
   const rows = resource.data?.[tab] ?? [];
   return (
     <Screen
-      refreshControl={<RefreshControl refreshing={resource.loading} onRefresh={resource.reload} />}
+      refreshControl={
+        <RefreshControl refreshing={resource.refreshing} onRefresh={resource.reload} />
+      }
     >
       <T style={ui.title}>My activity</T>
       <View style={ui.row}>
@@ -81,7 +83,9 @@ export function NotificationsScreen() {
   }
   return (
     <Screen
-      refreshControl={<RefreshControl refreshing={resource.loading} onRefresh={resource.reload} />}
+      refreshControl={
+        <RefreshControl refreshing={resource.refreshing} onRefresh={resource.reload} />
+      }
     >
       <T style={ui.title}>Notifications</T>
       <Button
